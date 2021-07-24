@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
+
     <title>DoIt</title>
+    <link rel="icon" th:href="@{/dist/img/Logo.png}" type="image/x-ico">
+
     <!-- Icons -->
-    <link href="plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
     <!-- Theme style -->
-    <link href="dist/css/adminlte.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -145,9 +148,9 @@
     <!-- 左侧导航栏 -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a class="brand-link" href="index3.html">
-            <img alt="AdminLTE Logo" class="brand-image img-circle elevation-3" src="dist/img/AdminLTELogo.png"
-                 style="opacity: .8">
+        <a class="brand-link" href="#">
+            <img alt="" class="brand-image img-circle elevation-3" src=""
+                 style="opacity: .8" th:src="@{/dist/img/Logo.png}">
             <span class="brand-text font-weight-light">DoIt</span>
         </a>
 
@@ -168,11 +171,11 @@
 </div>
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+<script th:src="@{/dist/js/adminlte.js}"></script>
 </body>
 
 </html>
