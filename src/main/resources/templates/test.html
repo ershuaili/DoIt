@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>DoIt</title>
     <link rel="icon" th:href="@{/dist/img/Logo.png}" type="image/x-ico">
 
-    <!-- Font Awesome Icons -->
-    <link href="../plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+    <!-- fullCalendar -->
+    <link rel="stylesheet" th:href="@{/plugins/fullcalendar/main.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
           rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <!-- fullCalendar -->
-    <link href="../plugins/fullcalendar/main.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link href="../dist/css/adminlte.min.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -154,8 +152,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a class="brand-link" href="index3.html">
-            <img alt="AdminLTE Logo" class="brand-image img-circle elevation-3" src="dist/img/AdminLTELogo.png"
-                 style="opacity: .8">
+            <img alt="" class="brand-image img-circle elevation-3" src="" style="opacity: .8"
+                 th:src="@{/dist/img/Logo.png}">
             <span class="brand-text font-weight-light">DoIt</span>
         </a>
 
@@ -253,14 +251,13 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap -->
-<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- jQuery UI -->
-<script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-
+<script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
 <!-- fullCalendar 2.2.5 -->
-<script src="../plugins/fullcalendar/main.js"></script>
+<script th:src="@{/plugins/fullcalendar/main.js}"></script>
 
 
 <!-- Page specific script -->
