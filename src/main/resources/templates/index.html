@@ -6,17 +6,17 @@
     <title>DoIt</title>
     <link rel="icon" th:href="@{/dist/img/Logo.png}" type="image/x-ico">
 
-    <!-- Font Awesome Icons -->
-    <link href="../plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
           rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
     <!-- Font Awesome -->
-    <link href="../plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
     <!-- fullCalendar -->
-    <link href="../plugins/fullcalendar/main.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/plugins/fullcalendar/main.css}">
     <!-- Theme style -->
-    <link href="../dist/css/adminlte.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -29,7 +29,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link" href="index3.html">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a class="nav-link" href="#">Contact</a>
@@ -253,15 +253,18 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="../plugins/jquery/jquery.min.js"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap -->
-<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- jQuery UI -->
-<script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
-
+<script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
 <!-- fullCalendar 2.2.5 -->
-<script src="../plugins/fullcalendar/main.js"></script>
-
+<script th:src="@{/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/plugins/fullcalendar/main.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/dist/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/dist/js/demo.js}"></script>
 
 <!-- Page specific script -->
 <script>
