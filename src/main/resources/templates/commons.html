@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
-    <title>DoIt</title>
+    <title th:replace="${title}">DoIt</title>
     <link rel="icon" th:href="@{/dist/img/Logo.png}" type="image/x-ico">
 
     <!-- BootStrapICO -->
@@ -19,14 +19,14 @@
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
     <!-- 顶部导航栏 -->
-    <nav class="main-header navbar navbar-expand navbar-dark">
+    <nav class="main-header navbar navbar-expand navbar-dark" th:fragment="commonNav(nav)">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="bi bi-list"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link" href="index.html">我的一天</a>
+                <h3>我的一天</h3>
             </li>
         </ul>
 
@@ -43,7 +43,7 @@
                         <!-- Message Start -->
                         <div class="media">
                             <img alt="User Avatar" class="img-size-50 mr-3 img-circle"
-                                 src="dist/img/user1-128x128.jpg">
+                                 src="" th:src="@{/dist/img/user1-128x128.jpg}">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Brad Diesel
@@ -60,7 +60,7 @@
                         <!-- Message Start -->
                         <div class="media">
                             <img alt="User Avatar" class="img-size-50 img-circle mr-3"
-                                 src="dist/img/user8-128x128.jpg">
+                                 src="" th:src="@{/dist/img/user2-160x160.jpg}">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     John Pierce
@@ -77,7 +77,7 @@
                         <!-- Message Start -->
                         <div class="media">
                             <img alt="User Avatar" class="img-size-50 img-circle mr-3"
-                                 src="dist/img/user3-128x128.jpg">
+                                 src="" th:src="@{/dist/img/user3-128x128.jpg}">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Nora Silvester
@@ -99,10 +99,11 @@
     <!--/ 顶部导航栏 -->
 
     <!-- 左侧导航栏 -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="commonMenu(aside)">
         <!-- Brand Logo -->
         <a class="brand-link" href="index.html">
-            <img alt="" class="brand-image img-circle elevation-3" src="dist/img/AdminLTELogo.png" style="opacity: .8">
+            <img alt="" class="brand-image img-circle elevation-3" src="" style="opacity: .8"
+                 th:src="@{/dist/img/Logo.png}">
             <span class="brand-text font-weight-light">DoIt</span>
         </a>
 
@@ -112,30 +113,30 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview"
                     role="menu">
-                    <!-- 今天 -->
+                    <!-- 今天 Day -->
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/widgets.html">
+                        <a class="nav-link" th:class="${aside=='day'?'active nav-link':'nav-link'}" th:href="@{/}">
                             <i class="nav-icon bi bi-sun"></i>
                             <p>我的一天<span class="right badge badge-danger">1</span></p>
                         </a>
                     </li>
-                    <!-- 明天 -->
+                    <!-- 明天 Tomorrow -->
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/widgets.html">
+                        <a class="nav-link" th:class="${aside=='tom'?'active nav-link':'nav-link'}" th:href="@{tom}">
                             <i class="nav-icon bi bi-sunrise"></i>
                             <p>明天<span class="right badge badge-danger">1</span></p>
                         </a>
                     </li>
-                    <!-- 最近七天 -->
+                    <!-- 最近七天 Week -->
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/widgets.html">
+                        <a class="nav-link" th:class="${aside=='wee'?'active nav-link':'nav-link'}" th:href="@{wee}">
                             <i class="nav-icon bi bi-calendar3-week"></i>
                             <p>最近七天<span class="right badge badge-danger">1</span></p>
                         </a>
                     </li>
-                    <!-- 日历 -->
+                    <!-- 日历 Calendar -->
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/widgets.html">
+                        <a class="nav-link" th:class="${aside=='cal'?'active nav-link':'nav-link'}" th:href="@{cal}">
                             <i class="nav-icon bi bi-calendar3"></i>
                             <p>日历<span class="right badge badge-danger">1</span></p>
                         </a>
@@ -144,16 +145,16 @@
                 <hr>
                 <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview"
                     role="menu">
-                    <!-- 任务 -->
+                    <!-- 任务 Task -->
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/widgets.html">
+                        <a class="nav-link" th:class="${aside=='tas'?'active nav-link':'nav-link'}" th:href="@{tas}">
                             <i class="nav-icon bi bi-list-task"></i>
                             <p>任务<span class="right badge badge-danger">1</span></p>
                         </a>
                     </li>
-                    <!-- 清单 -->
+                    <!-- 清单 Checklist -->
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/widgets.html">
+                        <a class="nav-link" th:class="${aside=='che'?'active nav-link':'nav-link'}" th:href="@{che}">
                             <i class="nav-icon bi bi-journal-text"></i>
                             <p>清单<span class="right badge badge-danger">1</span></p>
                         </a>
@@ -255,185 +256,187 @@
     <!--/ 中间内容 -->
 </div>
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap -->
-<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- jQuery UI -->
-<script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
-<!-- fullCalendar 2.2.5 -->
-<script th:src="@{/plugins/moment/moment.min.js}"></script>
-<script th:src="@{/plugins/fullcalendar/main.js}"></script>
-<!-- AdminLTE App -->
-<script th:src="@{/dist/js/adminlte.min.js}"></script>
-<!-- AdminLTE for demo purposes -->
-<script th:src="@{/dist/js/demo.js}"></script>
+<div th:fragment="commonScript">
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!-- jQuery UI -->
+    <script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"></script>
+    <!-- fullCalendar 2.2.5 -->
+    <script th:src="@{/plugins/moment/moment.min.js}"></script>
+    <script th:src="@{/plugins/fullcalendar/main.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/dist/js/adminlte.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/dist/js/demo.js}"></script>
 
-<!-- Page specific script -->
-<script>
-    $(function () {
+    <!-- Page specific script -->
+    <script>
+        $(function () {
 
-        /* initialize the external events
-         -----------------------------------------------------------------*/
-        function ini_events(ele) {
-            ele.each(function () {
+            /* initialize the external events
+             -----------------------------------------------------------------*/
+            function ini_events(ele) {
+                ele.each(function () {
 
-                // create an Event Object (https://fullcalendar.io/docs/event-object)
-                // it doesn't need to have a start or end
-                const eventObject = {
-                    title: $.trim($(this).text()) // use the element's text as the event title
-                };
+                    // create an Event Object (https://fullcalendar.io/docs/event-object)
+                    // it doesn't need to have a start or end
+                    const eventObject = {
+                        title: $.trim($(this).text()) // use the element's text as the event title
+                    };
 
-                // store the Event Object in the DOM element so we can get to it later
-                $(this).data('eventObject', eventObject)
+                    // store the Event Object in the DOM element so we can get to it later
+                    $(this).data('eventObject', eventObject)
 
-                // make the event draggable using jQuery UI
-                $(this).draggable({
-                    zIndex: 1070,
-                    revert: true, // will cause the event to go back to its
-                    revertDuration: 0  //  original position after the drag
+                    // make the event draggable using jQuery UI
+                    $(this).draggable({
+                        zIndex: 1070,
+                        revert: true, // will cause the event to go back to its
+                        revertDuration: 0  //  original position after the drag
+                    })
+
                 })
+            }
 
+            ini_events($('#external-events div.external-event'))
+
+            /* initialize the calendar
+             -----------------------------------------------------------------*/
+            //Date for the calendar events (dummy data)
+            const date = new Date();
+            const d = date.getDate(),
+                m = date.getMonth(),
+                y = date.getFullYear();
+
+            const Calendar = FullCalendar.Calendar;
+            const Draggable = FullCalendar.Draggable;
+
+            const containerEl = document.getElementById('external-events');
+            const checkbox = document.getElementById('drop-remove');
+            const calendarEl = document.getElementById('calendar');
+
+            // initialize the external events
+            // -----------------------------------------------------------------
+
+            new Draggable(containerEl, {
+                itemSelector: '.external-event',
+                eventData: function (eventEl) {
+                    return {
+                        title: eventEl.innerText,
+                        backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
+                        borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
+                        textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
+                    };
+                }
+            });
+
+            const calendar = new Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                themeSystem: 'bootstrap',
+                //Random default events
+                events: [
+                    {
+                        title: 'All Day Event',
+                        start: new Date(y, m, 1),
+                        backgroundColor: '#f56954', //red
+                        borderColor: '#f56954', //red
+                        allDay: true
+                    },
+                    {
+                        title: 'Long Event',
+                        start: new Date(y, m, d - 5),
+                        end: new Date(y, m, d - 2),
+                        backgroundColor: '#f39c12', //yellow
+                        borderColor: '#f39c12' //yellow
+                    },
+                    {
+                        title: 'Meeting',
+                        start: new Date(y, m, d, 10, 30),
+                        allDay: false,
+                        backgroundColor: '#0073b7', //Blue
+                        borderColor: '#0073b7' //Blue
+                    },
+                    {
+                        title: 'Lunch',
+                        start: new Date(y, m, d, 12, 0),
+                        end: new Date(y, m, d, 14, 0),
+                        allDay: false,
+                        backgroundColor: '#00c0ef', //Info (aqua)
+                        borderColor: '#00c0ef' //Info (aqua)
+                    },
+                    {
+                        title: 'Birthday Party',
+                        start: new Date(y, m, d + 1, 19, 0),
+                        end: new Date(y, m, d + 1, 22, 30),
+                        allDay: false,
+                        backgroundColor: '#00a65a', //Success (green)
+                        borderColor: '#00a65a' //Success (green)
+                    },
+                    {
+                        title: 'Click for Google',
+                        start: new Date(y, m, 28),
+                        end: new Date(y, m, 29),
+                        url: 'https://www.google.com/',
+                        backgroundColor: '#3c8dbc', //Primary (light-blue)
+                        borderColor: '#3c8dbc' //Primary (light-blue)
+                    }
+                ],
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar !!!
+                drop: function (info) {
+                    // is the "remove after drop" checkbox checked?
+                    if (checkbox.checked) {
+                        // if so, remove the element from the "Draggable Events" list
+                        info.draggedEl.parentNode.removeChild(info.draggedEl);
+                    }
+                }
+            });
+
+            calendar.render();
+            // $('#calendar').fullCalendar()
+
+            /* ADDING EVENTS */
+            let currColor = '#3c8dbc'; //Red by default
+            // Color chooser button
+            $('#color-chooser > li > a').click(function (e) {
+                e.preventDefault()
+                // Save color
+                currColor = $(this).css('color')
+                // Add color effect to button
+                $('#add-new-event').css({
+                    'background-color': currColor,
+                    'border-color': currColor
+                })
             })
-        }
-
-        ini_events($('#external-events div.external-event'))
-
-        /* initialize the calendar
-         -----------------------------------------------------------------*/
-        //Date for the calendar events (dummy data)
-        const date = new Date();
-        const d = date.getDate(),
-            m = date.getMonth(),
-            y = date.getFullYear();
-
-        const Calendar = FullCalendar.Calendar;
-        const Draggable = FullCalendar.Draggable;
-
-        const containerEl = document.getElementById('external-events');
-        const checkbox = document.getElementById('drop-remove');
-        const calendarEl = document.getElementById('calendar');
-
-        // initialize the external events
-        // -----------------------------------------------------------------
-
-        new Draggable(containerEl, {
-            itemSelector: '.external-event',
-            eventData: function (eventEl) {
-                return {
-                    title: eventEl.innerText,
-                    backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-                    borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-                    textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
-                };
-            }
-        });
-
-        const calendar = new Calendar(calendarEl, {
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            themeSystem: 'bootstrap',
-            //Random default events
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1),
-                    backgroundColor: '#f56954', //red
-                    borderColor: '#f56954', //red
-                    allDay: true
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d - 5),
-                    end: new Date(y, m, d - 2),
-                    backgroundColor: '#f39c12', //yellow
-                    borderColor: '#f39c12' //yellow
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false,
-                    backgroundColor: '#0073b7', //Blue
-                    borderColor: '#0073b7' //Blue
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    backgroundColor: '#00c0ef', //Info (aqua)
-                    borderColor: '#00c0ef' //Info (aqua)
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false,
-                    backgroundColor: '#00a65a', //Success (green)
-                    borderColor: '#00a65a' //Success (green)
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'https://www.google.com/',
-                    backgroundColor: '#3c8dbc', //Primary (light-blue)
-                    borderColor: '#3c8dbc' //Primary (light-blue)
+            $('#add-new-event').click(function (e) {
+                e.preventDefault()
+                // Get value and make sure it is not null
+                const val = $('#new-event').val();
+                if (val.length === 0) {
+                    return
                 }
-            ],
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar !!!
-            drop: function (info) {
-                // is the "remove after drop" checkbox checked?
-                if (checkbox.checked) {
-                    // if so, remove the element from the "Draggable Events" list
-                    info.draggedEl.parentNode.removeChild(info.draggedEl);
-                }
-            }
-        });
 
-        calendar.render();
-        // $('#calendar').fullCalendar()
+                // Create events
+                const event = $('<div />');
+                event.css({
+                    'background-color': currColor,
+                    'border-color': currColor,
+                    'color': '#fff'
+                }).addClass('external-event')
+                event.text(val)
+                $('#external-events').prepend(event)
 
-        /* ADDING EVENTS */
-        let currColor = '#3c8dbc'; //Red by default
-        // Color chooser button
-        $('#color-chooser > li > a').click(function (e) {
-            e.preventDefault()
-            // Save color
-            currColor = $(this).css('color')
-            // Add color effect to button
-            $('#add-new-event').css({
-                'background-color': currColor,
-                'border-color': currColor
+                // Add draggable funtionality
+                ini_events(event)
             })
         })
-        $('#add-new-event').click(function (e) {
-            e.preventDefault()
-            // Get value and make sure it is not null
-            const val = $('#new-event').val();
-            if (val.length === 0) {
-                return
-            }
-
-            // Create events
-            const event = $('<div />');
-            event.css({
-                'background-color': currColor,
-                'border-color': currColor,
-                'color': '#fff'
-            }).addClass('external-event')
-            event.text(val)
-            $('#external-events').prepend(event)
-
-            // Add draggable funtionality
-            ini_events(event)
-        })
-    })
-</script>
+    </script>
+</div>
 </body>
 </html>

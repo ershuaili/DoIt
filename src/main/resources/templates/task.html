@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{commons::head(~{::title})}">
-    <title>DoIt-Day</title>
+    <title>DoIt-Tas</title>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
     <!-- 顶部导航栏 -->
-    <nav th:replace="commons::commonNav(day)"></nav>
+    <nav th:replace="commons::commonNav(tas)"></nav>
     <!-- 左侧导航栏 -->
-    <aside th:replace="commons::commonMenu(day)"></aside>
+    <aside th:replace="commons::commonMenu(tas)"></aside>
 
     <!-- 中间内容 -->
     <div class="content-wrapper">
@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <!-- /.row -->
                 <div class="row">
-                    <h1>Day</h1>
+                    <h1>Task</h1>
                 </div>
                 <!-- /.row -->
             </div>
