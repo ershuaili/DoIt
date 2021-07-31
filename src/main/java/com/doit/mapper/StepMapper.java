@@ -30,7 +30,13 @@ public interface StepMapper {
      */
     Step queryById(Integer id);
 
-
+    /**
+     * 查询单个任务的步骤
+     *
+     * @param taskId 任务id
+     * @return 实例对象
+     */
+    List<Step> queryStepByTaskId(Integer taskId);
 
     /**
      * 新增数据

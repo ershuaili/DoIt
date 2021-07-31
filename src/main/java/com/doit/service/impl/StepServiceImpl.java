@@ -41,6 +41,17 @@ public class StepServiceImpl implements StepService {
     }
 
     /**
+     * 查询单个任务的步骤
+     *
+     * @param taskId 任务id
+     * @return 实例对象
+     */
+    @Override
+    public List<Step> queryStepByTaskId(Integer taskId) {
+        return this.stepMapper.queryStepByTaskId(taskId);
+    }
+
+    /**
      * 新增数据
      *
      * @param step 实例对象

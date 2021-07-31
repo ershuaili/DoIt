@@ -24,13 +24,20 @@
                         <input class="form-control input-lg" id="task" placeholder="添加任务" type="text">
                         <div th:each="task:${tasks}">
                             <label>
-                                <input th:text="${task.getTaskName()}" type="checkbox" value="">
+                                <input type="checkbox" value="">
                             </label>
+                            <a th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
                     </div>
 
                     <div class="col-4">
-
+                        <label for="step"></label>
+                        <input class="form-control input-lg" id="step" placeholder="添加任务" type="text">
+                        <div th:each="step:${steps}">
+                            <label>
+                                <input th:text="${step.content}" type="checkbox" value="">
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <!-- /.row -->

@@ -30,4 +30,8 @@ public class Step implements Serializable {
      * 步骤是否完成
      */
     private Boolean isFinish;
+    /**
+     * 任务步骤
+     */
+    private Task task;
 }

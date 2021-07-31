@@ -1,5 +1,6 @@
 package com.doit.controller;
 
+import com.doit.entity.Step;
 import com.doit.entity.Task;
 import com.doit.service.StepService;
 import com.doit.service.TaskService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -27,10 +29,13 @@ public class IndexController {
     private StepService stepService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(@RequestParam(defaultValue = "1", value = "id") Integer id, Model model) {
 
         List<Task> tasks = taskService.queryAll();
+        List<Step> steps = stepService.queryStepByTaskId(id);
+
         model.addAttribute("tasks", tasks);
+        model.addAttribute("steps", steps);
         return "index";
     }
 }

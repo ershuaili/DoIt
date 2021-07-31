@@ -7,6 +7,11 @@
         <result property="taskId" column="task_id" jdbcType="INTEGER"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="isFinish" column="is_finish" jdbcType="BOOLEAN"/>
+
+        <association property="task" javaType="Task">
+            <result property="taskName" column="task_name" jdbcType="INTEGER"/>
+        </association>
+
     </resultMap>
 
     <!--查询所有-->
@@ -30,11 +35,13 @@
 
     <!--通过任务id查询任务步骤-->
     <select id="queryStepByTaskId" resultMap="StepMap">
-        select task_id, content
-        from step,
-             task
-        where step.task_id = #{tsakId}
+        select task.id tid, task_name, step.id, content
+        from db_doit.step,
+             db_doit.task
+        where step.task_id = task.id
+          and task_id = #{taskId}
     </select>
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into db_doit.step(task_id, content, is_finish)

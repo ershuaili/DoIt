@@ -17,7 +17,8 @@ class DoItApplicationTests {
     @Test
     void contextLoads() {
         // System.out.println(taskService.queryAll());
-        System.out.println(stepService.queryAll());
+        // System.out.println(stepService.queryAll());
+        System.out.println(stepService.queryStepByTaskId(1));
     }
 
 }
