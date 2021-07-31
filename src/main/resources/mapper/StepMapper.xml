@@ -9,6 +9,15 @@
         <result property="isFinish" column="is_finish" jdbcType="BOOLEAN"/>
     </resultMap>
 
+    <!--查询所有-->
+    <select id="queryAll" resultMap="StepMap">
+        select id,
+               task_id,
+               content,
+               is_finish
+        from db_doit.step
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="StepMap">
         select id,
@@ -19,37 +28,13 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="StepMap">
-        select id,
-               task_id,
-               content,
-               is_finish
-        from db_doit.step
-        limit #{offset}, #{limit}
+    <!--通过任务id查询任务步骤-->
+    <select id="queryStepByTaskId" resultMap="StepMap">
+        select task_id, content
+        from step,
+             task
+        where step.task_id = #{tsakId}
     </select>
-
-    <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="StepMap">
-        select
-        id, task_id, content, is_finish
-        from db_doit.step
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="taskId != null">
-                and task_id = #{taskId}
-            </if>
-            <if test="content != null and content != ''">
-                and content = #{content}
-            </if>
-            <if test="isFinish != null">
-                and is_finish = #{isFinish}
-            </if>
-        </where>
-    </select>
-
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into db_doit.step(task_id, content, is_finish)

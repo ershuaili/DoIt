@@ -20,6 +20,16 @@ public class StepServiceImpl implements StepService {
     private StepMapper stepMapper;
 
     /**
+     * 查询所有数据
+     *
+     * @return 实例对象列表
+     */
+    @Override
+    public List<Step> queryAll() {
+        return this.stepMapper.queryAll();
+    }
+
+    /**
      * 通过ID查询单条数据
      *
      * @param id 主键
@@ -28,18 +38,6 @@ public class StepServiceImpl implements StepService {
     @Override
     public Step queryById(Integer id) {
         return this.stepMapper.queryById(id);
-    }
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<Step> queryAllByLimit(int offset, int limit) {
-        return this.stepMapper.queryAllByLimit(offset, limit);
     }
 
     /**

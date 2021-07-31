@@ -22,9 +22,9 @@
                     <div class="col-8">
                         <label for="task"></label>
                         <input class="form-control input-lg" id="task" placeholder="添加任务" type="text">
-                        <div th:each="task:${task}">
+                        <div th:each="task:${tasks}">
                             <label>
-                                <input th:text="${task}" type="checkbox" value="">
+                                <input th:text="${task.getTaskName()}" type="checkbox" value="">
                             </label>
                         </div>
                     </div>
