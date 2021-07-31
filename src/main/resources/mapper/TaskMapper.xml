@@ -5,17 +5,25 @@
     <resultMap type="com.doit.entity.Task" id="TaskMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="taskName" column="task_name" jdbcType="VARCHAR"/>
-        <result property="taskDescription" column="task_description" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>
         <result property="isFinish" column="is_finish" jdbcType="BOOLEAN"/>
     </resultMap>
 
+    <!--查询所有实例-->
+    <select id="queryAll" resultMap="TaskMap">
+        select id,
+               task_name,
+               create_time,
+               expire_time,
+               is_finish
+        from db_doit.task
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="TaskMap">
         select id,
                task_name,
-               task_description,
                create_time,
                expire_time,
                is_finish
@@ -23,70 +31,29 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="TaskMap">
-        select id,
-               task_name,
-               task_description,
-               create_time,
-               expire_time,
-               is_finish
-        from db_doit.task
-        limit #{offset}, #{limit}
-    </select>
-
-    <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="TaskMap">
-        select
-        id, task_name, task_description, create_time, expire_time, is_finish
-        from db_doit.task
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="taskName != null and taskName != ''">
-                and task_name = #{taskName}
-            </if>
-            <if test="taskDescription != null and taskDescription != ''">
-                and task_description = #{taskDescription}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="expireTime != null">
-                and expire_time = #{expireTime}
-            </if>
-            <if test="isFinish != null">
-                and is_finish = #{isFinish}
-            </if>
-        </where>
-    </select>
-
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, task_description, create_time, expire_time, is_finish)
-        values (#{taskName}, #{taskDescription}, #{createTime}, #{expireTime}, #{isFinish})
+        insert into db_doit.task(task_name, create_time, expire_time, is_finish)
+        values (#{taskName}, #{createTime}, #{expireTime}, #{isFinish})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, task_description, create_time, expire_time, is_finish)
+        insert into db_doit.task(task_name, create_time, expire_time, is_finish)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.taskName}, #{entity.taskDescription}, #{entity.createTime}, #{entity.expireTime},
-            #{entity.isFinish})
+            (#{entity.taskName}, #{entity.createTime}, #{entity.expireTime}, #{entity.isFinish})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, task_description, create_time, expire_time, is_finish)
+        insert into db_doit.task(task_name, create_time, expire_time, is_finish)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.taskName}, #{entity.taskDescription}, #{entity.createTime}, #{entity.expireTime},
-            #{entity.isFinish})
+            (#{entity.taskName}, #{entity.createTime}, #{entity.expireTime}, #{entity.isFinish})
         </foreach>
         on duplicate key update
-        task_name = values(task_name) , task_description = values(task_description) , create_time = values(create_time)
-        , expire_time = values(expire_time) , is_finish = values(is_finish)
+        task_name = values(task_name) , create_time = values(create_time) , expire_time = values(expire_time) ,
+        is_finish = values(is_finish)
     </insert>
 
     <!--通过主键修改数据-->
@@ -95,9 +62,6 @@
         <set>
             <if test="taskName != null and taskName != ''">
                 task_name = #{taskName},
-            </if>
-            <if test="taskDescription != null and taskDescription != ''">
-                task_description = #{taskDescription},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},

@@ -12,12 +12,22 @@ import java.util.List;
  * (Task)表服务实现类
  *
  * @author 李二帅
- * @since 2021-07-30 23:05:47
+ * @since 2021-07-31 16:08:44
  */
 @Service("taskService")
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskMapper taskMapper;
+
+    /**
+     * 查询所有数据
+     *
+     * @return 实例对象列表
+     */
+    @Override
+    public List<Task> queryAll() {
+        return this.taskMapper.queryAll();
+    }
 
     /**
      * 通过ID查询单条数据
@@ -28,18 +38,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task queryById(Integer id) {
         return this.taskMapper.queryById(id);
-    }
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<Task> queryAllByLimit(int offset, int limit) {
-        return this.taskMapper.queryAllByLimit(offset, limit);
     }
 
     /**

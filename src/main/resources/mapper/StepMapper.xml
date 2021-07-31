@@ -4,6 +4,7 @@
 
     <resultMap type="com.doit.entity.Step" id="StepMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="taskId" column="task_id" jdbcType="INTEGER"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="isFinish" column="is_finish" jdbcType="BOOLEAN"/>
     </resultMap>
@@ -11,6 +12,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="StepMap">
         select id,
+               task_id,
                content,
                is_finish
         from db_doit.step
@@ -20,6 +22,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StepMap">
         select id,
+               task_id,
                content,
                is_finish
         from db_doit.step
@@ -29,11 +32,14 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="StepMap">
         select
-        id, content, is_finish
+        id, task_id, content, is_finish
         from db_doit.step
         <where>
             <if test="id != null">
                 and id = #{id}
+            </if>
+            <if test="taskId != null">
+                and task_id = #{taskId}
             </if>
             <if test="content != null and content != ''">
                 and content = #{content}
@@ -46,32 +52,35 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.step(content, is_finish)
-        values (#{content}, #{isFinish})
+        insert into db_doit.step(task_id, content, is_finish)
+        values (#{taskId}, #{content}, #{isFinish})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.step(content, is_finish)
+        insert into db_doit.step(task_id, content, is_finish)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.content}, #{entity.isFinish})
+            (#{entity.taskId}, #{entity.content}, #{entity.isFinish})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.step(content, is_finish)
+        insert into db_doit.step(task_id, content, is_finish)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.content}, #{entity.isFinish})
+            (#{entity.taskId}, #{entity.content}, #{entity.isFinish})
         </foreach>
         on duplicate key update
-        content = values(content) , is_finish = values(is_finish)
+        task_id = values(task_id) , content = values(content) , is_finish = values(is_finish)
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update db_doit.step
         <set>
+            <if test="taskId != null">
+                task_id = #{taskId},
+            </if>
             <if test="content != null and content != ''">
                 content = #{content},
             </if>

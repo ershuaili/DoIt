@@ -8,9 +8,16 @@ import java.util.List;
  * (Task)表服务接口
  *
  * @author 李二帅
- * @date 2021-07-30 23:05:47
+ * @date 2021-07-31 16:08:44
  */
 public interface TaskService {
+
+    /**
+     * 查询所有数据
+     *
+     * @return 实例对象列表
+     */
+    List<Task> queryAll();
 
     /**
      * 通过ID查询单条数据
@@ -19,15 +26,6 @@ public interface TaskService {
      * @return 实例对象
      */
     Task queryById(Integer id);
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    List<Task> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据

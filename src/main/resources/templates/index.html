@@ -20,10 +20,16 @@
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-8">
-                        <input class="form-control input-lg" placeholder="添加任务" type="text">
+                        <label for="task"></label>
+                        <input class="form-control input-lg" id="task" placeholder="添加任务" type="text">
+                        <div th:each="task:${task}">
+                            <label>
+                                <input th:text="${task}" type="checkbox" value="">
+                            </label>
+                        </div>
                     </div>
 
-                    <div class="col-4" style="background-color: antiquewhite">
+                    <div class="col-4">
 
                     </div>
                 </div>
