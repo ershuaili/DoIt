@@ -19,9 +19,15 @@
             <div class="container-fluid">
                 <!-- /.row -->
                 <div class="row">
+                    <!-- 任务 -->
                     <div class="col-8">
-                        <label for="task"></label>
-                        <input class="form-control input-lg" id="task" placeholder="添加任务" type="text">
+                        <form th:action="@{/}" th:object="${task}">
+                            <label>
+                                <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
+                                       type="text">
+                            </label>
+                        </form>
+
                         <div th:each="task:${tasks}">
                             <label>
                                 <input type="checkbox" value="">
@@ -29,7 +35,7 @@
                             <a th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
                     </div>
-
+                    <!-- 步骤 -->
                     <div class="col-4">
                         <label for="step"></label>
                         <input class="form-control input-lg" id="step" placeholder="添加任务" type="text">
