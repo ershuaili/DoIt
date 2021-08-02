@@ -7,8 +7,8 @@ import com.doit.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -29,8 +29,8 @@ public class IndexController {
     @Autowired
     private StepService stepService;
 
-    @GetMapping("/")
-    public String index(@RequestParam(defaultValue = "1", value = "id", required = false) Integer id, Model model) {
+    @RequestMapping("/")
+    public String index(@RequestParam(defaultValue = "1", value = "id") Integer id, Model model) {
         //查询所有任务
         List<Task> tasks = taskService.queryAll();
         //按照任务id查询任务步骤
@@ -42,12 +42,10 @@ public class IndexController {
         return "index";
     }
 
-    @PostMapping("/")
+    @PostMapping("taskInput")
     public String insert(Task task, Model model) {
-        System.out.println("这个方法执行了");
         Task insert = taskService.insert(task);
         model.addAttribute("insert", insert);
-        System.out.println(insert);
-        return "index";
+        return "redirect:/";
     }
 }

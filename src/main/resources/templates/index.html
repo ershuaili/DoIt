@@ -21,16 +21,15 @@
                 <div class="row">
                     <!-- 任务 -->
                     <div class="col-8">
-                        <form th:action="@{/}" th:object="${task}">
-                            <label>
-                                <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
-                                       type="text">
-                            </label>
+                        <form method="post" th:action="@{/taskInput}" th:object="${task}">
+                            <label for="taskName"></label>
+                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
+                                   required type="text">
                         </form>
 
                         <div th:each="task:${tasks}">
                             <label>
-                                <input type="checkbox" value="">
+                                <input required type="checkbox" value="">
                             </label>
                             <a th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
