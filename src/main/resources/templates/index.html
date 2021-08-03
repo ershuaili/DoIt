@@ -31,7 +31,7 @@
                             <label>
                                 <input required type="checkbox" value="">
                             </label>
-                            <a th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
+                            <a id="btn" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
                     </div>
                     <!-- 步骤 -->
@@ -53,5 +53,14 @@
     <!--/ 中间内容 -->
 </div>
 <div th:replace="commons::commonScript"></div>
+<!--<script>-->
+<!--    $(function (){-->
+<!--        $("#btn").click(function (){-->
+<!--            $.post("/",function (data){-->
+<!--                console.log(data);-->
+<!--            })-->
+<!--        })-->
+<!--    });-->
+<!--</script>-->
 </body>
 </html>
