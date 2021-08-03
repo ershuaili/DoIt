@@ -21,16 +21,16 @@
      * AdminLTE CardRefresh.js
      * License MIT
      * --------------------------------------------
-   */
-  /**
-   * Constants
-   * ====================================================
-   */
+     */
+    /**
+     * Constants
+     * ====================================================
+     */
 
-  var NAME$e = 'CardRefresh';
-  var DATA_KEY$e = 'lte.cardrefresh';
-  var EVENT_KEY$7 = "." + DATA_KEY$e;
-  var JQUERY_NO_CONFLICT$e = $__default['default'].fn[NAME$e];
+    var NAME$e = 'CardRefresh';
+    var DATA_KEY$e = 'lte.cardrefresh';
+    var EVENT_KEY$7 = "." + DATA_KEY$e;
+    var JQUERY_NO_CONFLICT$e = $__default['default'].fn[NAME$e];
   var EVENT_LOADED = "loaded" + EVENT_KEY$7;
   var EVENT_OVERLAY_ADDED = "overlay.added" + EVENT_KEY$7;
   var EVENT_OVERLAY_REMOVED = "overlay.removed" + EVENT_KEY$7;
@@ -910,44 +910,44 @@
   $__default['default'].fn[NAME$a].Constructor = Dropdown;
 
   $__default['default'].fn[NAME$a].noConflict = function () {
-    $__default['default'].fn[NAME$a] = JQUERY_NO_CONFLICT$a;
-    return Dropdown._jQueryInterface;
+      $__default['default'].fn[NAME$a] = JQUERY_NO_CONFLICT$a;
+      return Dropdown._jQueryInterface;
   };
 
-  /**
-   * --------------------------------------------
-   * AdminLTE ExpandableTable.js
-   * License MIT
-   * --------------------------------------------
-   */
+    /**
+     * --------------------------------------------
+     * AdminLTE ExpandableTable.js
+     * License MIT
+     * --------------------------------------------
+     */
     /**
      * Constants
      * ====================================================
      */
 
-  var NAME$9 = 'ExpandableTable';
-  var DATA_KEY$9 = 'lte.expandableTable';
-  var EVENT_KEY$3 = "." + DATA_KEY$9;
-  var JQUERY_NO_CONFLICT$9 = $__default['default'].fn[NAME$9];
-  var EVENT_EXPANDED$1 = "expanded" + EVENT_KEY$3;
-  var EVENT_COLLAPSED$2 = "collapsed" + EVENT_KEY$3;
-  var SELECTOR_TABLE = '.expandable-table';
-  var SELECTOR_EXPANDABLE_BODY = '.expandable-body';
-  var SELECTOR_DATA_TOGGLE$2 = '[data-widget="expandable-table"]';
-  var SELECTOR_ARIA_ATTR = 'aria-expanded';
+    var NAME$9 = 'ExpandableTable';
+    var DATA_KEY$9 = 'lte.expandableTable';
+    var EVENT_KEY$3 = "." + DATA_KEY$9;
+    var JQUERY_NO_CONFLICT$9 = $__default['default'].fn[NAME$9];
+    var EVENT_EXPANDED$1 = "expanded" + EVENT_KEY$3;
+    var EVENT_COLLAPSED$2 = "collapsed" + EVENT_KEY$3;
+    var SELECTOR_TABLE = '.expandable-table';
+    var SELECTOR_EXPANDABLE_BODY = '.expandable-body';
+    var SELECTOR_DATA_TOGGLE$2 = '[data-widget="expandable-table"]';
+    var SELECTOR_ARIA_ATTR = 'aria-expanded';
     /**
      * Class Definition
      * ====================================================
      */
 
-  var ExpandableTable = /*#__PURE__*/function () {
-    function ExpandableTable(element, options) {
-      this._options = options;
-      this._element = element;
-    } // Public
+    var ExpandableTable = /*#__PURE__*/function () {
+        function ExpandableTable(element, options) {
+            this._options = options;
+            this._element = element;
+        } // Public
 
 
-    var _proto = ExpandableTable.prototype;
+        var _proto = ExpandableTable.prototype;
 
     _proto.init = function init() {
       $__default['default'](SELECTOR_DATA_TOGGLE$2).each(function (_, $header) {
@@ -994,40 +994,40 @@
           $__default['default'](this).data(DATA_KEY$9, data);
         }
 
-        if (typeof operation === 'string' && /init|toggleRow/.test(operation)) {
-          data[operation]();
-        }
+          if (typeof operation === 'string' && /init|toggleRow/.test(operation)) {
+              data[operation]();
+          }
       });
     };
 
-    return ExpandableTable;
-  }();
+        return ExpandableTable;
+    }();
     /**
      * Data API
      * ====================================================
      */
 
 
-  $__default['default'](SELECTOR_TABLE).ready(function () {
-    ExpandableTable._jQueryInterface.call($__default['default'](this), 'init');
-  });
-  $__default['default'](document).on('click', SELECTOR_DATA_TOGGLE$2, function () {
-    ExpandableTable._jQueryInterface.call($__default['default'](this), 'toggleRow');
-  });
+    $__default['default'](SELECTOR_TABLE).ready(function () {
+        ExpandableTable._jQueryInterface.call($__default['default'](this), 'init');
+    });
+    $__default['default'](document).on('click', SELECTOR_DATA_TOGGLE$2, function () {
+        ExpandableTable._jQueryInterface.call($__default['default'](this), 'toggleRow');
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-  $__default['default'].fn[NAME$9] = ExpandableTable._jQueryInterface;
-  $__default['default'].fn[NAME$9].Constructor = ExpandableTable;
+    $__default['default'].fn[NAME$9] = ExpandableTable._jQueryInterface;
+    $__default['default'].fn[NAME$9].Constructor = ExpandableTable;
 
-  $__default['default'].fn[NAME$9].noConflict = function () {
-    $__default['default'].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
-    return ExpandableTable._jQueryInterface;
-  };
+    $__default['default'].fn[NAME$9].noConflict = function () {
+        $__default['default'].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
+        return ExpandableTable._jQueryInterface;
+    };
 
-  /**
+    /**
    * --------------------------------------------
    * AdminLTE Fullscreen.js
    * License MIT
@@ -1106,14 +1106,14 @@
       var plugin = new Fullscreen($__default['default'](this), _options);
       $__default['default'](this).data(DATA_KEY$8, typeof config === 'object' ? config : data);
 
-      if (typeof config === 'string' && /toggle|fullscreen|windowed/.test(config)) {
-        plugin[config]();
-      } else {
-        plugin.init();
-      }
+        if (typeof config === 'string' && /toggle|fullscreen|windowed/.test(config)) {
+            plugin[config]();
+        } else {
+            plugin.init();
+        }
     };
 
-    return Fullscreen;
+      return Fullscreen;
   }();
     /**
      * Data API
@@ -1121,13 +1121,13 @@
      */
 
 
-  $__default['default'](document).on('click', SELECTOR_DATA_WIDGET$2, function () {
-    Fullscreen._jQueryInterface.call($__default['default'](this), 'toggle');
-  });
-  /**
-   * jQuery API
-   * ====================================================
-   */
+    $__default['default'](document).on('click', SELECTOR_DATA_WIDGET$2, function () {
+        Fullscreen._jQueryInterface.call($__default['default'](this), 'toggle');
+    });
+    /**
+     * jQuery API
+     * ====================================================
+     */
 
   $__default['default'].fn[NAME$8] = Fullscreen._jQueryInterface;
   $__default['default'].fn[NAME$8].Constructor = Fullscreen;
