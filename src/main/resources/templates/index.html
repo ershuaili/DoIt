@@ -37,7 +37,7 @@
                     <!-- 步骤 -->
                     <div class="col-4">
                         <label for="step"></label>
-                        <input class="form-control input-lg" id="step" placeholder="添加任务" type="text">
+                        <input class="form-control input-lg" id="step" placeholder="添加步骤" type="text">
                         <div th:each="step:${steps}">
                             <label>
                                 <input th:text="${step.content}" type="checkbox" value="">
@@ -53,14 +53,17 @@
     <!--/ 中间内容 -->
 </div>
 <div th:replace="commons::commonScript"></div>
-<!--<script>-->
-<!--    $(function (){-->
-<!--        $("#btn").click(function (){-->
-<!--            $.post("/",function (data){-->
-<!--                console.log(data);-->
-<!--            })-->
-<!--        })-->
-<!--    });-->
-<!--</script>-->
+<script>
+    function test() {
+        $.post({
+            url: "/",
+            data: {"#id": $("task").val()},
+
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    }
+</script>
 </body>
 </html>
