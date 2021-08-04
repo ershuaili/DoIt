@@ -23,13 +23,12 @@
                     <div class="col-8">
                         <form method="post" th:action="@{/taskInput}" th:object="${task}">
                             <label for="taskName"></label>
-                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
-                                   required type="text">
+                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务" type="text">
                         </form>
 
                         <div th:each="task:${tasks}">
                             <label>
-                                <input required type="checkbox" value="">
+                                <input style="width: 50px" type="checkbox" value="">
                             </label>
                             <a id="btn" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
@@ -54,16 +53,12 @@
 </div>
 <div th:replace="commons::commonScript"></div>
 <script>
-    function test() {
-        $.post({
-            url: "/",
-            data: {"#id": $("task").val()},
-
-            success: function (data) {
-                console.log(data)
-            }
+    // 查询所有
+    $('#btn1').click(function () {
+        $.get('/employees', function (data) {
+            console.log(data);
         });
-    }
+    });
 </script>
 </body>
 </html>
