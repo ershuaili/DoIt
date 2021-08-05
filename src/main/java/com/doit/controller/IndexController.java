@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -29,6 +30,13 @@ public class IndexController {
     @Autowired
     private StepService stepService;
 
+    /**
+     * 前端首页展示任务和任务详细信息列表
+     *
+     * @param id    步骤id
+     * @param model 模型
+     * @return index
+     */
     @RequestMapping("/")
     public String index(@RequestParam(defaultValue = "1", value = "id") Integer id, Model model) {
         //查询所有任务
@@ -42,10 +50,20 @@ public class IndexController {
         return "index";
     }
 
+    /**
+     * 增加一个任务
+     *
+     * @param task 任务对象
+     * @return 首页
+     */
     @PostMapping("taskInput")
-    public String insert(Task task, Model model) {
+    public String insert(Task task, RedirectAttributes attributes) {
         Task insert = taskService.insert(task);
-        model.addAttribute("insert", insert);
+        if (insert == null) {
+            attributes.addFlashAttribute("msg", "添加成功");
+        } else {
+            attributes.addFlashAttribute("msg", "添加失败");
+        }
         return "redirect:/";
     }
 }
