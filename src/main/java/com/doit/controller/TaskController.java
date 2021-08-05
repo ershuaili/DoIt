@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2021-07-31 16:08:44
  */
 @Controller
-@RequestMapping("task")
+@RequestMapping("/tas")
 public class TaskController {
     /**
      * 服务对象
      */
     @Autowired
     private TaskService taskService;
+
+    @RequestMapping
+    public String tasks() {
+        return "task";
+    }
 
     /**
      * 通过主键查询单条数据
