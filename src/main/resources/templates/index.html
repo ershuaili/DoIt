@@ -30,7 +30,7 @@
                             <label>
                                 <input style="width: 50px" type="checkbox" value="">
                             </label>
-                            <a id="btn" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
+                            <a th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
                     </div>
                     <!-- 步骤 -->
@@ -52,13 +52,5 @@
     <!--/ 中间内容 -->
 </div>
 <div th:replace="commons::commonScript"></div>
-<script>
-    // 查询所有
-    $('#btn1').click(function () {
-        $.get('/employees', function (data) {
-            console.log(data);
-        });
-    });
-</script>
 </body>
 </html>
