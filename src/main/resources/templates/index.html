@@ -27,10 +27,9 @@
                         </form>
 
                         <div th:each="task:${tasks}">
-                            <label>
-                                <input style="width: 50px" type="checkbox" value="">
-                            </label>
-                            <a th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
+                            <p></p>
+                            <i th:class="${task.isFinish == true?'bi bi-circle':'bi bi-check-circle'}"> </i>
+                            <a style="color: #f9f9f9" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
                         </div>
                     </div>
                     <!-- 步骤 -->
@@ -38,9 +37,8 @@
                         <label for="step"></label>
                         <input class="form-control input-lg" id="step" placeholder="添加步骤" type="text">
                         <div th:each="step:${steps}">
-                            <label>
-                                <input th:text="${step.content}" type="checkbox" value="">
-                            </label>
+                            <p></p>
+                            <i class="bi bi-check-circle" th:text="${step.content}"></i>
                         </div>
                     </div>
                 </div>
