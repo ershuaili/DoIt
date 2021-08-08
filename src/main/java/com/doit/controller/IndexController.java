@@ -47,6 +47,7 @@ public class IndexController {
         model.addAttribute("tasks", tasks);
         model.addAttribute("steps", steps);
         model.addAttribute("task", new Task());
+        model.addAttribute("step", new Step());
         return "index";
     }
 
@@ -57,8 +58,26 @@ public class IndexController {
      * @return 首页
      */
     @PostMapping("taskInput")
-    public String insert(Task task, RedirectAttributes attributes) {
+    public String taskInsert(Task task, RedirectAttributes attributes) {
         Task insert = taskService.insert(task);
+        if (insert == null) {
+            attributes.addFlashAttribute("msg", "添加成功");
+        } else {
+            attributes.addFlashAttribute("msg", "添加失败");
+        }
+        return "redirect:/";
+    }
+
+
+    /**
+     * 增加一个步骤
+     *
+     * @param step 步骤对象
+     * @return 首页
+     */
+    @PostMapping("stepInput")
+    public String stepInsert(Step step, RedirectAttributes attributes) {
+        Step insert = stepService.insert(step);
         if (insert == null) {
             attributes.addFlashAttribute("msg", "添加成功");
         } else {

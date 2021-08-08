@@ -22,24 +22,33 @@
                     <!-- 任务 -->
                     <div class="col-8">
                         <form method="post" th:action="@{/taskInput}" th:object="${task}">
-                            <label for="taskName"></label>
-                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务" type="text">
+                            <!--输入框-->
+                            <div>
+                                <label for="taskName"></label>
+                                <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务" type="text">
+                            </div>
+                            <!--选择框-->
+                            <div th:each="task:${tasks}">
+                                <p></p>
+                                <i th:class="${task.isFinish == true?'bi bi-circle':'bi bi-check-circle'}"> </i>
+                                <a style="color: #f9f9f9" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
+                            </div>
                         </form>
-
-                        <div th:each="task:${tasks}">
-                            <p></p>
-                            <i th:class="${task.isFinish == true?'bi bi-circle':'bi bi-check-circle'}"> </i>
-                            <a style="color: #f9f9f9" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
-                        </div>
                     </div>
                     <!-- 步骤 -->
                     <div class="col-4">
-                        <label for="step"></label>
-                        <input class="form-control input-lg" id="step" placeholder="添加步骤" type="text">
-                        <div th:each="step:${steps}">
-                            <p></p>
-                            <i class="bi bi-check-circle" th:text="${step.content}"></i>
-                        </div>
+                        <form method="post" th:action="@{/stepInput}" th:object="${step}">
+                            <!--输入框-->
+                            <div>
+                                <label for="step"></label>
+                                <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤" type="text">
+                            </div>
+                            <!--选择框-->
+                            <div th:each="step:${steps}">
+                                <p></p>
+                                <i class="bi bi-check-circle" th:text="${step.content}"></i>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.row -->
