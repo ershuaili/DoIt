@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class IndexController {
      * @return index
      */
     @RequestMapping("/")
-    public String index(@RequestParam(defaultValue = "1", value = "id") Integer id, Model model) {
+    public String index(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
         //查询所有任务
         List<Task> tasks = taskService.queryAll();
         //按照任务id查询任务步骤
@@ -84,5 +85,17 @@ public class IndexController {
             attributes.addFlashAttribute("msg", "添加失败");
         }
         return "redirect:/";
+    }
+
+    /**
+     * 查询指定任务的步骤
+     *
+     * @param id 任务id
+     * @return 步骤实体
+     */
+    @ResponseBody
+    @RequestMapping("/day")
+    public List<Step> queryStep(@RequestParam(value = "task.id", defaultValue = "1") Integer id) {
+        return stepService.queryStepByTaskId(id);
     }
 }

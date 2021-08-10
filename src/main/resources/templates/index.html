@@ -24,14 +24,15 @@
                         <form method="post" th:action="@{/taskInput}" th:object="${task}">
                             <!--输入框-->
                             <label for="taskName"></label>
-                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务" type="text">
+                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
+                                   type="text">
                         </form>
                         <!--选择框-->
                         <div th:each="task:${tasks}">
                             <p></p>
                             <i th:class="${task.isFinish == true?'bi bi-check-circle':'bi bi-circle'}">&nbsp;</i>
-                            <a onmouseenter="task()" style="color: #f9f9f9" th:href="@{/(id=${task.id})}"
-                               th:text="${task.taskName}"></a>
+                            <a style="color: #f9f9f9" th:href="@{/(id=${task.id})}" th:text="${task.taskName}"></a>
+                            <button id="btn" th:value="${task.id}">测试</button>
                         </div>
                     </div>
                     <!-- 步骤 -->
@@ -39,7 +40,8 @@
                         <form method="post" th:action="@{/stepInput}" th:object="${step}">
                             <!--输入框-->
                             <label for="step"></label>
-                            <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤" type="text">
+                            <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
+                                   type="text">
                         </form>
                         <!--选择框-->
                         <div id="steps" th:each="step:${steps}">
@@ -57,9 +59,13 @@
 </div>
 <div th:replace="commons::commonScript"></div>
 <script>
-    function task() {
-        document.getElementById("steps").innerHTML = 'test';
-    }
+    $(function () {
+        $("#btn").click(function () {
+            $.post("/day", function (data) {
+                console.log(data);
+            })
+        })
+    });
 </script>
 </body>
 </html>
