@@ -94,8 +94,9 @@ public class IndexController {
      * @return 步骤实体
      */
     @ResponseBody
-    @RequestMapping("/day")
-    public List<Step> queryStep(@RequestParam(value = "id", defaultValue = "1") Integer id) {
+    @RequestMapping("/d")
+    public List<Step> queryStep(Integer id) {
+        id = 1;
         return stepService.queryStepByTaskId(id);
     }
 }

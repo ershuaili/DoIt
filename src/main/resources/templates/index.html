@@ -33,7 +33,7 @@
                             <i th:class="${task.isFinish == true?'bi bi-check-circle':'bi bi-circle'}">&nbsp;</i>
                             <a style="color: #f9f9f9" th:href="${task.id}" th:text="${task.taskName}"></a>
 
-                            <button id="name" th:value="${task.taskName}">测试</button>
+                            <button id="name" th:text="${task.taskName}" th:value="${task.id}">测试</button>
                         </div>
                     </div>
                     <!-- 步骤 -->
@@ -61,16 +61,17 @@
 
 <div th:replace="commons::commonScript"></div>
 <script th:inline="javascript">
-    const id = [[${task}]];
-    const test = $("button#name").val();
-    console.log(id);
-    console.log(test);
+    // const id = [[${tasks}]];
+    // const test = $("button#name").val();
+    // console.log(id);
+    // console.log(test);
 
     $(function () {
         $("#name").click(function () {
-            $.post({
+            $.ajax({
                 // 请求路径
-                url: "/day",
+                url: "/d",
+                type: 'post',
                 // 方法回调将#name的值赋值给id
                 data: {"id": $("#name").val()},
                 success: function (data) {

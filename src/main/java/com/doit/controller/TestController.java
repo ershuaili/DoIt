@@ -24,11 +24,10 @@ public class TestController {
     /**
      * 查询指定任务的步骤
      *
-     * @param id 任务id
      * @return 步骤实体
      */
     @ResponseBody
-    @RequestMapping("/test")
+    @RequestMapping("/a")
     public List<Step> queryStep() {
         Integer id = 1;
         return stepService.queryStepByTaskId(id);

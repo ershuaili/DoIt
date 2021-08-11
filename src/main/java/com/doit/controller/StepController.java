@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2021-07-31 16:08:43
  */
 @Controller
-@RequestMapping("step")
+@RequestMapping("/step")
 public class StepController {
     /**
      * 服务对象

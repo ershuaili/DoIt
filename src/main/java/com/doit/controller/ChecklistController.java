@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version v1.0
  */
 @Controller
-@RequestMapping("che")
+@RequestMapping("/che")
 public class ChecklistController {
     @RequestMapping
     public String checklist() {
