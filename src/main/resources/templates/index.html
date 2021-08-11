@@ -28,7 +28,7 @@
                                    type="text">
                         </form>
                         <!--选择框-->
-                        <div th:each="task:${tasks}">
+                        <div id="tasks" th:each="task:${tasks}">
                             <p></p>
                             <i th:class="${task.isFinish == true?'bi bi-check-circle':'bi bi-circle'}">&nbsp;</i>
                             <a style="color: #f9f9f9" th:href="${task.id}" th:text="${task.taskName}"></a>
@@ -44,6 +44,7 @@
                             <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
                                    type="text">
                         </form>
+
                         <!--选择框-->
                         <div id="steps"></div>
                     </div>
@@ -58,10 +59,37 @@
 
 <div th:replace="commons::commonScript"></div>
 <script th:inline="javascript">
-    // const id = [[${tasks}]];
-    // const test = $("button#name").val();
-    // console.log(id);
-    // console.log(test);
+
+    let tasks = document.getElementById("tasks");
+    let steps = document.getElementById("steps")
+    // 插入节点
+    // tasks.innerHTML='a';
+    // 追加节点
+    tasks.appendChild(steps);
+    // 创建一个新的节点
+    // let newP = document.createElement('p');
+    // newP.id='tasks'
+
+    $(function () {
+        $("").onpageshow(function () {
+            $.ajax({
+                // 请求路径
+                url: "/d",
+                type: 'post',
+                // 方法回调将#name的值赋值给id
+                data: {"id": $("#name").val()},
+                success: function (data) {
+                    // 拿到数据后执行的方法
+                    console.log(data);
+                    let html = "";
+                    for (let i = 0; i < data.length; i++) {
+                        html += "<br>" + "<i class=\"bi bi-check-circle\"></i>" + "&nbsp;" + data[i].content + "<br>"
+                    }
+                    $("#steps").html(html);
+                }
+            })
+        })
+    })
 
     // 步骤
     $(function () {
