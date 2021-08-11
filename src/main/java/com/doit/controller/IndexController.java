@@ -95,8 +95,7 @@ public class IndexController {
      */
     @ResponseBody
     @RequestMapping("/d")
-    public List<Step> queryStep(Integer id) {
-        id = 1;
+    public List<Step> queryStep(@RequestParam(value = "id", defaultValue = "1") Integer id) {
         return stepService.queryStepByTaskId(id);
     }
 }
