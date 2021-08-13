@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,22 +33,37 @@ public class IndexController {
     /**
      * 前端首页展示任务和任务详细信息列表
      *
-     * @param id    步骤id
      * @param model 模型
      * @return index
      */
     @RequestMapping("/")
-    public String index(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
-        //查询所有任务
-        List<Task> tasks = taskService.queryAll();
-        //按照任务id查询任务步骤
-        List<Step> steps = stepService.queryStepByTaskId(id);
-
-        model.addAttribute("tasks", tasks);
-        model.addAttribute("steps", steps);
+    public String index(Model model) {
         model.addAttribute("task", new Task());
         model.addAttribute("step", new Step());
         return "index";
+    }
+
+    /**
+     * 查询所有任务
+     *
+     * @return 任务列表
+     */
+    @RequestMapping("/task")
+    @ResponseBody
+    public List<Task> queryTask() {
+        return taskService.queryAll();
+    }
+
+    /**
+     * 查询指定任务的步骤
+     *
+     * @param id 任务id
+     * @return 步骤实体
+     */
+    @RequestMapping("/step")
+    @ResponseBody
+    public List<Step> queryStep(Integer id) {
+        return stepService.queryStepByTaskId(id);
     }
 
     /**
@@ -85,17 +99,5 @@ public class IndexController {
             attributes.addFlashAttribute("msg", "添加失败");
         }
         return "redirect:/";
-    }
-
-    /**
-     * 查询指定任务的步骤
-     *
-     * @param id 任务id
-     * @return 步骤实体
-     */
-    @ResponseBody
-    @RequestMapping("/d")
-    public List<Step> queryStep(@RequestParam(value = "id", defaultValue = "1") Integer id) {
-        return stepService.queryStepByTaskId(id);
     }
 }

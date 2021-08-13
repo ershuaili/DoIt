@@ -28,14 +28,10 @@
                                    type="text">
                         </form>
                         <!--选择框-->
-                        <div id="tasks" th:each="task:${tasks}">
-                            <p></p>
-                            <i th:class="${task.isFinish == true?'bi bi-check-circle':'bi bi-circle'}">&nbsp;</i>
-                            <a style="color: #f9f9f9" th:href="${task.id}" th:text="${task.taskName}"></a>
-
-                            <button id="name" th:text="${task.taskName}" th:value="${task.id}">测试</button>
+                        <div id="tasks">
                         </div>
                     </div>
+
                     <!-- 步骤 -->
                     <div class="col-4">
                         <form method="post" th:action="@{/stepInput}" th:object="${step}">
@@ -44,7 +40,6 @@
                             <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
                                    type="text">
                         </form>
-
                         <!--选择框-->
                         <div id="steps"></div>
                     </div>
@@ -59,57 +54,43 @@
 
 <div th:replace="commons::commonScript"></div>
 <script th:inline="javascript">
-
-    let tasks = document.getElementById("tasks");
-    let steps = document.getElementById("steps")
-    // 插入节点
-    // tasks.innerHTML='a';
-    // 追加节点
-    tasks.appendChild(steps);
-    // 创建一个新的节点
-    // let newP = document.createElement('p');
-    // newP.id='tasks'
-
+    // 任务
     $(function () {
-        $("").onpageshow(function () {
-            $.ajax({
-                // 请求路径
-                url: "/d",
-                type: 'post',
-                // 方法回调将#name的值赋值给id
-                data: {"id": $("#name").val()},
-                success: function (data) {
-                    // 拿到数据后执行的方法
-                    console.log(data);
-                    let html = "";
-                    for (let i = 0; i < data.length; i++) {
-                        html += "<br>" + "<i class=\"bi bi-check-circle\"></i>" + "&nbsp;" + data[i].content + "<br>"
-                    }
-                    $("#steps").html(html);
+        $.ajax({
+            // 请求路径
+            url: "/task",
+            type: 'post',
+            success: function (data) {
+                // 拿到数据后执行的方法
+                // console.log(data);
+
+                let html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += "<li id=task value=" + data[i].id + ">" + data[i].taskName + "</li>" + "<br>"
                 }
-            })
+                $("#tasks").append(html);
+            }
         })
-    })
+    });
 
     // 步骤
-    $(function () {
-        $("#name").click(function () {
-            $.ajax({
-                // 请求路径
-                url: "/d",
-                type: 'post',
-                // 方法回调将#name的值赋值给id
-                data: {"id": $("#name").val()},
-                success: function (data) {
-                    // 拿到数据后执行的方法
-                    console.log(data);
-                    let html = "";
-                    for (let i = 0; i < data.length; i++) {
-                        html += "<br>" + "<i class=\"bi bi-check-circle\"></i>" + "&nbsp;" + data[i].content + "<br>"
-                    }
-                    $("#steps").html(html);
+    $("div[id='task']").click(function () {
+
+        alert("测试按钮");
+        $.ajax({
+            // 请求路径
+            url: "/step",
+            type: 'post',
+            // 方法回调将#name的值赋值给id
+            data: {id: $("#tasks li").val()},
+            success: function (data) {
+                // 拿到数据后执行的方法
+                let html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += data[i].content + "<br>"
                 }
-            })
+                $("#steps").append(html);
+            }
         })
     });
 </script>
