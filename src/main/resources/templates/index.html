@@ -28,7 +28,8 @@
                                    type="text">
                         </form>
                         <!--选择框-->
-                        <div id="tasks">
+                        <div>
+                            <ul id="tasks"></ul>
                         </div>
                     </div>
 
@@ -66,23 +67,24 @@
 
                 let html = "";
                 for (let i = 0; i < data.length; i++) {
-                    html += "<li id=task value=" + data[i].id + ">" + data[i].taskName + "</li>" + "<br>"
+                    html += "<li id='task' class= task value= " + data[i].id + " >" + data[i].taskName + "</li>" +
+                        "<br>"
                 }
                 $("#tasks").append(html);
             }
         })
     });
 
-    // 步骤
-    $("div[id='task']").click(function () {
+    console.log($("li[id='task']").val());
 
-        alert("测试按钮");
+    // 步骤
+    $("#tasks").on("click", "li.task", function () {
         $.ajax({
             // 请求路径
             url: "/step",
             type: 'post',
             // 方法回调将#name的值赋值给id
-            data: {id: $("#tasks li").val()},
+            data: {id: $(".task").val()},
             success: function (data) {
                 // 拿到数据后执行的方法
                 let html = "";
@@ -93,6 +95,7 @@
             }
         })
     });
+
 </script>
 </body>
 </html>
