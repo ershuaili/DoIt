@@ -71,11 +71,13 @@
                         "<br>"
                 }
                 $("#tasks").append(html);
+
+
             }
         })
     });
 
-    console.log($("li[id='task']").val());
+    // console.log($("li[id='task']").val());
 
     // 步骤
     $("#tasks").on("click", "li.task", function () {
@@ -83,6 +85,7 @@
             // 请求路径
             url: "/step",
             type: 'post',
+
             // 方法回调将#name的值赋值给id
             data: {id: $(".task").val()},
             success: function (data) {
