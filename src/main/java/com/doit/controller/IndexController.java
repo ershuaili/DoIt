@@ -38,6 +38,9 @@ public class IndexController {
      */
     @RequestMapping("/")
     public String index(Model model) {
+        List<Task> tasks = taskService.queryAll();
+
+        model.addAttribute("tasks", tasks);
         model.addAttribute("task", new Task());
         model.addAttribute("step", new Step());
         return "index";
