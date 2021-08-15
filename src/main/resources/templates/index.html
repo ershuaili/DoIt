@@ -96,12 +96,14 @@
     });
 
     // 获取步骤列表
+    // on可以动态创建元素绑定事件
     $("#tasks").on("click", "li", function () {
         $.ajax({
             // 请求路径
             url: "/steps",
             type: 'get',
             // 方法回调将#name的值赋值给id
+            // 取到当前的元素的value
             data: {id: $(this).val()},
             success: function (data) {
                 // 拿到数据后执行的方法
@@ -115,10 +117,6 @@
             }
         });
     });
-
-    // $(".task").each(function () {
-    //
-    // });
 
     // 添加步骤
     $("#stepInput").submit(function () {
