@@ -30,7 +30,7 @@
                         <!--选择框-->
                         <div>
                             <ul id="tasks" th:each="task:${tasks}">
-                                <li id="task" th:text="${task.taskName}" th:value="${task.id}"></li>
+                                <li class="task" th:id="${task.id}" th:text="${task.taskName}"></li>
                             </ul>
                         </div>
                     </div>
@@ -79,26 +79,37 @@
     //     })
     // });
 
-    // console.log($("li[id='task']").val());
+    // $("li[id='task']").click(function () {
+    //     console.log($("li[id='task']").val());
+    // })
+
+
+    // $(".task").each(function () {
+    //     $(this).click(function () {
+    //         alert($(this).attr('id'));
+    //     });
+    // });
 
     // 步骤
-    $("li[id='task']").click(function () {
-        $.ajax({
-            // 请求路径
-            url: "/step",
-            type: 'post',
+    $(".task").each(function () {
+        $(this).click(function () {
+            $.ajax({
+                // 请求路径
+                url: "/step",
+                type: 'post',
 
-            // 方法回调将#name的值赋值给id
-            data: {id: $("li[id='task']").val()},
-            success: function (data) {
-                // 拿到数据后执行的方法
-                let html = "";
-                for (let i = 0; i < data.length; i++) {
-                    html += data[i].content + "<br>"
+                // 方法回调将#name的值赋值给id
+                data: {id: $(this).attr('id')},
+                success: function (data) {
+                    // 拿到数据后执行的方法
+                    let html = "";
+                    for (let i = 0; i < data.length; i++) {
+                        html += data[i].content + "<br>"
+                    }
+                    $("#steps").append(html);
                 }
-                $("#steps").append(html);
-            }
-        })
+            })
+        });
     });
 
 </script>
