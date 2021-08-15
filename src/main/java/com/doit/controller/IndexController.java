@@ -4,7 +4,6 @@ import com.doit.entity.Step;
 import com.doit.entity.Task;
 import com.doit.service.StepService;
 import com.doit.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,9 +25,9 @@ public class IndexController {
     /**
      * 服务对象
      */
-    @Autowired
+    @Resource
     private TaskService taskService;
-    @Autowired
+    @Resource
     private StepService stepService;
 
     /**
@@ -82,14 +82,10 @@ public class IndexController {
      * @param step 步骤对象
      * @return 首页
      */
-    @PostMapping("stepInput")
-    public String stepInsert(Step step, RedirectAttributes attributes) {
+    @PostMapping("/stepInput")
+    @ResponseBody
+    public boolean stepInsert(Step step) {
         Step insert = stepService.insert(step);
-        if (insert == null) {
-            attributes.addFlashAttribute("msg", "添加成功");
-        } else {
-            attributes.addFlashAttribute("msg", "添加失败");
-        }
-        return "redirect:/";
+        return insert == null;
     }
 }

@@ -35,7 +35,7 @@
 
     <!--通过任务id查询任务步骤-->
     <select id="queryStepByTaskId" resultMap="StepMap">
-        select task.id tid, task_name, step.id, content
+        select task.id tid, task_id, task_name, step.id, content, step.is_finish
         from db_doit.step,
              db_doit.task
         where step.task_id = task.id

@@ -21,7 +21,8 @@
                 <div class="row">
                     <!-- 任务 -->
                     <div class="col-8">
-                        <form method="post" th:action="@{/taskInput}" th:object="${task}">
+                        <!-- 添加任务 -->
+                        <form method="post" th:action="@{/taskInput}">
                             <!--输入框-->
                             <label for="taskName"></label>
                             <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
@@ -29,7 +30,7 @@
                         </form>
                         <!--选择框-->
                         <div>
-                            <ul id="tasks" th:each="task:${tasks}">
+                            <ul class="list-unstyled" id="tasks" th:each="task:${tasks}">
                                 <li class="task" th:id="${task.id}" th:text="${task.taskName}"></li>
                             </ul>
                         </div>
@@ -37,11 +38,15 @@
 
                     <!-- 步骤 -->
                     <div class="col-4">
-                        <form method="post" th:action="@{/stepInput}" th:object="${step}">
+                        <!--添加步骤-->
+                        <form id="stepInput" method="post">
                             <!--输入框-->
                             <label for="step"></label>
                             <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
                                    type="text">
+
+                            <!--隐藏域父类id-->
+                            <input id="taskId" name="taskId" type="hidden" value="">
                         </form>
                         <!--选择框-->
                         <div id="steps"></div>
@@ -56,7 +61,7 @@
 </div>
 
 <div th:replace="commons::commonScript"></div>
-<script th:inline="javascript">
+<script type="text/javascript">
     // 步骤列表
     $(".task").each(function () {
         $(this).click(function () {
@@ -64,7 +69,6 @@
                 // 请求路径
                 url: "/step",
                 type: 'post',
-
                 // 方法回调将#name的值赋值给id
                 data: {id: $(this).attr('id')},
                 success: function (data) {
@@ -72,13 +76,37 @@
                     let html = "";
                     for (let i = 0; i < data.length; i++) {
                         html += data[i].content + "<br>"
+                        // 设置步骤的父级任务id
+                        document.getElementById('taskId').value = data[i].taskId
                     }
-                    $("#steps").append(html);
+                    $("#steps").html(html);
                 }
             })
         });
     });
 
+    // $("#stepInput").after(function () {
+    //     let step = $("#step"),
+    //         taskId = $("taskId");
+    //     console.log(step,t)
+    // })
+
+    // 添加步骤
+    $("#stepInput").submit(function () {
+        $.ajax({
+            url: '/stepInput',
+            type: 'post',
+            data: $('#stepInput').serialize(),
+            success: function (data) {
+                console.log(data);
+                // if (data===true){
+                //     alert("添加成功")
+                // }else {
+                //     alert("添加失败")
+                // }
+            }
+        });
+    });
 </script>
 </body>
 </html>
