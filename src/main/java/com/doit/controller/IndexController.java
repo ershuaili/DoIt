@@ -47,17 +47,6 @@ public class IndexController {
     }
 
     /**
-     * 查询所有任务
-     *
-     * @return 任务列表
-     */
-    @RequestMapping("/task")
-    @ResponseBody
-    public List<Task> queryTask() {
-        return taskService.queryAll();
-    }
-
-    /**
      * 查询指定任务的步骤
      *
      * @param id 任务id

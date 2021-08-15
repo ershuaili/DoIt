@@ -57,40 +57,7 @@
 
 <div th:replace="commons::commonScript"></div>
 <script th:inline="javascript">
-    // 任务
-    // $(function () {
-    //     $.ajax({
-    //         // 请求路径
-    //         url: "/task",
-    //         type: 'post',
-    //         success: function (data) {
-    //             // 拿到数据后执行的方法
-    //             // console.log(data);
-    //
-    //             let html = "";
-    //             for (let i = 0; i < data.length; i++) {
-    //                 html += "<li id='task' class= task value= " + data[i].id + " >" + data[i].taskName + "</li>" +
-    //                     "<br>"
-    //             }
-    //             $("#tasks").append(html);
-    //
-    //
-    //         }
-    //     })
-    // });
-
-    // $("li[id='task']").click(function () {
-    //     console.log($("li[id='task']").val());
-    // })
-
-
-    // $(".task").each(function () {
-    //     $(this).click(function () {
-    //         alert($(this).attr('id'));
-    //     });
-    // });
-
-    // 步骤
+    // 步骤列表
     $(".task").each(function () {
         $(this).click(function () {
             $.ajax({
