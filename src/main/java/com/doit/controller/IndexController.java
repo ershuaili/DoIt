@@ -5,11 +5,10 @@ import com.doit.entity.Task;
 import com.doit.service.StepService;
 import com.doit.service.TaskService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,17 +32,22 @@ public class IndexController {
     /**
      * 前端首页展示任务和任务详细信息列表
      *
-     * @param model 模型
      * @return index
      */
     @RequestMapping("/")
-    public String index(Model model) {
-        List<Task> tasks = taskService.queryAll();
-
-        model.addAttribute("tasks", tasks);
-        model.addAttribute("task", new Task());
-        model.addAttribute("step", new Step());
+    public String index() {
         return "index";
+    }
+
+    /**
+     * 查询所有步骤
+     *
+     * @return 步骤列表
+     */
+    @GetMapping("/tasks")
+    @ResponseBody
+    public List<Task> queryTask() {
+        return taskService.queryAll();
     }
 
     /**
@@ -52,7 +56,7 @@ public class IndexController {
      * @param id 任务id
      * @return 步骤实体
      */
-    @RequestMapping("/step")
+    @GetMapping("/steps")
     @ResponseBody
     public List<Step> queryStep(Integer id) {
         return stepService.queryStepByTaskId(id);
@@ -64,15 +68,11 @@ public class IndexController {
      * @param task 任务对象
      * @return 首页
      */
-    @PostMapping("taskInput")
-    public String taskInsert(Task task, RedirectAttributes attributes) {
+    @PostMapping("/taskInput")
+    @ResponseBody
+    public boolean taskInsert(Task task) {
         Task insert = taskService.insert(task);
-        if (insert == null) {
-            attributes.addFlashAttribute("msg", "添加成功");
-        } else {
-            attributes.addFlashAttribute("msg", "添加失败");
-        }
-        return "redirect:/";
+        return insert == null;
     }
 
 

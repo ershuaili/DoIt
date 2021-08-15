@@ -22,17 +22,15 @@
                     <!-- 任务 -->
                     <div class="col-8">
                         <!-- 添加任务 -->
-                        <form method="post" th:action="@{/taskInput}">
+                        <form id="taskInput" method="post">
                             <!--输入框-->
                             <label for="taskName"></label>
                             <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
                                    type="text">
                         </form>
                         <!--选择框-->
-                        <div>
-                            <ul class="list-unstyled" id="tasks" th:each="task:${tasks}">
-                                <li class="task" th:id="${task.id}" th:text="${task.taskName}"></li>
-                            </ul>
+                        <div id="tasks">
+                            <ul></ul>
                         </div>
                     </div>
 
@@ -44,7 +42,6 @@
                             <label for="step"></label>
                             <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
                                    type="text">
-
                             <!--隐藏域父类id-->
                             <input id="taskId" name="taskId" type="hidden" value="">
                         </form>
@@ -62,34 +59,66 @@
 
 <div th:replace="commons::commonScript"></div>
 <script type="text/javascript">
-    // 步骤列表
-    $(".task").each(function () {
-        $(this).click(function () {
-            $.ajax({
-                // 请求路径
-                url: "/step",
-                type: 'post',
-                // 方法回调将#name的值赋值给id
-                data: {id: $(this).attr('id')},
-                success: function (data) {
-                    // 拿到数据后执行的方法
-                    let html = "";
-                    for (let i = 0; i < data.length; i++) {
-                        html += data[i].content + "<br>"
-                        // 设置步骤的父级任务id
-                        document.getElementById('taskId').value = data[i].taskId
-                    }
-                    $("#steps").html(html);
+    // 获取任务列表
+    $(function () {
+        $.ajax({
+            // 请求路径
+            url: "/tasks",
+            type: 'get',
+            success: function (data) {
+                // 拿到数据后执行的方法
+                // console.log(data);
+                let html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += "<li id=task value=" + data[i].id + ">" + data[i].taskName + "</li>" + "<br>"
                 }
-            })
+                $("#tasks").append(html);
+            }
+        })
+    });
+
+    // 添加任务
+    $("#taskInput").submit(function () {
+        $.ajax({
+            url: '/taskInput',
+            type: 'post',
+            data: $('#taskInput').serialize(),
+            success: function (data) {
+                console.log(data);
+                // if (data===true){
+                //     alert("添加成功")
+                // }else {
+                //     alert("添加失败")
+                // }
+            }
+        });
+        return false;
+    });
+
+    // 获取步骤列表
+    $("#tasks").on("click", "li", function () {
+        $.ajax({
+            // 请求路径
+            url: "/steps",
+            type: 'get',
+            // 方法回调将#name的值赋值给id
+            data: {id: $(this).val()},
+            success: function (data) {
+                // 拿到数据后执行的方法
+                let html = "";
+                for (let i = 0; i < data.length; i++) {
+                    html += data[i].content + "<a href='javascript:;'> 删除</a>" + "<br>"
+                    // 设置步骤的父级任务id
+                    document.getElementById('taskId').value = data[i].taskId
+                }
+                $("#steps").html(html);
+            }
         });
     });
 
-    // $("#stepInput").after(function () {
-    //     let step = $("#step"),
-    //         taskId = $("taskId");
-    //     console.log(step,t)
-    // })
+    // $(".task").each(function () {
+    //
+    // });
 
     // 添加步骤
     $("#stepInput").submit(function () {
