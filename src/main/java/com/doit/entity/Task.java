@@ -31,7 +31,7 @@ public class Task implements Serializable {
     /**
      * 结束时间
      */
-    private Date expireTime;
+    private Date endTime;
     /**
      * 是否完成
      */

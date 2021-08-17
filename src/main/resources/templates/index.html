@@ -23,12 +23,13 @@
                     <!-- 任务 -->
                     <div class="col-8">
                         <!-- 添加任务 -->
-                        <form id="taskInput" method="post">
+                        <form class="form-inline" id="taskInput" method="post">
                             <!--输入框-->
                             <label for="taskName"></label>
                             <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
                                    type="text">
-                            <input id="taskBtn" type="button" value="提交"/>
+                            <input id="endTime" name="endTime" type="button" value="选择结束日期">
+                            <input class="btn btn-primary" id="taskBtn" type="button" value="提交"/>
                         </form>
                         <!--选择框-->
                         <div id="tasks">
@@ -39,12 +40,12 @@
                     <!-- 步骤 -->
                     <div class="col-4">
                         <!--添加步骤-->
-                        <form id="stepInput" method="post">
+                        <form class="form-inline" id="stepInput" method="post">
                             <!--输入框-->
                             <label for="step"></label>
                             <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
                                    type="text">
-                            <input id="stepBtn" type="button" value="提交"/>
+                            <input class="btn btn-primary" id="stepBtn" type="button" value="提交"/>
                             <!--隐藏域父类id-->
                             <input id="taskId" name="taskId" type="hidden" value="">
                         </form>
@@ -113,9 +114,7 @@
                 type: "post",
                 data: {id: $(this).val()},
                 success: function () {
-                    $(this).remove();
-                    alert()
-                    alert($(this).val())
+                    tasks();
                 }
             })
         })
@@ -166,6 +165,14 @@
         });
     });
 
+    // 日历控件
+    $("#endTime").datepicker({
+        language: 'zh-CN', //语言
+        autoclose: true, //选择后自动关闭
+        clearBtn: true,//清除按钮
+        format: "yyyy-mm-dd",//日期格式
+        todayHighlight: true,//今天高亮
+    });
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="taskName" column="task_name" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
         <result property="isFinish" column="is_finish" jdbcType="BOOLEAN"/>
     </resultMap>
 
@@ -15,7 +15,7 @@
         select id,
                task_name,
                create_time,
-               expire_time,
+               end_time,
                is_finish
         from db_doit.task
     </select>
@@ -25,7 +25,7 @@
         select id,
                task_name,
                create_time,
-               expire_time,
+               end_time,
                is_finish
         from db_doit.task
         where id = #{id}
@@ -33,12 +33,12 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, create_time, expire_time, is_finish)
+        insert into db_doit.task(task_name, create_time, end_time, is_finish)
         values (#{taskName}, #{createTime}, #{expireTime}, #{isFinish})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, create_time, expire_time, is_finish)
+        insert into db_doit.task(task_name, create_time, end_time, is_finish)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.taskName}, #{entity.createTime}, #{entity.expireTime}, #{entity.isFinish})
@@ -46,13 +46,13 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, create_time, expire_time, is_finish)
+        insert into db_doit.task(task_name, create_time, end_time, is_finish)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.taskName}, #{entity.createTime}, #{entity.expireTime}, #{entity.isFinish})
         </foreach>
         on duplicate key update
-        task_name = values(task_name) , create_time = values(create_time) , expire_time = values(expire_time) ,
+        task_name = values(task_name) , create_time = values(create_time) , end_time = values(end_time) ,
         is_finish = values(is_finish)
     </insert>
 
