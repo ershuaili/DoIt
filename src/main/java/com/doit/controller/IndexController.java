@@ -86,4 +86,17 @@ public class IndexController {
         Step insert = stepService.insert(step);
         return insert == null;
     }
+
+    /**
+     * 删除一个任务
+     *
+     * @param id 任务id
+     * @return 删除成功
+     */
+    @PostMapping("/taskDelete")
+    @ResponseBody
+    public boolean taskDelete(Integer id) {
+        return taskService.deleteById(id);
+    }
+
 }

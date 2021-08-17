@@ -73,7 +73,9 @@
                 // console.log(data);
                 let html = "";
                 for (let i = 0; i < data.length; i++) {
-                    html += "<li id=task value=" + data[i].id + ">" + data[i].taskName + "</li>" + "<br>"
+                    html +=
+                        "<li id=task value=" + data[i].id + ">" + data[i].taskName + " </li>" +
+                        "<button value=" + data[i].id + ">删除</button>" + "<br>"
                 }
                 $("#tasks").html(html);
             }
@@ -82,10 +84,6 @@
 
     // 添加任务
     $("#taskBtn").click(function () {
-        // $("#taskInput").keydown(function (e) {
-        //按下键盘触发函数
-        //如果按下的是回车
-        // if (e.keyCode === 13) {
         $.ajax({
             url: '/taskInput',
             type: 'post',
@@ -96,6 +94,7 @@
                 if (data === false) {
                     // 重新获取任务列表
                     tasks();
+                    $("#taskName").val("")
                 } else {
                     alert("添加失败")
                     tasks();
@@ -103,6 +102,23 @@
             }
         });
 
+    });
+
+    // 删除任务
+    $(function () {
+        $("#tasks").on("click", "button", function () {
+
+            $.ajax({
+                url: "/taskDelete",
+                type: "post",
+                data: {id: $(this).val()},
+                success: function () {
+                    $(this).remove();
+                    alert()
+                    alert($(this).val())
+                }
+            })
+        })
     });
 
     // 获取步骤列表
@@ -138,9 +154,11 @@
             async: false,
             data: $('#stepInput').serialize(),
             success: function (data) {
-                console.log(data);
                 if (data === false) {
-                    alert("添加成功");
+                    // 将添加的元素加入到下面
+                    $("#steps").append($("#step").val() + "<a href='javascript:;'> 删除</a>" + "<br>")
+                    // 清空输入框
+                    $('#step').val('');
                 } else {
                     alert("添加失败")
                 }
