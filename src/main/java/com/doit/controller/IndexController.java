@@ -7,7 +7,6 @@ import com.doit.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -20,7 +19,6 @@ import java.util.List;
  * @version v1.0
  */
 @Controller
-@RequestMapping("/")
 public class IndexController {
     /**
      * 服务对象
@@ -75,7 +73,6 @@ public class IndexController {
         Task insert = taskService.insert(task);
         return insert == null;
     }
-
 
     /**
      * 增加一个步骤

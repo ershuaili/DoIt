@@ -44,6 +44,7 @@
                             <label for="step"></label>
                             <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
                                    type="text">
+                            <input id="stepBtn" type="button" value="提交"/>
                             <!--隐藏域父类id-->
                             <input id="taskId" name="taskId" type="hidden" value="">
                         </form>
@@ -88,9 +89,9 @@
         $.ajax({
             url: '/taskInput',
             type: 'post',
+            async: false,
             // 获取数据发送给后端
             data: $('#taskInput').serialize(),
-            async: false,
             success: function (data) {
                 if (data === false) {
                     // 重新获取任务列表
@@ -108,6 +109,8 @@
     // on可以动态创建元素绑定事件
     $(function () {
         $("#tasks").on("click", "li", function () {
+            // 设置步骤的父级任务id
+            document.getElementById('taskId').value = $(this).val();
             $.ajax({
                 // 请求路径
                 url: "/steps",
@@ -120,9 +123,6 @@
                     let html = "";
                     for (let i = 0; i < data.length; i++) {
                         html += data[i].content + "<a href='javascript:;'> 删除</a>" + "<br>"
-                        // 设置步骤的父级任务id
-                        document.getElementById('taskId').value = data[i].taskId;
-                        alert(data[i].taskId);
                     }
                     $("#steps").html(html);
                 }
@@ -131,44 +131,23 @@
     });
 
     // 添加步骤
-    // $("#stepInput").submit(function () {
-    //     $.ajax({
-    //         url: '/stepInput',
-    //         type: 'post',
-    //         async: false,
-    //         data: $('#stepInput').serialize(),
-    //         success: function (data) {
-    //             console.log(data);
-    //             // if (data===true){
-    //             //     alert("添加成功")
-    //             // }else {
-    //             //     alert("添加失败")
-    //             // }
-    //         }
-    //     });
-    // });
-
-    $("#stepInput").keydown(function (e) {
-        //按下键盘触发函数
-        if (e.keyCode === 13) {
-            //如果按下的是回车
-            $.ajax({
-                url: '/stepInput',
-                type: 'post',
-                data: $('#stepInput').serialize(),
-                success: function (data) {
-                    alert("aaa")
-                    console.log(data);
-                    if (data === false) {
-                        alert("添加成功")
-                    } else {
-                        alert("添加失败")
-                    }
+    $("#stepBtn").click(function () {
+        $.ajax({
+            url: '/stepInput',
+            type: 'post',
+            async: false,
+            data: $('#stepInput').serialize(),
+            success: function (data) {
+                console.log(data);
+                if (data === false) {
+                    alert("添加成功");
+                } else {
+                    alert("添加失败")
                 }
-            });
-            //处理事件
-        }
+            }
+        });
     });
+
 </script>
 </body>
 </html>
