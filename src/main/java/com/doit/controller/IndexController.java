@@ -20,6 +20,7 @@ import java.util.List;
  * @version v1.0
  */
 @Controller
+@RequestMapping("/")
 public class IndexController {
     /**
      * 服务对象
@@ -34,7 +35,7 @@ public class IndexController {
      *
      * @return index
      */
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
         return "index";
     }
