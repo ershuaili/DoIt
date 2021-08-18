@@ -25,11 +25,12 @@
                         <!-- 添加任务 -->
                         <form class="form-inline" id="taskInput" method="post">
                             <!--输入框-->
-                            <label for="taskName"></label>
-                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
-                                   type="text">
-                            <input id="endTime" name="endTime" type="button" value="选择结束日期">
-                            <input class="btn btn-primary" id="taskBtn" type="button" value="提交"/>
+                            <label>
+                                <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
+                                       type="text">
+                                <input id="endTime" name="endTime" type="text" value="选择结束日期">
+                                <input class="btn btn-primary" id="taskBtn" type="button" value="提交"/>
+                            </label>
                         </form>
                         <!--选择框-->
                         <div id="tasks">
@@ -88,6 +89,7 @@
 
     // 添加任务
     $("#taskBtn").click(function () {
+        // console.log($('#taskInput').serialize())
         $.ajax({
             url: '/taskInput',
             type: 'post',
@@ -105,7 +107,6 @@
                 }
             }
         });
-
     });
 
     // 删除任务
