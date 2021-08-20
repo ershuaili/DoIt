@@ -1,0 +1,54 @@
+/* 头部导航栏 */
+
+.layui-header {
+    background-color: #000000
+}
+
+
+/* 头部内容 */
+
+.layui-layout-left li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.layui-layout-right li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+/* 主体部分 */
+
+.main {
+    width: 90%;
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* 任务列表 */
+
+.task {
+    background-color: white;
+    border-radius: 10px;
+    padding-left: 20px;
+    margin-top: 5px;
+    height: 50px;
+    line-height: 50px;
+}
+
+
+/* 任务内容 */
+
+.taskText {
+    padding-left: 10px;
+}
+
+
+/* 统一icon */
+
+.layui-icon {
+    font-size: 25px;
+}
