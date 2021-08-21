@@ -199,14 +199,16 @@
             let str = '';
             str += '<div class="task">' +
                 '<i class="layui-icon layui-icon-ok-circle"></i>' +
-                '<i class="taskText"><del>' + $(this).next().text() + '</del></i>' +
-                '</div>';
+                '<div class="taskMain">' +
+                '<i class="taskText"><del>' + $(this).next().children().first().text() + '</del></i><br>' +
+                '<i class="taskTime">' + $(this).next().children().next().text() + '</i>' +
+                '</div>'
             $("#finishTasks").prepend(str);
         });
     });
 
     //步骤列表
-    $(".tasks").on("click", ".taskText", function () {
+    $(".tasks").on("click", ".taskMain", function () {
         const taskText = $(this).text();
         const typeIcon = $(this).prev().attr('class');
         layer.open({
