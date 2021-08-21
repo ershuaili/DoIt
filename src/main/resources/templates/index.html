@@ -1,74 +1,143 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="~{commons::head(~{::title})}">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
     <title>DoIt-Day</title>
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/dist/dist/css/my.css}">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
-      onload="tasks()">
-<div class="wrapper">
-    <!-- 顶部导航栏 -->
-    <nav th:replace="commons::commonNav(day)"></nav>
-    <!-- 左侧导航栏 -->
-    <aside th:replace="commons::commonMenu(day)"></aside>
+<body>
+<!-- 布 局 框 架 -->
+<div class="layui-layout layui-layout-admin">
 
-    <!-- 中间内容 -->
-    <div class="content-wrapper">
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- /.row -->
-                <div class="row">
-                    <!-- 任务 -->
-                    <div class="col-8">
-                        <!-- 添加任务 -->
-                        <form class="form-inline" id="taskInput" method="post">
-                            <!--输入框-->
-                            <label>
-                                <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务"
-                                       type="text">
-                                <input id="endTime" name="endTime" type="text" value="选择结束日期">
-                                <input class="btn btn-primary" id="taskBtn" type="button" value="提交"/>
-                            </label>
-                        </form>
-                        <!--选择框-->
-                        <div id="tasks">
-                            <ul></ul>
-                        </div>
-                    </div>
+    <!-- 头部区域 -->
+    <div class="layui-header">
+        <!-- logo -->
+        <div class="layui-logo layui-hide-xs layui-bg-black">
+            <ul class="layui-nav" style="float: left;">
+                <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                    <a href="">
+                        <img alt=""
+                             class="layui-nav-img"
+                             src="https://gitee.com/liershuaide/picturebed/raw/master/img/20210811221317.png"> tester
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">个人主页</a></dd>
+                        <dd><a href="">设置</a></dd>
+                        <dd><a href="">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
 
-                    <!-- 步骤 -->
-                    <div class="col-4">
-                        <!--添加步骤-->
-                        <form class="form-inline" id="stepInput" method="post">
-                            <!--输入框-->
-                            <label for="step"></label>
-                            <input class="form-control input-lg" id="step" name="content" placeholder="添加步骤"
-                                   type="text">
-                            <input class="btn btn-primary" id="stepBtn" type="button" value="提交"/>
-                            <!--隐藏域父类id-->
-                            <input id="taskId" name="taskId" type="hidden" value="">
-                        </form>
-                        <!--选择框-->
-                        <div id="steps"></div>
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-        </section>
-        <!-- Main content -->
+        <!-- 添加任务 -->
+        <div>
+            <form id="addTask" method="post">
+                <ul class="layui-nav layui-layout-left" lay-bar="disabled">
+                    <!-- 输入提示按钮 -->
+                    <li class="layui-nav-item">
+                        <i class="layui-icon layui-icon-circle" id="inputIcon"></i>
+                    </li>
+                    <!-- 任务输入框 -->
+                    <li class="layui-nav-item">
+                        <label for="taskInput"></label>
+                        <input class="layui-input" id="taskInput" name="taskName" placeholder="添加任务"
+                               style="width: 200%;"
+                               type="text">
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right" lay-bar="disabled">
+                    <!-- 日期选择器 -->
+                    <li class="layui-nav-item">
+                        <label for="endTime"></label>
+                        <input class="layui-input" id="endTime" name="endTime" placeholder="任务结束时间" type="text"/>
+                    </li>
+                    <!-- 提交按钮 -->
+                    <li class="layui-nav-item">
+                        <button class="layui-btn" id="inputBtn" type="button">提交</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
     </div>
-    <!--/ 中间内容 -->
+
+    <!-- 左侧导航栏 -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item"><a href="javascript:">我的一天</a></li>
+                <li class="layui-nav-item"><a href="">明天</a></li>
+                <li class="layui-nav-item"><a href="">最近七天</a></li>
+                <li class="layui-nav-item"><a href="">日历</a></li>
+            </ul>
+            <hr>
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item"><a href="">任务</a></li>
+                <li class="layui-nav-item"><a href="">清单</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 主体区域 -->
+    <div class="layui-body" style="background-color:#429972">
+        <div class="main">
+            <!-- 未完成 -->
+            <div class="tasks" id="tasks"></div>
+            <!-- 分割线 -->
+            <div>
+                <fieldset class="layui-elem-field layui-field-title site-title">
+                    <legend>已完成</legend>
+                </fieldset>
+            </div>
+            <!-- 已完成 -->
+            <div class="tasks" id="finishTasks"></div>
+
+        </div>
+    </div>
 </div>
 
-<div th:replace="commons::commonScript"></div>
-<!--bootstrap日历控件-->
-<script src="https://www.itxst.com/package/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://www.itxst.com/package/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<!-- lay-ui -->
+<script th:src="@{/plugins/layui/layui.js}"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <script>
-    // 获取任务列表
-    function tasks() {
+    const taskInput = $("#taskInput");
+    const inputIcon = $("#inputIcon");
+    const endTime = $("#endTime")
+    // lay-ui 加载模块
+    layui.use(['element', 'laydate', 'layer', 'util'], function () {
+        const element = layui.element; //框架
+        const laydate = layui.laydate; //日期
+        const layer = layui.layer;     //弹出层
+
+        //执行一个laydate实例
+        laydate.render({
+            //指定元素
+            elem: "#endTime",
+            format: "yyyy-MM-dd",//日期格式
+            // 得到元素后执行的方法
+            done: function (value) {
+                $("#endTime").val(value);
+            }
+        });
+    });
+
+    // 输入提示按钮
+    $(function () {
+        // 获得焦点
+        $(taskInput).focus(function () {
+            $(inputIcon).attr("class", "layui-icon layui-icon-add-1");
+        });
+        // 失去焦点
+        $(taskInput).blur(function () {
+            $(inputIcon).attr("class", "layui-icon layui-icon-circle");
+        });
+    });
+
+    //获取任务列表
+    $(function () {
         $.ajax({
             // 请求路径
             url: "/tasks",
@@ -76,107 +145,83 @@
             success: function (data) {
                 // 拿到数据后执行的方法
                 // console.log(data);
-                let html = "";
+                let str = "";
                 for (let i = 0; i < data.length; i++) {
-                    html +=
-                        "<li id=task value=" + data[i].id + ">" + data[i].taskName + " </li>" +
-                        "<button value=" + data[i].id + ">删除</button>" + "<br>"
+                    str += '<div class="task">' +
+                        '<i class="layui-icon layui-icon-circle"></i>' +
+                        '<i class="taskText">' + data[i].taskName + '</i>' +
+                        '<i class="taskTime">任务结束时间:' + data[i].endTime + '</i>' +
+                        '</div>';
                 }
-                $("#tasks").html(html);
+                $("#tasks").html(str);
             }
-        })
-    }
+        });
+    });
 
     // 添加任务
-    $("#taskBtn").click(function () {
-        // console.log($('#taskInput').serialize())
-        $.ajax({
-            url: '/taskInput',
-            type: 'post',
-            async: false,
-            // 获取数据发送给后端
-            data: $('#taskInput').serialize(),
-            success: function (data) {
-                if (data === false) {
-                    // 重新获取任务列表
-                    tasks();
-                    $("#taskName").val("")
-                } else {
-                    alert("添加失败")
-                    tasks();
-                }
-            }
-        });
-    });
-
-    // 删除任务
     $(function () {
-        $("#tasks").on("click", "button", function () {
-
+        $("#inputBtn").click(function () {
             $.ajax({
-                url: "/taskDelete",
-                type: "post",
-                data: {id: $(this).val()},
-                success: function () {
-                    tasks();
-                }
-            })
-        })
-    });
-
-    // 获取步骤列表
-    // on可以动态创建元素绑定事件
-    $(function () {
-        $("#tasks").on("click", "li", function () {
-            // 设置步骤的父级任务id
-            document.getElementById('taskId').value = $(this).val();
-            $.ajax({
-                // 请求路径
-                url: "/steps",
-                type: 'get',
-                // 方法回调将#name的值赋值给id
-                // 取到当前的元素的value
-                data: {id: $(this).val()},
+                url: '/taskInput',
+                type: 'post',
+                async: false,
+                // 获取数据发送给后端
+                data: $('#addTask').serialize(),
                 success: function (data) {
-                    // 拿到数据后执行的方法
-                    let html = "";
-                    for (let i = 0; i < data.length; i++) {
-                        html += data[i].content + "<a href='javascript:;'> 删除</a>" + "<br>"
+                    if (data === false) {
+                        console.log("添加成功");
+                    } else {
+                        alert("添加失败");
                     }
-                    $("#steps").html(html);
                 }
             });
+
+            let str = '';
+            str += '<div class="task">' +
+                '<i class="layui-icon layui-icon-circle"></i>' +
+                '<i class="taskText">       任务结束时间: ' + $(taskInput).val() + $(endTime).val() + '</i>' +
+                '</div>';
+            $("#tasks").prepend(str);
+
+            $(taskInput).val("");
+            $(endTime).val("");
         });
     });
 
-    // 添加步骤
-    $("#stepBtn").click(function () {
-        $.ajax({
-            url: '/stepInput',
-            type: 'post',
-            async: false,
-            data: $('#stepInput').serialize(),
-            success: function (data) {
-                if (data === false) {
-                    // 将添加的元素加入到下面
-                    $("#steps").append($("#step").val() + "<a href='javascript:;'> 删除</a>" + "<br>")
-                    // 清空输入框
-                    $('#step').val('');
-                } else {
-                    alert("添加失败")
-                }
-            }
+    // 完成任务
+    $(function () {
+        $("#tasks").on("click", ".layui-icon-circle", function () {
+            // 移除当前任务列表
+            $(this).parent().remove();
+            // 为完成的任务列表添加任务
+            let str = '';
+            str += '<div class="task">' +
+                '<i class="layui-icon layui-icon-ok-circle"></i>' +
+                '<i class="taskText"><del>' + $(this).next().text() + '</del></i>' +
+                '</div>';
+            $("#finishTasks").prepend(str);
         });
     });
 
-    // 日历控件
-    $("#endTime").datepicker({
-        language: 'zh-CN', //语言
-        autoclose: true, //选择后自动关闭
-        clearBtn: true,//清除按钮
-        format: "yyyy-mm-dd",//日期格式
-        todayHighlight: true,//今天高亮
+    //步骤列表
+    $(".tasks").on("click", ".taskText", function () {
+        const taskText = $(this).text();
+        const typeIcon = $(this).prev().attr('class');
+        layer.open({
+            type: 1,
+            title: taskText,
+            content:
+                '<div style="padding: 15px;">' +
+                '<i class="' + typeIcon + '"></i>' +
+                '<a href="">' + taskText + '</a>' +
+                '</div>',
+            area: ['500px', '100%'],
+            offset: 'rt', //右上角
+            anim: 5,
+            shadeClose: true
+        });
     });
 </script>
 </body>
+
 </html>

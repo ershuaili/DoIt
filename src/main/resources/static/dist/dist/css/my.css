@@ -46,6 +46,10 @@
     padding-left: 10px;
 }
 
+.taskTime {
+    padding-right: 10px;
+    float: right;
+}
 
 /* 统一icon */
 
