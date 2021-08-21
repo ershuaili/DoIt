@@ -4,7 +4,6 @@
     background-color: #000000
 }
 
-
 /* 头部内容 */
 
 .layui-layout-left li {
@@ -17,7 +16,6 @@
     margin-right: 10px;
 }
 
-
 /* 主体部分 */
 
 .main {
@@ -27,7 +25,6 @@
     margin-right: auto;
 }
 
-
 /* 任务列表 */
 
 .task {
@@ -36,19 +33,36 @@
     padding-left: 20px;
     margin-top: 5px;
     height: 50px;
-    line-height: 50px;
 }
 
+/* 图标文字一行显示 */
+.layui-icon-circle, .taskMain {
+    display: inline;
+}
 
-/* 任务内容 */
+/* 任务列表:图标 */
+.layui-icon-circle {
+    padding-right: 20px;
+    line-height: 50px;
+    height: 50px;
+    float: left;
+}
+
+/* 任务列表:内容 */
+.taskMain {
+    height: 50px;
+    line-height: 25px;
+}
+
+/* 任务列表:内容:文本 */
 
 .taskText {
-    padding-left: 10px;
+
 }
 
+/* 任务列表:内容:时间 */
 .taskTime {
-    padding-right: 10px;
-    float: right;
+
 }
 
 /* 统一icon */
