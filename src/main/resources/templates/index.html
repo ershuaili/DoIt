@@ -266,21 +266,25 @@
     //步骤列表
     $(".tasks").on("click", ".taskMain", function () {
         const typeIcon = $(this).prev().attr('class');
-        const taskText = $(this).children().first().text();
+        const taskText = $(this).children().first().next().text();
+        let title = '';
+        let content = '';
+        title += '<i class ="' + typeIcon + '"></i>' +
+            '<i>' + taskText + '</i>';
+        content += '<p> hello world!</p>'
         layer.open({
             type: 1,
-            title: taskText,
-            content:
-                '<div style="padding: 15px;">' +
-                '<i class="' + typeIcon + '"></i>' +
-                '<a href="">' + taskText + '</a>' +
-                '</div>',
-            area: ['500px', '100%'],
-            offset: 'rt', //右上角
-            anim: 5,
-            shadeClose: true
+            title: title,                 // 头部内容
+            content: content,             // 这里content是一个普通的String
+            area: ['500px', '100%'],      // 窗口大小
+            offset: 'rt',                 // 窗口位置
+            anim: 5,                      // 窗口动画
+            shadeClose: true,             // 阴影 关闭
+            moveOut: true,                // 是否允许拖动到窗口外
         });
     });
+
+
 </script>
 </body>
 
