@@ -67,26 +67,24 @@ public class IndexController {
      * 增加一个任务
      *
      * @param task 任务对象
-     * @return 首页
+     * @return 任务对象实体
      */
     @PostMapping("/taskInput")
     @ResponseBody
-    public boolean taskInsert(Task task) {
-        Task insert = taskService.insert(task);
-        return insert == null;
+    public Task taskInsert(Task task) {
+        return taskService.insert(task);
     }
 
     /**
      * 增加一个步骤
      *
      * @param step 步骤对象
-     * @return 首页
+     * @return 步骤对象实体
      */
     @PostMapping("/stepInput")
     @ResponseBody
-    public boolean stepInsert(Step step) {
-        Step insert = stepService.insert(step);
-        return insert == null;
+    public Step stepInsert(Step step) {
+        return stepService.insert(step);
     }
 
     /**
@@ -101,4 +99,27 @@ public class IndexController {
         return taskService.deleteById(id);
     }
 
+    /**
+     * 删除一个步骤
+     *
+     * @param id 步骤id
+     * @return 删除成功
+     */
+    @PostMapping("/stepDelete")
+    @ResponseBody
+    public boolean stepDelete(Integer id) {
+        return stepService.deleteById(id);
+    }
+
+    /**
+     * 修改一个任务
+     *
+     * @param task 任务对象
+     * @return 修改成功
+     */
+    @PostMapping("/taskUpdate")
+    @ResponseBody
+    public Task taskUpdate(Task task) {
+        return taskService.update(task);
+    }
 }

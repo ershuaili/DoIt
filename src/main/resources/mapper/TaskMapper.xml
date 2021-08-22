@@ -33,8 +33,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, create_time, end_time, is_finish)
-        values (#{taskName}, #{createTime}, #{endTime}, #{isFinish})
+        insert into db_doit.task(task_name, create_time, end_time)
+        values (#{taskName}, #{createTime}, #{endTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
