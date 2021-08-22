@@ -19,6 +19,17 @@
     margin-right: 10px;
 }
 
+/* 头部:icon */
+#inputIcon {
+    height: 60px;
+    line-height: 60px;
+}
+
+/* 主体背景色 */
+.layui-body {
+    background-color: #429972
+}
+
 /* 主体部分 */
 .main {
     width: 90%;

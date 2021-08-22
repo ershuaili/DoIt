@@ -30,21 +30,19 @@
                 </li>
             </ul>
         </div>
-
         <!-- 添加任务 -->
         <div>
             <form id="addTask" method="post">
                 <ul class="layui-nav layui-layout-left" lay-bar="disabled">
                     <!-- 输入提示按钮 -->
                     <li class="layui-nav-item">
-                        <i class="layui-icon layui-icon-circle" id="inputIcon"></i>
+                        <i class="layui-icon layui-icon-edit" id="inputIcon"></i>
                     </li>
                     <!-- 任务输入框 -->
                     <li class="layui-nav-item">
                         <label for="taskInput"></label>
                         <input class="layui-input" id="taskInput" name="taskName" placeholder="添加任务"
-                               style="width: 200%;"
-                               type="text">
+                               style="width: 200%;" type="text">
                     </li>
                 </ul>
                 <ul class="layui-nav layui-layout-right" lay-bar="disabled">
@@ -82,7 +80,7 @@
     </div>
 
     <!-- 主体区域 -->
-    <div class="layui-body" style="background-color:#429972">
+    <div class="layui-body">
         <div class="main">
             <!-- 未完成 -->
             <div class="tasks" id="tasks"></div>
@@ -132,7 +130,7 @@
         });
         // 失去焦点
         $(taskInput).blur(function () {
-            $(inputIcon).attr("class", "layui-icon layui-icon-circle");
+            $(inputIcon).attr("class", "layui-icon layui-icon-edit");
         });
     });
 
@@ -144,14 +142,13 @@
             type: 'get',
             success: function (data) {
                 // 拿到数据后执行的方法
-                // console.log(data);
                 let str = "";
                 for (let i = 0; i < data.length; i++) {
                     str += '<div class="task">' +
                         '<i class="layui-icon layui-icon-circle"></i>' +
                         '<div class="taskMain">' +
-                        '<i class="taskText">' + data[i].taskName + '</i><br>' +
-                        '<i class="taskTime">任务结束时间:' + data[i].endTime + '</i>' +
+                        '<p class="taskText">' + data[i].taskName + '</p>' +
+                        '<p class="taskTime">' + data[i].endTime + '</p>' +
                         '</div>' +
                         '</div>';
                 }
@@ -182,8 +179,8 @@
             str += '<div class="task">' +
                 '<i class="layui-icon layui-icon-circle"></i>' +
                 '<div class="taskMain">' +
-                '<i class="taskText">' + $(taskInput).val() + '</i><br>' +
-                '<i class="taskTime">任务结束时间:' + $(endTime).val() + '</i>' +
+                '<p class="taskText">' + $(taskInput).val() + '</p>' +
+                '<p class="taskTime">' + $(endTime).val() + '</p>' +
                 '</div>' +
                 '</div>';
             $("#tasks").prepend(str);
@@ -196,6 +193,7 @@
     // 完成任务
     $(function () {
         $("#tasks").on("click", ".layui-icon-circle", function () {
+
             // 移除当前任务列表
             $(this).parent().remove();
             // 为完成的任务列表添加任务
@@ -203,8 +201,8 @@
             str += '<div class="task">' +
                 '<i class="layui-icon layui-icon-ok-circle"></i>' +
                 '<div class="taskMain">' +
-                '<i class="taskText"><del>' + $(this).next().children().first().text() + '</del></i><br>' +
-                '<i class="taskTime">' + $(this).next().children().next().text() + '</i>' +
+                '<p class="taskText"><del>' + $(this).next().children().first().text() + '</del></p>' +
+                '<p class="taskTime">' + $(this).next().children().next().text() + '</p>' +
                 '</div>'
             $("#finishTasks").prepend(str);
         });
