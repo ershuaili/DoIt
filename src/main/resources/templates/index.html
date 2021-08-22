@@ -263,15 +263,21 @@
         });
     });
 
-    //步骤列表
+    // 步骤列表
     $(".tasks").on("click", ".taskMain", function () {
         const typeIcon = $(this).prev().attr('class');
         const taskText = $(this).children().first().next().text();
-        let title = '';
-        let content = '';
-        title += '<i class ="' + typeIcon + '"></i>' +
+        let title =
+            '<i class ="' + typeIcon + '"></i>' +
             '<i>' + taskText + '</i>';
-        content += '<p> hello world!</p>'
+        let content =
+            '<div class="popup">' +
+            '<div class="myDay"><i class="layui-icon layui-icon-light"></i>我的一天</div>' +
+            '<div class="recur"><i class="layui-icon layui-icon-refresh"></i>任务重复</div>' +
+            '<div class="addStep"><i class="layui-icon layui-icon-add-1"></i>添加步骤</div>' +
+            '<div class="steps"><i class="layui-icon layui-icon-circle"></i>任务列表</div>' +
+            '<div class="delete"><i class="layui-icon layui-icon-delete"></i>删除</div>' +
+            '</div>';
         layer.open({
             type: 1,
             title: title,                 // 头部内容
@@ -283,8 +289,6 @@
             moveOut: true,                // 是否允许拖动到窗口外
         });
     });
-
-
 </script>
 </body>
 
