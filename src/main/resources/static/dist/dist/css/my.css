@@ -118,7 +118,7 @@ html, body {
 }
 
 .recur {
-    background-color: #2E2D3C;
+    background-color: #00ad81;
 }
 
 .addStep {
@@ -135,4 +135,8 @@ html, body {
     width: 100%;
     position: absolute;
     bottom: 0;
+}
+
+.layui-icon-delete {
+    float: right;
 }
