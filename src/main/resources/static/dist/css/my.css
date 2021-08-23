@@ -35,7 +35,7 @@ html, body {
 }
 
 /* 主体部分 */
-.main {
+.dayMain {
     width: 90%;
     padding-top: 40px;
     margin-left: auto;
@@ -140,3 +140,5 @@ html, body {
 .layui-icon-delete {
     float: right;
 }
+
+
