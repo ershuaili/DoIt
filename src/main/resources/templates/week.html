@@ -1,56 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head th:replace="~{commons::head(~{::title})}">
+<html lang="zh" th:replace="~{commons::layout(~{::title},~{::section},~{::header})}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
     <title>DoIt-Wee</title>
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-<div class="wrapper">
-    <!-- 顶部导航栏 -->
-    <nav th:replace="commons::commonNav(wee)"></nav>
-    <!-- 左侧导航栏 -->
-    <aside th:replace="commons::commonMenu(wee)"></aside>
+<body>
+<!--头部-->
+<header>
 
-    <!-- 中间内容 -->
-    <div class="content-wrapper">
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- /.row -->
-                <div class="row">
-                    <!-- 任务 -->
-                    <div class="col-8">
-                        <form method="post">
-                            <label for="taskName"></label>
-                            <input class="form-control input-lg" id="taskName" name="taskName" placeholder="添加任务" type="text">
-                        </form>
+</header>
 
-                        <div>
-                            <label>
-                                <input style="width: 50px" type="checkbox" value="">
-                            </label>
-                            <a></a>
-                        </div>
-                    </div>
-                    <!-- 步骤 -->
-                    <div class="col-4">
-                        <label for="step"></label>
-                        <input class="form-control input-lg" id="step" placeholder="添加步骤" type="text">
-                        <div>
-                            <label>
-                                <input type="checkbox" value="">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-        </section>
-        <!-- Main content -->
-    </div>
-    <!--/ 中间内容 -->
-</div>
-<div th:replace="commons::commonScript"></div>
+<!-- 主体部分 -->
+<section class="weeMain">
+    <h1>这周</h1>
+</section>
+
+<!-- lay-ui -->
+<script th:src="@{/plugins/layui/layui.js}"></script>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/dist/js/my.js}"></script>
 </body>
 </html>
+
+

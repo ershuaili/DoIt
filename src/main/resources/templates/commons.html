@@ -39,15 +39,15 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
-                <li class="layui-nav-item"><a href="javascript:">我的一天</a></li>
-                <li class="layui-nav-item"><a href="">明天</a></li>
-                <li class="layui-nav-item"><a href="">最近七天</a></li>
-                <li class="layui-nav-item"><a href="">日历</a></li>
+                <li class="layui-nav-item" id="DoIt-Day"><a th:href="@{/}">我的一天</a></li>
+                <li class="layui-nav-item" id="DoIt-Tom"><a href="tomorrow.html" th:href="@{tom}">明天</a></li>
+                <li class="layui-nav-item" id="DoIt-Wee"><a th:href="@{wee}">最近七天</a></li>
+                <li class="layui-nav-item" id="DoIt-Cal"><a th:href="@{cal}">日历</a></li>
             </ul>
             <hr>
             <ul class="layui-nav layui-nav-tree">
-                <li class="layui-nav-item"><a href="">任务</a></li>
-                <li class="layui-nav-item"><a href="">清单</a></li>
+                <li class="layui-nav-item" id="DoIt-Tas"><a th:href="@{tas}">任务</a></li>
+                <li class="layui-nav-item" id="DoIt-Che"><a th:href="@{che}">清单</a></li>
             </ul>
         </div>
     </div>
@@ -60,7 +60,9 @@
 
 <!-- lay-ui -->
 <script th:src="@{/plugins/layui/layui.js}"></script>
+<!--jquery-->
 <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- my.js -->
 <script th:src="@{/dist/js/my.js}"></script>
 </body>
 

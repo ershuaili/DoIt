@@ -1,6 +1,7 @@
 const taskInput = $("#taskInput");
 const inputIcon = $("#inputIcon");
 const endTime = $("#endTime")
+
 // lay-ui 加载模块
 layui.use(['element', 'laydate', 'layer', 'util'], function () {
     const element = layui.element; //框架
@@ -17,6 +18,30 @@ layui.use(['element', 'laydate', 'layer', 'util'], function () {
             $("#endTime").val(value);
         }
     });
+});
+
+// 左侧导航选中
+$(function () {
+    switch ($("title").text()) {
+        case "DoIt-Day":
+            $("#DoIt-Day").attr("class", "layui-nav-item layui-this")
+            break;
+        case "DoIt-Tom":
+            $("#DoIt-Tom").attr("class", "layui-nav-item layui-this")
+            break;
+        case "DoIt-Wee":
+            $("#DoIt-Wee").attr("class", "layui-nav-item layui-this")
+            break;
+        case "DoIt-Cal":
+            $("#DoIt-Cal").attr("class", "layui-nav-item layui-this")
+            break;
+        case "DoIt-Tas":
+            $("#DoIt-Tas").attr("class", "layui-nav-item layui-this")
+            break;
+        case "DoIt-Che":
+            $("#DoIt-Che").attr("class", "layui-nav-item layui-this")
+            break;
+    }
 });
 
 // 输入提示按钮
