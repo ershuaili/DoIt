@@ -88,8 +88,8 @@ html, body {
 
 }
 
-/* 步骤 */
 
+/* 步骤列表 */
 .popup {
     width: 95%;
     height: 100%;
@@ -112,25 +112,47 @@ html, body {
     padding-right: 10px;
 }
 
+/*我的一天*/
 .myDay {
     background-color: bisque;
-    margin-top: 0;
 }
 
+/*重复任务*/
 .recur {
     background-color: #00ad81;
 }
 
+/*添加步骤*/
 .addStep {
     background-color: #01AAED;
 }
 
-.steps {
-    background-color: #009F95;
+#stepInput {
+    background-color: #01AAED;
+    width: 92%;
+    line-height: 30px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+    padding-left: 0;
 }
 
-.delete {
+/*步骤列表*/
+.steps {
     background-color: #00FF00;
+}
+
+#steps {
+    height: auto;
+}
+
+.step {
+    background-color: #00FF00;
+}
+
+/*删除任务*/
+.delete {
+    background-color: #f45922;
     margin-bottom: 5px;
     width: 100%;
     position: absolute;

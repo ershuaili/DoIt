@@ -149,7 +149,7 @@ $(function () {
                     '<div class="taskMain">' +
                     '<input type="hidden" value=' + data.id + '>' +
                     '<p class="taskText"><del>' + data.taskName + '</del></p>' +
-                    '<p class="taskTime">' + data.endTime + '</p>' +
+                    '<p class="taskTime">' + (data.endTime == null ? "" : data.endTime) + '</p>' +
                     '</div>'
                 $("#finishTasks").prepend(str);
             }
@@ -190,16 +190,42 @@ $(function () {
 $(".tasks").on("click", ".taskMain", function () {
     const typeIcon = $(this).prev().attr('class');
     const taskText = $(this).children().first().next().text();
+    const taskId = $(this).children().first().val();
+    const task = $(this).parent();
+    //获取步骤列表
+    $(function () {
+        $.ajax({
+            // 请求路径
+            url: "/steps",
+            type: 'get',
+            data: {id: taskId},
+            success: function (data) {
+                // 拿到数据后执行的方法
+                for (let i = 0; i < data.length; i++) {
+                    let str = "";
+                    str += '<div class="step">' +
+                        '<i class="layui-icon layui-icon-circle"></i>' +
+                        '<p class="taskText">' + data[i].content + '</p>' +
+                        '</div>';
+                    $("#steps").prepend(str);
+                }
+            }
+        });
+    });
+
     let title =
         '<i class ="' + typeIcon + '"></i>' +
         '<i>' + taskText + '</i>';
     let content =
         '<div class="popup">' +
-        '<div class="myDay"><i class="layui-icon layui-icon-light"></i>我的一天</div>' +
+        '<div class="myDay"><i class="layui-icon layui-icon-light"></i>添加到我的一天</div>' +
         '<div class="recur"><i class="layui-icon layui-icon-refresh"></i>任务重复</div>' +
-        '<div class="addStep"><i class="layui-icon layui-icon-add-1"></i>添加步骤</div>' +
+        '<div class="addStep"><i class="layui-icon layui-icon-add-1"></i>' +
+        '<input id="stepInput" name="content" placeholder="添加步骤" type="text">' +
+        '</div>' +
         '<div class="steps"><i class="layui-icon layui-icon-circle"></i>步骤列表</div>' +
-        '<div class="delete"><i class="layui-icon layui-icon-delete"></i>删除</div>' +
+        '<div id="steps"></div>' +
+        '<div class="delete"><i class="layui-icon layui-icon-delete">删除</i></div>' +
         '</div>';
     layer.open({
         type: 1,
@@ -210,5 +236,17 @@ $(".tasks").on("click", ".taskMain", function () {
         anim: 5,                      // 窗口动画
         shadeClose: true,             // 阴影 关闭
         moveOut: true,                // 是否允许拖动到窗口外
+    });
+
+    $(".delete").click(function () {
+        $.ajax({
+            url: "/taskDelete",
+            type: "post",
+            data: {id: taskId},
+            success: function () {
+                layer.closeAll();
+                task.remove();
+            }
+        });
     });
 });
