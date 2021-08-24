@@ -238,6 +238,25 @@ $(".tasks").on("click", ".taskMain", function () {
         moveOut: true,                // 是否允许拖动到窗口外
     });
 
+    $("#stepInput").keyup(function (event) {
+        if (event.keyCode === 13) {
+            $.ajax({
+                url: "/stepInput",
+                type: "post",
+                data: {content: $("#stepInput").val(), taskId: taskId, isFinish: 0},
+                success: function (data) {
+                    let str = "";
+                    str += '<div class="step">' +
+                        '<i class="layui-icon layui-icon-circle"></i>' +
+                        '<p class="taskText">' + data.content + '</p>' +
+                        '</div>';
+                    $("#steps").prepend(str);
+                    $("#stepInput").val("");
+                }
+            })
+        }
+    });
+
     $(".delete").click(function () {
         $.ajax({
             url: "/taskDelete",
