@@ -227,6 +227,7 @@ $(".tasks").on("click", ".taskMain", function () {
         '<div id="steps"></div>' +
         '<div class="delete"><i class="layui-icon layui-icon-delete">删除</i></div>' +
         '</div>';
+    // 步骤展示
     layer.open({
         type: 1,
         title: title,                 // 头部内容
@@ -238,6 +239,7 @@ $(".tasks").on("click", ".taskMain", function () {
         moveOut: true,                // 是否允许拖动到窗口外
     });
 
+    // 步骤输入
     $("#stepInput").keyup(function (event) {
         if (event.keyCode === 13) {
             $.ajax({
@@ -256,7 +258,7 @@ $(".tasks").on("click", ".taskMain", function () {
             })
         }
     });
-
+    // 删除任务
     $(".delete").click(function () {
         $.ajax({
             url: "/taskDelete",
