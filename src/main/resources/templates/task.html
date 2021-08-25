@@ -13,11 +13,37 @@
 
 <!-- 主体部分 -->
 <section class="tasMain">
-    <h1>任务</h1>
+    <!-- 未完成 -->
+    <div class="tasks"></div>
 </section>
 
 <footer>
     <script th:src="@{/dist/js/my.js}"></script>
+    <script>
+        //获取任务列表
+        $(function () {
+            $.ajax({
+                // 请求路径
+                url: '/tas/queryAllTask',
+                type: 'get',
+                success: function (data) {
+                    // 拿到数据后执行的方法
+                    for (let i = 0; i < data.length; i++) {
+                        let str = "";
+                        str += '<div class="task">' +
+                            '<i class="layui-icon layui-icon-circle"></i>' +
+                            '<div class="taskMain">' +
+                            '<input type="hidden" value=' + data[i].id + '>' +
+                            '<p class="taskText">' + data[i].taskName + '</p>' +
+                            '<p class="taskTime">' + (data[i].endTime == null ? "" : data[i].endTime) + '</p>' +
+                            '</div>' +
+                            '</div>';
+                        $(".tasks").prepend(str);
+                    }
+                }
+            });
+        });
+    </script>
 </footer>
 </body>
 </html>

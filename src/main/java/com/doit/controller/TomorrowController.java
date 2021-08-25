@@ -38,10 +38,9 @@ public class TomorrowController {
      *
      * @return 任务列表
      */
-    @GetMapping("/queryToday")
+    @GetMapping("/queryTomorrowTasks")
     @ResponseBody
-    public List<Task> queryToday() {
-        return taskService.queryToday();
+    public List<Task> queryTomorrowTasks() {
+        return taskService.queryTomorrow();
     }
-
 }

@@ -31,6 +31,26 @@
         where end_time >= DATE(NOW())
            or end_time IS NULL
     </select>
+    <!--查询明天的任务-->
+    <select id="queryTomorrow" resultMap="TaskMap">
+        select id,
+               task_name,
+               create_time,
+               end_time,
+               is_finish
+        from db_doit.task
+        where end_time = (DATE(NOW()) + 1)
+    </select>
+    <!-- 查询最近七天的任务 -->
+    <select id="queryWeek" resultMap="TaskMap">
+        select id,
+               task_name,
+               create_time,
+               end_time,
+               is_finish
+        from db_doit.task
+        where end_time &lt;= (DATE(NOW()) + 7)
+    </select>
 
     <!--查询单个-->
     <select id="queryById" resultMap="TaskMap">

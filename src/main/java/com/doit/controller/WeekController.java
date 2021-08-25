@@ -1,7 +1,14 @@
 package com.doit.controller;
 
+import com.doit.entity.Task;
+import com.doit.service.TaskService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>描述: [] </p>
@@ -14,8 +21,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/wee")
 public class WeekController {
 
-    @RequestMapping
+    @Resource
+    private TaskService taskService;
+
+    @GetMapping
     public String week() {
         return "week";
     }
+
+    @GetMapping("/queryWeekTasks")
+    @ResponseBody
+    public List<Task> queryWeekTasks() {
+        return taskService.queryWeek();
+    }
+
 }

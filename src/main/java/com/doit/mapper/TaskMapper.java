@@ -28,6 +28,21 @@ public interface TaskMapper {
      */
     List<Task> queryToday();
 
+
+    /**
+     * 查询明天任务
+     *
+     * @return 任务列表
+     */
+    List<Task> queryTomorrow();
+
+    /**
+     * 查询最近七天任务
+     *
+     * @return 任务列表
+     */
+    List<Task> queryWeek();
+
     /**
      * 通过ID查询单条数据
      *

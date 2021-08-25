@@ -13,11 +13,33 @@
 
 <!-- 主体部分 -->
 <section class="weeMain">
-    <h1>这周</h1>
+    <div class="weeTasks"></div>
 </section>
 
 <footer>
     <script th:src="@{/dist/js/my.js}"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "/wee/queryWeekTasks",
+                type: "get",
+                success: function (data) {
+                    let str = "";
+                    for (let i = 0; i < data.length; i++) {
+                        str += '<div class="task">' +
+                            '<i class="layui-icon layui-icon-circle"></i>' +
+                            '<div class="taskMain">' +
+                            '<input type="hidden" value=' + data[i].id + '>' +
+                            '<p class="taskText">' + data[i].taskName + '</p>' +
+                            '<p class="taskTime">' + (data[i].endTime == null ? "" : data[i].endTime) + '</p>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    $(".weeTasks").prepend(str);
+                }
+            });
+        });
+    </script>
 </footer>
 </body>
 </html>

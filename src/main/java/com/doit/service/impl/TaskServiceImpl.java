@@ -3,9 +3,9 @@ package com.doit.service.impl;
 import com.doit.entity.Task;
 import com.doit.mapper.TaskMapper;
 import com.doit.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Service("taskService")
 public class TaskServiceImpl implements TaskService {
-    @Autowired
+    @Resource
     private TaskMapper taskMapper;
 
     /**
@@ -37,6 +37,26 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> queryToday() {
         return this.taskMapper.queryToday();
+    }
+
+    /**
+     * 查询明天任务
+     *
+     * @return 任务列表
+     */
+    @Override
+    public List<Task> queryTomorrow() {
+        return this.taskMapper.queryTomorrow();
+    }
+
+    /**
+     * 查询最近七天任务
+     *
+     * @return 任务列表
+     */
+    @Override
+    public List<Task> queryWeek() {
+        return this.taskMapper.queryWeek();
     }
 
     /**
