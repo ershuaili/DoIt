@@ -2,10 +2,11 @@ package com.doit.controller;
 
 import com.doit.entity.Step;
 import com.doit.service.StepService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 
 /**
  * (Step)表控制层
@@ -19,7 +20,7 @@ public class StepController {
     /**
      * 服务对象
      */
-    @Autowired
+    @Resource
     private StepService stepService;
 
     /**
