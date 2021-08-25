@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" th:replace="~{commons::layout(~{::title},~{::section},~{::header})}"
+<html lang="zh" th:replace="~{commons::layout(~{::title},~{::section},~{::header},~{::footer})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>DoIt-Tom</title>
@@ -8,18 +8,60 @@
 <body>
 <!--头部-->
 <header>
-
+    <!--添加明天任务-->
+    <form id="addTask" method="post">
+        <ul class="layui-nav layui-layout-left" lay-bar="disabled">
+            <!-- 输入提示按钮 -->
+            <li class="layui-nav-item">
+                <i class="layui-icon layui-icon-add-1" id="inputIcon"></i>
+            </li>
+            <!-- 任务输入框 -->
+            <li class="layui-nav-item">
+                <label for="tasTaskInput"></label>
+                <input class="layui-input" id="tasTaskInput" name="taskName" placeholder="为明天添加任务"
+                       style="width: 200%;" type="text">
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right" lay-bar="disabled">
+            <!-- 提交按钮 -->
+            <li class="layui-nav-item">
+                <button class="layui-btn" id="inputBtn" type="button">添加</button>
+            </li>
+        </ul>
+    </form>
 </header>
 
 <!-- 主体部分 -->
 <section class="tomMain">
-    <h1>明天</h1>
+    <div class="tomTasks"></div>
 </section>
 
-<!-- lay-ui -->
-<script th:src="@{/plugins/layui/layui.js}"></script>
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-<script th:src="@{/dist/js/my.js}"></script>
+<footer>
+    <script th:src="@{/dist/js/my.js}"></script>
+
+    <script>
+        $(function () {
+            $.ajax({
+                url: "/tom/queryToday",
+                type: "get",
+                success: function (data) {
+                    let str = "";
+                    for (let i = 0; i < data.length; i++) {
+                        str += '<div class="task">' +
+                            '<i class="layui-icon layui-icon-circle"></i>' +
+                            '<div class="taskMain">' +
+                            '<input type="hidden" value=' + data[i].id + '>' +
+                            '<p class="taskText">' + data[i].taskName + '</p>' +
+                            '<p class="taskTime">' + (data[i].endTime == null ? "" : data[i].endTime) + '</p>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                    $(".tomTasks").prepend(str);
+                }
+            });
+        });
+    </script>
+</footer>
 </body>
 </html>
 

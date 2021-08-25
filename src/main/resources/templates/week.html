@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" th:replace="~{commons::layout(~{::title},~{::section},~{::header})}"
+<html lang="zh" th:replace="~{commons::layout(~{::title},~{::section},~{::header},~{::footer})}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>DoIt-Wee</title>
@@ -16,10 +16,9 @@
     <h1>这周</h1>
 </section>
 
-<!-- lay-ui -->
-<script th:src="@{/plugins/layui/layui.js}"></script>
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-<script th:src="@{/dist/js/my.js}"></script>
+<footer>
+    <script th:src="@{/dist/js/my.js}"></script>
+</footer>
 </body>
 </html>
 

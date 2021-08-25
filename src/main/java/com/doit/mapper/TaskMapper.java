@@ -2,7 +2,6 @@ package com.doit.mapper;
 
 import com.doit.entity.Task;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,6 +22,13 @@ public interface TaskMapper {
     List<Task> queryAll();
 
     /**
+     * 查询今天的任务
+     *
+     * @return 对象列表
+     */
+    List<Task> queryToday();
+
+    /**
      * 通过ID查询单条数据
      *
      * @param id 主键
@@ -37,22 +43,6 @@ public interface TaskMapper {
      * @return 影响行数
      */
     int insert(Task task);
-
-    /**
-     * 批量新增数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Task> 实例对象列表
-     * @return 影响行数
-     */
-    int insertBatch(@Param("entities") List<Task> entities);
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Task> 实例对象列表
-     * @return 影响行数
-     */
-    int insertOrUpdateBatch(@Param("entities") List<Task> entities);
 
     /**
      * 修改数据

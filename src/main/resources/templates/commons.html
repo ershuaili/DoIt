@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" th:fragment="layout (title,content,header)" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" th:fragment="layout (title,content,header,footer)" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title th:replace="${title}">DoIt</title>
@@ -40,7 +40,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item" id="DoIt-Day"><a th:href="@{/}">我的一天</a></li>
-                <li class="layui-nav-item" id="DoIt-Tom"><a href="tomorrow.html" th:href="@{tom}">明天</a></li>
+                <li class="layui-nav-item" id="DoIt-Tom"><a th:href="@{tom}">明天</a></li>
                 <li class="layui-nav-item" id="DoIt-Wee"><a th:href="@{wee}">最近七天</a></li>
                 <li class="layui-nav-item" id="DoIt-Cal"><a th:href="@{cal}">日历</a></li>
             </ul>
@@ -57,13 +57,12 @@
         <div class="main" th:replace="${content}"></div>
     </div>
 </div>
-
 <!-- lay-ui -->
 <script th:src="@{/plugins/layui/layui.js}"></script>
 <!--jquery-->
 <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
 <!-- my.js -->
-<script th:src="@{/dist/js/my.js}"></script>
+<div th:replace="${footer}"></div>
 </body>
 
 </html>

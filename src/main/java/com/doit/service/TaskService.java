@@ -19,6 +19,14 @@ public interface TaskService {
      */
     List<Task> queryAll();
 
+
+    /**
+     * 查询今天的任务
+     *
+     * @return 对象列表
+     */
+    List<Task> queryToday();
+
     /**
      * 通过ID查询单条数据
      *

@@ -30,6 +30,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     /**
+     * 查询今天的任务
+     *
+     * @return 对象列表
+     */
+    @Override
+    public List<Task> queryToday() {
+        return this.taskMapper.queryToday();
+    }
+
+    /**
      * 通过ID查询单条数据
      *
      * @param id 主键

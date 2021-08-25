@@ -20,6 +20,18 @@
         from db_doit.task
     </select>
 
+    <!--查询今天的任务-->
+    <select id="queryToday" resultMap="TaskMap">
+        select id,
+               task_name,
+               create_time,
+               end_time,
+               is_finish
+        from db_doit.task
+        where end_time >= DATE(NOW())
+           or end_time IS NULL
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="TaskMap">
         select id,
@@ -34,26 +46,7 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into db_doit.task(task_name, create_time, end_time)
-        values (#{taskName}, #{createTime}, #{endTime})
-    </insert>
-
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, create_time, end_time, is_finish)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.taskName}, #{entity.createTime}, #{entity.endTime}, #{entity.isFinish})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.task(task_name, create_time, end_time, is_finish)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.taskName}, #{entity.createTime}, #{entity.endTime}, #{entity.isFinish})
-        </foreach>
-        on duplicate key update
-        task_name = values(task_name) , create_time = values(create_time) , end_time = values(end_time) ,
-        is_finish = values(is_finish)
+        values (#{taskName}, DATE(NOW()), #{endTime})
     </insert>
 
     <!--通过主键修改数据-->

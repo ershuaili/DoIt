@@ -36,7 +36,7 @@ html, body {
 
 /* 我的一天 */
 /* 主体部分 */
-.dayMain {
+.dayMain, .tomMain, .weeMain, .cheMain, .tasMain, .calMain {
     width: 90%;
     padding-top: 40px;
     margin-left: auto;
@@ -166,4 +166,4 @@ html, body {
 
 
 /* 明天 */
-
+.tomMain

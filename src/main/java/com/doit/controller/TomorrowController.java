@@ -1,7 +1,14 @@
 package com.doit.controller;
 
+import com.doit.entity.Task;
+import com.doit.service.TaskService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>描述: [] </p>
@@ -13,8 +20,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/tom")
 public class TomorrowController {
-    @RequestMapping
+    @Resource
+    private TaskService taskService;
+
+    /**
+     * 页面转跳
+     *
+     * @return 返回明天页面
+     */
+    @GetMapping
     public String tomorrow() {
-        return "tomorrow";
+        return "/tomorrow";
     }
+
+    /**
+     * 获取明天任务列表
+     *
+     * @return 任务列表
+     */
+    @GetMapping("/queryToday")
+    @ResponseBody
+    public List<Task> queryToday() {
+        return taskService.queryToday();
+    }
+
 }

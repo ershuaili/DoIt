@@ -20,7 +20,7 @@ import java.util.List;
  * @version v1.0
  */
 @Controller
-@RequestMapping
+@RequestMapping("/")
 public class IndexController {
     /**
      * 服务对象
@@ -48,7 +48,7 @@ public class IndexController {
     @GetMapping("/tasks")
     @ResponseBody
     public List<Task> queryTask() {
-        return taskService.queryAll();
+        return taskService.queryToday();
     }
 
     /**
