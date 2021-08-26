@@ -36,11 +36,17 @@ html, body {
 
 /* 我的一天 */
 /* 主体部分 */
-.dayMain, .tomMain, .weeMain, .cheMain, .tasMain, .calMain {
+.dayMain, .tomMain, .weeMain, .cheMain, .tasMain {
     width: 90%;
     padding-top: 40px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.calMain {
+    width: 100%;
+    height: auto;
+    background-color: #fd0202;
 }
 
 /* 任务列表 */

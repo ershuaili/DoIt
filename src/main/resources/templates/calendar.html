@@ -13,11 +13,17 @@
 
 <!-- 主体部分 -->
 <section class="calMain">
-    <h1>日历</h1>
+    <div class="wx-body">
+        <div id='calendar' style="width: 100px;"></div>
+    </div>
 </section>
 
 <footer>
     <script th:src="@{/dist/js/my.js}"></script>
+
+    <!-- 日历控件 -->
+    <script th:src="@{/dist/js/simple-calendar.js}"></script>
+    <script th:src="@{/dist/js/main.js}"></script>
 </footer>
 </body>
 </html>
