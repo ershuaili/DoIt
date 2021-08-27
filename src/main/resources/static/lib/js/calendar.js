@@ -1,9 +1,9 @@
 $(function () {
 
-    var get = '2020-05-14';
+    const get = '2020-05-14';
 
 //	$("#calendar").fullCalendar({
-    var calendar = $('#calendar').fullCalendar({
+    const calendar = $('#calendar').fullCalendar({
         header: {													//设置日历头部信息，false，则不显示头部信息。包括left，center,right左中右三个位置
             left: 'prev,next, today',								//上一个、下一个、今天
             center: 'title',										//标题
@@ -60,7 +60,7 @@ $(function () {
         render: function (view) {										//method,绑定日历到id上。$('#id').fullCalendar('render');
             console.log('render', view)
         },
-//    	events: function(start, end, timezone, callback){	
+//    	events: function(start, end, timezone, callback){
 //			$.ajax({
 //				type : "",
 //				url : "",
@@ -160,7 +160,7 @@ $(function () {
         },
         select: function (start, end, allDay) {				//点击空白区域/选择区域内容触发
 //	        window.location.href= 'apply.html?start=' + start.format() + '?end=' + end.format();
-            var title = prompt(start.format() + '————' + end.format() + '标题标题:');
+            const title = prompt(start.format() + '————' + end.format() + '标题标题:');
             if (title) {
                 calendar.fullCalendar('renderEvent', {		//一旦日历重新取得日程源，则原有日程将消失，当指定stick为true时，日程将永久的保存到日历上
                     title: title,
@@ -177,12 +177,12 @@ $(function () {
 ////			startDate：被选中区域的开始时间
 ////			endDate：被选中区域的结束时间
 ////			allDay：是否为全天事件
-////			jsEvent：jascript对象
+////			jsEvent：javascript对象
 ////			view：当前视图对象
 //			var selectStart = $.fullCalendar.formatDate(startDate,'YYYY-MM-DD HH:mm');
 //			var selectEnd =$.fullCalendar.formatDate(endDate,'YYYY-MM-DD HH:mm');
 //			alert(selectStart + ' 至 ' + selectEnd);
-//			$("#calendar").fullCalendar('renderEvent',true); 
+//			$("#calendar").fullCalendar('renderEvent',true);
 //		},
         unselect: function (view, jsEvent) {						//选择取消时触发
             console.log("");
@@ -224,9 +224,9 @@ $(function () {
         eventDrop: function (event, dayDelta, delta, revertFunc, jsEvent, ui, view) {  //日程拖拽停止，并且时间改变时触发，ayDelta日程前后移动了多少天
 //          console.log("eventDrop():"+event.title);
             console.log('eventDrop被执行，Event的title是：', event.title);
-            if (dayDelta._days != 0) {
+            if (dayDelta._days !== 0) {
                 console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._days + '天！');
-            } else if (dayDelta._milliseconds != 0) {
+            } else if (dayDelta._milliseconds !== 0) {
                 console.log('eventDrop被执行，Event的start和end时间改变了：', dayDelta._milliseconds / 1000 + '秒！');
             } else {
                 console.log('eventDrop被执行，Event的start和end时间没有改变！');
