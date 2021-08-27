@@ -37,7 +37,7 @@ html, body {
 /* 我的一天 */
 /* 主体部分 */
 .main {
-    background-color: #938a8a;
+    background-color: #429972;
 }
 
 .dayMain, .tomMain, .weeMain, .cheMain, .tasMain, .calMain {
@@ -169,4 +169,10 @@ html, body {
 
 
 /* 明天 */
-.tomMain
+.tomMain {
+
+}
+
+#calendar {
+    background-color: white;
+}
