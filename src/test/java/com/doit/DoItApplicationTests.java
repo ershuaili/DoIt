@@ -21,7 +21,7 @@ class DoItApplicationTests {
         // task.setIsFinish(true);
         // task.setTaskName("123");
         // task.setEndTime();
-        System.out.println(taskService.queryToday());
+        System.out.println(taskService.queryAll());
         // System.out.println(stepService.queryAll());
         // System.out.println(stepService.queryStepByTaskId(1));
         // Task task1 = new Task();

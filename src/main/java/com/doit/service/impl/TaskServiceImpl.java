@@ -83,6 +83,17 @@ public class TaskServiceImpl implements TaskService {
     }
 
     /**
+     * 新增数据 通过日历
+     *
+     * @param task 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public void insertCal(Task task) {
+        this.taskMapper.insertCal(task);
+    }
+
+    /**
      * 修改数据
      *
      * @param task 实例对象

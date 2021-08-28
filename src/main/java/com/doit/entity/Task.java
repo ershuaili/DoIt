@@ -1,7 +1,6 @@
 package com.doit.entity;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -32,7 +31,6 @@ public class Task implements Serializable {
     /**
      * 结束时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
     /**
      * 是否完成

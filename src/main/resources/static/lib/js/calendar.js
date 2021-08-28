@@ -1,6 +1,6 @@
 $(function () {
 
-    const get = '2020-05-14';
+    const get = new Date();
 
 //	$("#calendar").fullCalendar({
     const calendar = $('#calendar').fullCalendar({
@@ -60,6 +60,30 @@ $(function () {
         render: function (view) {										//method,绑定日历到id上。$('#id').fullCalendar('render');
             console.log('render', view)
         },
+
+        events: function (title, start, end, callback) {
+            $.ajax({
+                type: "get",
+                url: "/cal/queryAllCal",
+                success: function (data) {
+                    data = data.map(function (obj) {
+                        obj['title'] = obj['taskName']; // 分配新键
+                        obj['start'] = obj['createTime']; // 分配新键
+                        obj['end'] = obj['endTime']; // 分配新键
+                        delete obj['taskName']; // 删除旧键
+                        delete obj['createTime']; // 删除旧键
+                        delete obj['endTime']; // 删除旧键
+                        return obj;
+                    });
+                    callback(data)
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].isFinish === true) {
+                            $(this).className = "yellow"
+                        }
+                    }
+                }
+            })
+        },
 //    	events: function(start, end, timezone, callback){
 //			$.ajax({
 //				type : "",
@@ -83,65 +107,21 @@ $(function () {
 //				},
 //			});
 //		},
-//		events: {
-//			url: 'json/events.json',
-//			error: function () {
-//              alert("000");
-//          }
-//		},
-        events: [
-            {
-                "title": "可以直接加跳转链接",
-                "start": "2020-05-13T09:00:00",
-                "end": "2020-05-13T14:00:00",
-                "duration": "03:00",
-                "url": "https://www.baidu.com/",
-                "className": "green"
-            }, {
-                "title": "标题123",
-                "start": "2020-05-13T12:00:00",
-                "end": "2020-05-14T13:00:00",
-                "duration": "05:00",
-                "className": "yellow"
-            }, {
-                "title": "标题456",
-                "start": "2020-05-16T10:30:00",
-                "end": "2020-05-16T12:30:00",
-                "className": "red"
-            }, {
-                "title": "标题789",
-                "start": "2020-05-16T12:00:00",
-                "end": "2020-05-16T14:00:00",
-                "className": "red"
-            }, {
-                "title": "标题233333333",
-                "start": "2020-05-16T14:30:00",
-                "end": "2020-05-16T16:00:00",
-                "className": "red"
-            }, {
-                "title": "标题45645655",
-                "start": "2020-05-16T17:30:00",
-                "end": "2020-05-16T20:00:00",
-                "className": "red"
-            }, {
-                "title": "标题1234567890",
-                "start": "2020-05-16T20:00:00",
-                "end": "2020-05-16T23:00:00",
-                "className": "red"
-            }, {
-                "start": "2020-05-06",
-                "end": "2020-05-13",
-                "overlap": false,
-                "rendering": "background",
-                "color": "#cccccc"
-            },
-        ],
+//         events: [
+//             {
+//                 "title": "标题123",
+//                 "start": "2021-08-13T09:00:00",
+//                 "end": "2021-08-13T14:00:00",
+//                 "duration": "05:00",
+//                 "className": "yellow"
+//             }
+//         ],
         dayClick: function (date, allDay, jsEvent, view) {						//空白的日期区点击
 //        	alert($.fullCalendar.formatDate(date, "YYYY-MM-DD"));
 //      	console.log('Clicked on: ' + date.format());
         },
         eventClick: function (event, jsEvent) {									//日程事件点击
-            alert(event.title + event.start.format() + '______' + event.end.format() + '_______' + " ——详情");
+            alert(event.title);
             //状态判断？？？
             //权限限制？？？
         },
@@ -155,21 +135,30 @@ $(function () {
         selectMirror: true,									//镜像
         selectOverlap: false,       						//是否允许选择被事件占用的时间段，默认true可占用时间段
         selectAllow: function (selectInfo) { 				//精确的控制可以选择的地方，返回true则表示可选择，false表示不可选择
-            console.log("start:" + selectInfo.start.format() + "|end:" + selectInfo.end.format() + "|resourceId:" + selectInfo.resourceId);
+            // console.log("start:" + selectInfo.start.format() + "|end:" + selectInfo.end.format() + "|resourceId:" + selectInfo.resourceId);
             return true;
         },
         select: function (start, end, allDay) {				//点击空白区域/选择区域内容触发
+            console.log()
 //	        window.location.href= 'apply.html?start=' + start.format() + '?end=' + end.format();
             const title = prompt(start.format() + '————' + end.format() + '标题标题:');
             if (title) {
-                calendar.fullCalendar('renderEvent', {		//一旦日历重新取得日程源，则原有日程将消失，当指定stick为true时，日程将永久的保存到日历上
-                    title: title,
-                    start: start,
-                    end: end,
-                    allDay: allDay,
-//					rendering: 'background',
-                    block: true,
-                }, true);									//为true时，日程将永久的保存到日历上，让事件“持久”
+                // 提交任务
+                $.ajax({
+                    type: 'post',
+                    url: '/cal/insertCal',
+                    // 获取数据发送给后端
+                    data: {taskName: title, createTime: start.format(), endTime: end.format()},
+                    success: function (data) {
+                        calendar.fullCalendar('renderEvent', {		//一旦日历重新取得日程源，则原有日程将消失，当指定stick为true时，日程将永久的保存到日历上
+                            title: title,
+                            start: start,
+                            end: end,
+                            allDay: allDay,
+                            block: true,
+                        }, true);									//为true时，日程将永久的保存到日历上，让事件“持久”
+                    }
+                });
             }
 //	        calendar.unselect()
         },
@@ -204,8 +193,8 @@ $(function () {
 //	        }
 //    	},
         editable: true,                 						//支持日程拖动修改，默认false
-//      eventStartEditable : true,      						//日程开始时间可以改变，默认true，如果是false其实就是指日程块不能随意拖动，只能上下拉伸改变他的endTime
-//      eventDurationEditable : false,  						//日程的开始结束时间距离是否可以改变，默认true，如果是false则表示开始结束时间范围不能拉伸，只能拖拽
+        eventStartEditable: true,      						//日程开始时间可以改变，默认true，如果是false其实就是指日程块不能随意拖动，只能上下拉伸改变他的endTime
+        eventDurationEditable: false,  						//日程的开始结束时间距离是否可以改变，默认true，如果是false则表示开始结束时间范围不能拉伸，只能拖拽
         dragOpacity: 0.2,                						//拖拽时不透明度，0.0~1.0之间，数字越小越透明
         dragScroll: true,              						//是否在拖拽时自动移动容器，默认true
         eventOverlap: true,            						//拖拽时是否重叠

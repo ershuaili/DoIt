@@ -19,7 +19,6 @@ public interface TaskService {
      */
     List<Task> queryAll();
 
-
     /**
      * 查询今天的任务
      *
@@ -56,6 +55,14 @@ public interface TaskService {
      * @return 实例对象
      */
     Task insert(Task task);
+
+    /**
+     * 新增数据 通过日历
+     *
+     * @param task 实例对象
+     * @return 实例对象
+     */
+    void insertCal(Task task);
 
     /**
      * 修改数据

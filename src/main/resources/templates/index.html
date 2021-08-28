@@ -112,8 +112,8 @@
                 } else {
                     // 提交任务
                     $.ajax({
-                        url: '/taskInput',
                         type: 'post',
+                        url: '/taskInput',
                         // 获取数据发送给后端
                         data: $('#addTask').serialize(),
                         success: function (data) {

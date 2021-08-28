@@ -71,6 +71,12 @@
         values (#{taskName}, DATE(NOW()), #{endTime})
     </insert>
 
+    <!--日历中插入数据-->
+    <insert id="insertCal" keyProperty="id" useGeneratedKeys="true">
+        insert into db_doit.task(task_name, create_time, end_time)
+        values (#{taskName}, #{createTime}, #{endTime})
+    </insert>
+
     <!--通过主键修改数据-->
     <update id="update">
         update db_doit.task
