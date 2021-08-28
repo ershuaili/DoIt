@@ -40,7 +40,7 @@
                end_time,
                is_finish
         from db_doit.task
-        where end_time = (DATE(NOW()) + 1)
+        where task.create_time >= (DATE(NOW() + 1))
     </select>
 
     <!-- 查询最近七天的任务 -->

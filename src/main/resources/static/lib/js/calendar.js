@@ -120,7 +120,7 @@ $(function () {
 //        	alert($.fullCalendar.formatDate(date, "YYYY-MM-DD"));
 //      	console.log('Clicked on: ' + date.format());
         },
-        eventClick: function (event, jsEvent) {									//日程事件点击
+        eventClick: function (event) {									//日程事件点击
             alert(event.title);
             //状态判断？？？
             //权限限制？？？
@@ -134,7 +134,7 @@ $(function () {
         selectHelper: true,   								//当点击或拖动选择时间时，是否预先画出“日程区块”的样式显示默认加载的提示信息，该属性只在周/天视图里可用
         selectMirror: true,									//镜像
         selectOverlap: false,       						//是否允许选择被事件占用的时间段，默认true可占用时间段
-        selectAllow: function (selectInfo) { 				//精确的控制可以选择的地方，返回true则表示可选择，false表示不可选择
+        selectAllow: function () { 				//精确的控制可以选择的地方，返回true则表示可选择，false表示不可选择
             // console.log("start:" + selectInfo.start.format() + "|end:" + selectInfo.end.format() + "|resourceId:" + selectInfo.resourceId);
             return true;
         },
@@ -149,7 +149,7 @@ $(function () {
                     url: '/cal/insertCal',
                     // 获取数据发送给后端
                     data: {taskName: title, createTime: start.format(), endTime: end.format()},
-                    success: function (data) {
+                    success: function () {
                         calendar.fullCalendar('renderEvent', {		//一旦日历重新取得日程源，则原有日程将消失，当指定stick为true时，日程将永久的保存到日历上
                             title: title,
                             start: start,
@@ -173,7 +173,7 @@ $(function () {
 //			alert(selectStart + ' 至 ' + selectEnd);
 //			$("#calendar").fullCalendar('renderEvent',true);
 //		},
-        unselect: function (view, jsEvent) {						//选择取消时触发
+        unselect: function (view) {						//选择取消时触发
             console.log("");
             console.log("view:" + view);
         },
