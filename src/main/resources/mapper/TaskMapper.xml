@@ -22,36 +22,24 @@
 
     <!--查询今天的任务-->
     <select id="queryToday" resultMap="TaskMap">
-        select id,
-               task_name,
-               create_time,
-               end_time,
-               is_finish
+        select id, task_name, create_time, end_time, is_finish
         from db_doit.task
-        where end_time = DATE(NOW())
+        where end_time >= DATE(NOW())
            or end_time IS NULL
     </select>
 
     <!--查询明天的任务-->
     <select id="queryTomorrow" resultMap="TaskMap">
-        select id,
-               task_name,
-               create_time,
-               end_time,
-               is_finish
+        select id, task_name, create_time, end_time, is_finish
         from db_doit.task
-        where task.create_time >= (DATE(NOW() + 1))
+        where task.end_time >= (DATE(NOW() + 1));
     </select>
 
     <!-- 查询最近七天的任务 -->
     <select id="queryWeek" resultMap="TaskMap">
-        select id,
-               task_name,
-               create_time,
-               end_time,
-               is_finish
+        select id, task_name, create_time, end_time, is_finish
         from db_doit.task
-        where end_time &lt;= (DATE(NOW()) + 7)
+        where date_sub(curdate(), INTERVAL WEEKDAY(curdate()) DAY) &lt; date(create_time);
     </select>
 
     <!--查询单个-->
