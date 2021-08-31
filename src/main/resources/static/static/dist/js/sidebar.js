@@ -1,9 +1,10 @@
 $(function () {
     // 侧边栏弹出
     $('button').click(function () {
-        let left = $('#wrapper')[0].offsetLeft;
+        let wrapper = $('#wrapper')
+        let left = $(wrapper)[0].offsetLeft;
         if (left === 0) {
-            $('#wrapper').offset({
+            $(wrapper).offset({
                 'left': 220
             });
             $(this).css('transform', 'rotate(450deg)');
@@ -11,9 +12,9 @@ $(function () {
             $('.headSculpture p').addClass('opacity');
             setTimeout(function () {
                 $('.option ul>li').addClass('li');
-            }, 500)
+            }, 300)
         } else {
-            $('#wrapper').offset({
+            $(wrapper).offset({
                 'left': 0
             });
             $(this).css('transform', 'rotate(0deg)');
@@ -23,7 +24,7 @@ $(function () {
                 $('.option ul>li').removeClass('li');
             }, 300)
         }
-    })
+    });
     // 页面转跳
     $('.option ul>li').click(function () {
         let information = $(this).children().next().text();
@@ -48,4 +49,4 @@ $(function () {
                 break;
         }
     })
-})
+});
