@@ -1,0 +1,74 @@
+.main {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1300px) {
+    /*0~1300*/
+    .main {
+        width: 95%;
+        padding-top: 40px;
+    }
+}
+
+/* 底部输入框 */
+.bottom {
+    width: 100%;
+    position: fixed;
+    bottom: 10px;
+}
+
+/* 任务输入框 */
+.taskInput {
+    width: 80%;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: 20px;
+    border: 1px solid #C6C4C4;
+    outline: none;
+    opacity: 0.5;
+}
+
+/* 任务列表 */
+.tasksDay {
+    margin-left: 10px;
+}
+
+.tasksDay fieldset {
+    margin: 10px 0 10px;
+    border-width: 2px 0 0;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.task {
+    width: 70%;
+    height: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    display: flex;
+    margin: 0 auto;
+    display: table;
+    margin-top: 10px;
+}
+
+.task i {
+    float: left;
+    line-height: 40px;
+    font-size: 25px;
+    padding-right: 20px;
+    flex: none;
+}
+
+.taskMain {
+    text-align: left;
+    height: 100%;
+    flex: 1;
+}
+
+/* 图标文字一行显示 */
+.bi,
+.taskMain {
+    float: left;
+}
