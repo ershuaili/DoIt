@@ -1,8 +1,8 @@
 $(function () {
     // 侧边栏弹出
     $('button').click(function () {
-        var left = $('#wrapper')[0].offsetLeft;
-        if (left == 0) {
+        let left = $('#wrapper')[0].offsetLeft;
+        if (left === 0) {
             $('#wrapper').offset({
                 'left': 220
             });
@@ -24,27 +24,27 @@ $(function () {
             }, 300)
         }
     })
-
+    // 页面转跳
     $('.option ul>li').click(function () {
-        let infor = $(this).children().next().text();
-        switch (infor) {
+        let information = $(this).children().next().text();
+        switch (information) {
             case "今天":
-                window.location.href = "index.html";
+                window.location.href = "/";
                 break;
             case "明天":
-                window.location.href = "tomorrow.html";
+                window.location.href = "tom";
                 break;
             case "这周":
-                window.location.href = "week.html";
+                window.location.href = "wee";
                 break;
             case "日历":
-                window.location.href = "calendar.html";
+                window.location.href = "cal";
                 break;
             case "任务":
-                window.location.href = "task.html";
+                window.location.href = "tas";
                 break;
             case "清单":
-                window.location.href = "checklist.html";
+                window.location.href = "che";
                 break;
         }
     })
