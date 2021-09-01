@@ -54,15 +54,15 @@ public interface TaskService {
      * @param task 实例对象
      * @return 实例对象
      */
-    Task insert(Task task);
+    Task insertDay(Task task);
 
     /**
      * 新增数据 通过日历
      *
      * @param task 实例对象
-     * @return 实例对象
+     * @return 影响行数
      */
-    void insertCal(Task task);
+    int insertCal(Task task);
 
     /**
      * 修改数据

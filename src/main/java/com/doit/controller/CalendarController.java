@@ -48,8 +48,8 @@ public class CalendarController {
      */
     @PostMapping("/insertCal")
     @ResponseBody
-    public void insertCal(Task task) {
-        taskService.insertCal(task);
+    public int insertCal(Task task) {
+        return taskService.insertCal(task);
     }
 
 }

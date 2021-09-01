@@ -53,10 +53,10 @@
         where id = #{id}
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+    <!-- 今天新增任务 -->
+    <insert id="insertDay" keyProperty="id" useGeneratedKeys="true">
         insert into db_doit.task(task_name, create_time, end_time)
-        values (#{taskName}, DATE(NOW()), #{endTime})
+        values (#{taskName}, DATE(NOW()), DATE(NOW()))
     </insert>
 
     <!--日历中插入数据-->

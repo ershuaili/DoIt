@@ -55,9 +55,8 @@ public interface TaskMapper {
      * 新增数据
      *
      * @param task 实例对象
-     * @return 影响行数
      */
-    Task insert(Task task);
+    void insertDay(Task task);
 
     /**
      * 新增数据 通过日历
@@ -65,7 +64,7 @@ public interface TaskMapper {
      * @param task 实例对象
      * @return 实例对象
      */
-    void insertCal(Task task);
+    int insertCal(Task task);
 
     /**
      * 修改数据

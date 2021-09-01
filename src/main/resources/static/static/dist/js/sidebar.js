@@ -3,7 +3,6 @@ $(function () {
     $(document).mouseup(function (e) {
         let wrapper = $('#wrapper');
         let _con = $(".task,.taskInput,.layui-layer-shade,.layui-layer-page,.layui-layer-move");   // 设置目标区域
-        console.log(_con)
         if (!_con.is(e.target) && _con.has(e.target).length === 0) { // Mark 1
             let left = $(wrapper)[0].offsetLeft;
             if (left === 0) {

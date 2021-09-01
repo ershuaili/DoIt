@@ -71,8 +71,8 @@ public class IndexController {
      */
     @PostMapping("/taskInput")
     @ResponseBody
-    public Task taskInsert(Task task) {
-        return taskService.insert(task);
+    public Task insertDay(Task task) {
+        return taskService.insertDay(task);
     }
 
     /**

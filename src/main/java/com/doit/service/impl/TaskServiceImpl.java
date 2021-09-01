@@ -74,23 +74,22 @@ public class TaskServiceImpl implements TaskService {
      * 新增数据
      *
      * @param task 实例对象
-     * @return 实例对象
+     * @return 影响行数
      */
     @Override
-    public Task insert(Task task) {
-        this.taskMapper.insert(task);
-        return task;
+    public Task insertDay(Task task) {
+        this.taskMapper.insertDay(task);
+        return this.queryById(task.getId());
     }
 
     /**
      * 新增数据 通过日历
      *
      * @param task 实例对象
-     * @return 实例对象
      */
     @Override
-    public void insertCal(Task task) {
-        this.taskMapper.insertCal(task);
+    public int insertCal(Task task) {
+        return this.taskMapper.insertCal(task);
     }
 
     /**
