@@ -63,13 +63,86 @@
 }
 
 .taskMain {
-    text-align: left;
     height: 100%;
-    flex: 1;
+    text-align: left;
+    overflow: hidden;
 }
 
-/* 图标文字一行显示 */
-.bi,
-.taskMain {
-    float: left;
+
+/* 步骤列表 */
+.popup {
+    width: 95%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.popup * {
+    overflow: hidden;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-top: 2px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.popup .bi {
+    font-size: 15px;
+    padding-right: 10px;
+}
+
+/*我的一天*/
+.myDay {
+    background-color: bisque;
+}
+
+/*重复任务*/
+.recur {
+    background-color: #00ad81;
+}
+
+/*添加步骤*/
+.addStep {
+    background-color: #01AAED;
+}
+
+#stepInput {
+    background-color: #01AAED;
+    width: 80%;
+    line-height: 30px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+/*步骤列表*/
+.steps {
+    background-color: #00FF00;
+}
+
+#steps {
+    height: auto;
+}
+
+.step {
+    background-color: #00FF00;
+}
+
+/*删除任务*/
+.delete {
+    background-color: #f45922;
+    margin-bottom: 5px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 明天 */
+.tomMain {
+
+}
+
+#calendar {
+    background-color: white;
 }

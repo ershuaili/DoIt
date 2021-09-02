@@ -19,27 +19,3 @@ layui.use(['element', 'laydate', 'layer', 'util'], function () {
         }
     });
 });
-
-// 左侧导航选中
-$(function () {
-    switch ($("title").text()) {
-        case "DoIt-Day":
-            $("#DoIt-Day").attr("class", "layui-nav-item layui-this")
-            break;
-        case "DoIt-Tom":
-            $("#DoIt-Tom").attr("class", "layui-nav-item layui-this")
-            break;
-        case "DoIt-Wee":
-            $("#DoIt-Wee").attr("class", "layui-nav-item layui-this")
-            break;
-        case "DoIt-Cal":
-            $("#DoIt-Cal").attr("class", "layui-nav-item layui-this")
-            break;
-        case "DoIt-Tas":
-            $("#DoIt-Tas").attr("class", "layui-nav-item layui-this")
-            break;
-        case "DoIt-Che":
-            $("#DoIt-Che").attr("class", "layui-nav-item layui-this")
-            break;
-    }
-});

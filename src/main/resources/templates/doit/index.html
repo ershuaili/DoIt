@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
     <title>DoIt-Day</title>
     <link rel="icon" th:href="@{static/dist/images/Logo.png}" type="image/x-ico">
 
@@ -134,7 +135,7 @@
                             // 更新页面
                             let str = '';
                             str += '<div class="task">' +
-                                '<i class="layui-icon layui-icon-circle"></i>' +
+                                '<i class="bi bi-circle"></i>' +
                                 '<div class="taskMain">' +
                                 '<input type="hidden" value=' + data.id + '>' +
                                 '<p class="taskText">' + data.taskName + '</p>' +
@@ -153,7 +154,7 @@
 
     // 完成任务
     $(function () {
-        $("#tasks").on("click", ".layui-icon-circle", function () {
+        $("#unFinishTasks").on("click", ".bi-circle", function () {
             let taskUpdate = {id: $(this).next().children().val(), isFinish: true};
             $.ajax({
                 url: '/taskUpdate',
@@ -163,7 +164,7 @@
                     // 为完成的任务列表添加任务
                     let str = '';
                     str += '<div class="task">' +
-                        '<i class="layui-icon layui-icon-ok-circle"></i>' +
+                        '<i class="bi bi-check2-circle"></i>' +
                         '<div class="taskMain">' +
                         '<input type="hidden" value=' + data.id + '>' +
                         '<p class="taskText"><del>' + data.taskName + '</del></p>' +
@@ -179,7 +180,7 @@
 
     // 取消完成任务
     $(function () {
-        $("#finishTasks").on("click", ".layui-icon-ok-circle", function () {
+        $("#finishTasks").on("click", ".bi-check2-circle", function () {
             let taskUpdate = {id: $(this).next().children().val(), isFinish: false};
             console.log(taskUpdate);
             $.ajax({
@@ -190,13 +191,13 @@
                     // 为完成的任务列表添加任务
                     let str = '';
                     str += '<div class="task">' +
-                        '<i class="layui-icon layui-icon-circle"></i>' +
+                        '<i class="bi bi-circle"></i>' +
                         '<div class="taskMain">' +
                         '<input type="hidden" value=' + data.id + '>' +
                         '<p class="taskText">' + data.taskName + '</p>' +
                         '<p class="taskTime">' + (data.endTime == null ? "" : data.endTime) + '</p>' +
                         '</div>'
-                    $("#tasks").prepend(str);
+                    $("#unFinishTasks").prepend(str);
                 }
             })
             // 移除当前任务列表
@@ -205,7 +206,7 @@
     });
 
     // 步骤列表
-    $(".tasksDay").on("click", ".task", function () {
+    $(".tasksDay").on("click", ".taskMain", function () {
         const typeIcon = $(this).prev().attr('class');
         const taskText = $(this).children().first().next().text();
         const taskId = $(this).children().first().val();
@@ -233,32 +234,39 @@
         });
 
         let title =
-            '<i class ="' + typeIcon + '"></i>' +
+            '<i class ="' + typeIcon + '" style="font-size: 15px;padding-right: 10px"></i>' +
             '<i>' + taskText + '</i>';
         let content =
             '<div class="popup">' +
-            '<div class="myDay"><i class="layui-icon layui-icon-light"></i>添加到我的一天</div>' +
-            '<div class="recur"><i class="layui-icon layui-icon-refresh"></i>任务重复</div>' +
-            '<div class="addStep"><i class="layui-icon layui-icon-add-1"></i>' +
+            '<div class="myDay"><i class="bi bi-sun"></i>添加到我的一天</div>' +
+            '<div class="recur"><i class="bi bi-arrow-clockwise"></i>任务重复</div>' +
+            '<div class="addStep"><i class="bi bi-plus-lg"></i>' +
             '<input id="stepInput" name="content" placeholder="添加步骤" type="text">' +
             '</div>' +
-            '<div class="steps"><i class="layui-icon layui-icon-circle"></i>步骤列表</div>' +
+            '<div class="steps"><i class="bi bi-circle"></i>步骤列表</div>' +
             '<div id="steps"></div>' +
-            '<div class="delete"><i class="layui-icon layui-icon-delete">删除</i></div>' +
+            '<div class="delete"><i class="bi bi-trash">删除</i></div>' +
             '</div>';
+        // 适应手机端
+        let area;
+        if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+            area = ['100%', '100%'];
+        } else {
+            area = ['500px', '100%'];
+        }
         // 步骤展示
         layer.open({
             type: 1,
             title: title,                 // 头部内容
             content: content,             // 这里content是一个普通的String
-            area: ['500px', '100%'],      // 窗口大小
+            area: area,      // 窗口大小
             offset: 'rt',                 // 窗口位置
             anim: 5,                      // 窗口动画
             shadeClose: true,             // 阴影 关闭
             moveOut: true,                // 是否允许拖动到窗口外
         });
 
-        // 步骤输入
+        // 步骤列表
         $("#stepInput").keyup(function (event) {
             if (event.keyCode === 13) {
                 $.ajax({
@@ -266,10 +274,11 @@
                     type: "post",
                     data: {content: $("#stepInput").val(), taskId: taskId, isFinish: 0},
                     success: function (data) {
+                        console.log(data.content)
                         let str = "";
                         str += '<div class="step">' +
-                            '<i class="layui-icon layui-icon-circle"></i>' +
-                            '<p class="taskText">' + data.content + '</p>' +
+                            '<i class="bi bi-circle">' + data.content + '</i>' +
+                            // '<p class="stepText"></p>' +
                             '</div>';
                         $("#steps").prepend(str);
                         $("#stepInput").val("");
@@ -277,6 +286,7 @@
                 })
             }
         });
+
         // 删除任务
         $(".delete").click(function () {
             $.ajax({
