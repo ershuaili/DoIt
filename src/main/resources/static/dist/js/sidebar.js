@@ -2,7 +2,7 @@ $(function () {
     // 侧边栏弹出
     $(document).mouseup(function (e) {
         let wrapper = $('#wrapper');
-        let _con = $(".task,.taskInput,.layui-layer-shade,.layui-layer-page,.layui-layer-move");   // 设置目标区域
+        let _con = $(".task,.taskInput,.layui-layer-shade,.layui-layer-page,.layui-layer-move,#calendar");   // 设置目标区域
         if (!_con.is(e.target) && _con.has(e.target).length === 0) { // Mark 1
             let left = $(wrapper)[0].offsetLeft;
             if (left === 0) {

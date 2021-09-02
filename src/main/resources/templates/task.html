@@ -2,11 +2,13 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
     <title>DoIt-Tas</title>
-    <link rel="icon" th:href="@{../static/dist/img/Logo.png}" type="image/x-ico">
+    <link rel="icon" th:href="@{dist/images/Logo.png}" type="image/x-ico">
 
-    <link rel="stylesheet" th:href="@{../static/dist/css/doit.css}">
-    <link rel="stylesheet" th:href="@{../static/dist/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{dist/css/doit.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{dist/css/sidebar.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{plugins/layui/css/layui.css}" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -14,7 +16,7 @@
     <!-- 侧边栏 -->
     <div class="sidebar">
         <div class="headSculpture">
-            <img alt="" src="" th:src="@{../static/dist/images/headSculpture.jpg}">
+            <img alt="" src="" th:src="@{dist/images/profilePicture.jpg}">
             <p>昵称：user</p>
         </div>
         <div class="option">
@@ -40,8 +42,6 @@
             </ul>
         </div>
     </div>
-    <!-- 侧边栏按钮 -->
-    <button class="sidebarBtn"></button>
 
     <!-- 内容区域 -->
     <div class="banner">
@@ -87,7 +87,7 @@
 </div>
 <!-- js -->
 <!-- js -->
-<script th:src="@{../static/plugins/jquery/jquery.min.js}"></script>
-<script th:src="@{../static/dist/js/sidebar.js}"></script>
+<script th:src="@{plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{dist/js/sidebar.js}"></script>
 </body>
 </html>

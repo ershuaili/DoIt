@@ -1,13 +1,12 @@
-.main {
+#calendar {
     width: 80%;
     margin: 0 auto;
 }
 
 @media (max-width: 1300px) {
     /*0~1300*/
-    .main {
+    #calendar {
         width: 95%;
-        padding-top: 40px;
     }
 }
 
