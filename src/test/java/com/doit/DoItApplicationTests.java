@@ -1,6 +1,5 @@
 package com.doit;
 
-import com.doit.entity.Task;
 import com.doit.service.StepService;
 import com.doit.service.TaskService;
 import org.junit.jupiter.api.Test;
@@ -17,13 +16,13 @@ class DoItApplicationTests {
 
     @Test
     void contextLoads() {
-        Task task = new Task();
+        // Task task = new Task();
         // task.setId(1);
         // task.setIsFinish(true);
-        task.setTaskName("1234");
+        // task.setTaskName("1234");
         // task.setEndTime();
-        System.out.println(taskService.insertDay(task));
-        // System.out.println(stepService.queryAll());
+        // System.out.println(taskService.insertDay(task));
+        System.out.println(stepService.deleteById(89));
         // System.out.println(stepService.queryStepByTaskId(1));
         // Task task1 = new Task();
         // task1.setTaskName("喝茶");

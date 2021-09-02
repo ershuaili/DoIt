@@ -74,9 +74,7 @@
 <!-- my.js -->
 <script th:src="@{dist/js/doit.js}"></script>
 <script th:src="@{dist/js/sidebar.js}"></script>
-
 <script>
-
     //获取任务列表
     $(function () {
         $.ajax({
@@ -130,7 +128,7 @@
                     data: {taskName: $('.taskInput').val()},
                     success: function (data) {
                         if (data === null) {
-                            alert("添加失败");
+                            layer.msg('添加失败,请重试.', {time: 1000});
                         } else {
                             // 更新页面
                             let str = '';
@@ -224,8 +222,9 @@
                     for (let i = 0; i < data.length; i++) {
                         let str = "";
                         str += '<div class="step">' +
-                            '<i class="layui-icon layui-icon-circle"></i>' +
-                            '<p class="taskText">' + data[i].content + '</p>' +
+                            '<input type="hidden" value=' + data[i].id + '>' +
+                            '<i class="bi bi-circle">' + data[i].content + '</i>' +
+                            '<i class="bi bi-trash" style="float: right"></i>' +
                             '</div>';
                         $("#steps").prepend(str);
                     }
@@ -240,7 +239,7 @@
             '<div class="popup">' +
             '<div class="myDay"><i class="bi bi-sun"></i>添加到我的一天</div>' +
             '<div class="recur"><i class="bi bi-arrow-clockwise"></i>任务重复</div>' +
-            '<div class="addStep"><i class="bi bi-plus-lg"></i>' +
+            '<div class="addStep"><i class="bi bi-plus-lg" style="padding-right: 0"></i>' +
             '<input id="stepInput" name="content" placeholder="添加步骤" type="text">' +
             '</div>' +
             '<div class="steps"><i class="bi bi-circle"></i>步骤列表</div>' +
@@ -266,7 +265,7 @@
             moveOut: true,                // 是否允许拖动到窗口外
         });
 
-        // 步骤列表
+        // 新增步骤列表
         $("#stepInput").keyup(function (event) {
             if (event.keyCode === 13) {
                 $.ajax({
@@ -274,11 +273,11 @@
                     type: "post",
                     data: {content: $("#stepInput").val(), taskId: taskId, isFinish: 0},
                     success: function (data) {
-                        console.log(data.content)
                         let str = "";
                         str += '<div class="step">' +
+                            '<input type="hidden" value=' + data.id + '>' +
                             '<i class="bi bi-circle">' + data.content + '</i>' +
-                            // '<p class="stepText"></p>' +
+                            '<i class="bi bi-trash" style="float: right;"></i>' +
                             '</div>';
                         $("#steps").prepend(str);
                         $("#stepInput").val("");
@@ -287,15 +286,37 @@
             }
         });
 
+        // 删除步骤
+        $("#steps").on("click", ".bi-trash", function () {
+            let stepId = $(this).prev().prev().val();
+            let stepRemove = $(this).parent();
+            $.ajax({
+                url: "/stepDelete",
+                type: "post",
+                data: {id: stepId},
+                success: function (data) {
+                    if (data) {
+                        stepRemove.remove();
+                    } else {
+                        layer.msg('删除错误请重试', {time: 1000});
+                    }
+                }
+            });
+        });
+
         // 删除任务
         $(".delete").click(function () {
             $.ajax({
                 url: "/taskDelete",
                 type: "post",
                 data: {id: taskId},
-                success: function () {
-                    layer.closeAll();
-                    task.remove();
+                success: function (data) {
+                    if (data) {
+                        layer.closeAll();
+                        task.remove();
+                    } else {
+                        layer.msg('删除错误', {time: 1000});
+                    }
                 }
             });
         });
