@@ -49,6 +49,9 @@ $(function () {
             case "清单":
                 window.location.href = "che";
                 break;
+            case "设置":
+                window.location.href = "set";
+                break;
         }
     });
 });

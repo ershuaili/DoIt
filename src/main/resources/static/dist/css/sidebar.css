@@ -111,8 +111,14 @@ ul {
 
 .option ul li:nth-child(1),
 .option ul li:nth-child(3),
-.option ul li:nth-child(5) {
+.option ul li:nth-child(5),
+.option ul li:nth-child(7) {
     transform: translate(-200px, 0);
+}
+
+.option ul li:nth-child(7) {
+    position: absolute;
+    bottom: 10px;
 }
 
 .option ul li:nth-child(2),
