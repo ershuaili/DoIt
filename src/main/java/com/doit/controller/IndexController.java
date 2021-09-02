@@ -37,7 +37,7 @@ public class IndexController {
      */
     @GetMapping("/")
     public String index() {
-        return "doit/index";
+        return "/main/resources/templates/index.html";
     }
 
     /**
