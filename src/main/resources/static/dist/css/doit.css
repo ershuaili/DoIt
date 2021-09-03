@@ -160,6 +160,7 @@ body {
     box-shadow: 1px 1px 4px #ccc;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.5);
+    position: relative
 }
 
 /* 头像 */
@@ -215,4 +216,11 @@ body {
     top: 0;
     left: 0;
     cursor: pointer
+}
+
+.content-bottom {
+    /*绝对布局*/
+    position: absolute;
+    /*距离底部的距离*/
+    bottom: 0;
 }

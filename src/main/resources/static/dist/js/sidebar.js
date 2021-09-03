@@ -3,7 +3,7 @@ $(function () {
     $(document).mouseup(function (e) {
         let wrapper = $('#wrapper');
         // 排除区域
-        let _con = $(".task,.taskInput,.layui-layer-shade,.layui-layer-page,.layui-layer-move,#calendar");
+        let _con = $(".task,.taskInput,.layui-layer-shade,.layui-layer-page,.layui-layer-move,#calendar,.content");
         if (!_con.is(e.target) && _con.has(e.target).length === 0) { // Mark 1
             let left = $(wrapper)[0].offsetLeft;
             if (left === 0) {

@@ -39,6 +39,9 @@
                 <li><i class="bi bi-journal-text"></i>
                     <p>清单</p>
                 </li>
+                <li><i class="bi bi-gear-wide-connected"></i>
+                    <p>设置</p>
+                </li>
             </ul>
         </div>
     </div>
@@ -55,19 +58,12 @@
                     <p class="taskTime">456</p>
                 </div>
             </div>
-            <div class="task">
-                <i class="bi bi-circle"></i>
-                <div class="taskMain">
-                    <p class="taskText">123</p>
-                    <p class="taskTime">456</p>
-                </div>
-            </div>
         </div>
 
         <!-- 底部输入框 -->
         <div class="bottom">
             <label>
-                <input class="taskInput" placeholder="添加任务" type="text"/>
+                <input class="taskInput" placeholder="为明天添加任务   回车提交" type="text"/>
             </label>
         </div>
     </div>
@@ -79,5 +75,20 @@
 <!-- my.js -->
 <script th:src="@{dist/js/doit.js}"></script>
 <script th:src="@{dist/js/sidebar.js}"></script>
+<script>
+    $(function () {
+        // 获取明天任务列表
+        $.ajax({
+            url: "/tom/queryTomorrowTasks",
+            type: "get",
+            success: function (data) {
+                console.log(data);
+                for (let i = 0; i < data.left; i++) {
+
+                }
+            }
+        })
+    });
+</script>
 </body>
 </html>
