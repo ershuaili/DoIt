@@ -12,20 +12,31 @@
 
 /* 底部输入框 */
 .bottom {
-    width: 100%;
-    position: fixed;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80%;
+    position: absolute;
     bottom: 10px;
 }
 
 /* 任务输入框 */
 .taskInput {
-    width: 80%;
+    width: 100%;
     height: 40px;
     padding-left: 20px;
     border-radius: 20px;
     border: 1px solid #C6C4C4;
     outline: none;
     opacity: 0.5;
+}
+
+/*输入框图标*/
+.bottom .bi-calendar3 {
+    font-size: 25px;
+    position: absolute;
+    top: 20%;
+    right: 0;
 }
 
 /* 任务列表 */
