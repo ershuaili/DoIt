@@ -49,27 +49,7 @@
     <!-- 内容区域 -->
     <div class="banner">
         <!-- 任务列表 -->
-        <div class="tasksDay">
-            <!-- 待完成 -->
-            <div class="task">
-                <i class="bi bi-circle"></i>
-                <div class="taskMain">
-                    <p class="taskText">123</p>
-                    <p class="taskTime">456</p>
-                </div>
-            </div>
-            <div class="task">
-                <i class="bi bi-circle"></i>
-                <div class="taskMain">
-                    <p class="taskText">123</p>
-                    <p class="taskTime">456</p>
-                </div>
-            </div>
-            <!-- 分割线 -->
-            <fieldset>
-                <legend>这周</legend>
-            </fieldset>
-        </div>
+        <div class="tasksDay"></div>
 
         <!-- 底部输入框 -->
         <div class="bottom">
@@ -86,5 +66,190 @@
 <!-- my.js -->
 <script th:src="@{dist/js/doit.js}"></script>
 <script th:src="@{dist/js/sidebar.js}"></script>
+<script>
+    $(function () {
+        // 获取明天任务列表
+        $.ajax({
+            url: "/wee/queryWeekTasks",
+            type: "get",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    let str = "";
+                    str += '<div class="task">' +
+                        '<i class="bi bi-circle"></i>' +
+                        '<div class="taskMain">' +
+                        '<input type="hidden" value=' + data[i].id + '>' +
+                        '<p class="taskText">' + data[i].taskName + '</p>' +
+                        '<p class="taskTime">' + (data[i].endTime == null ? "" : data[i].endTime) + '</p>' +
+                        '</div>' +
+                        '</div>';
+                    $(".tasksDay").prepend(str);
+                }
+            }
+        });
+
+        // 添加任务
+        $(".taskInput").keydown(function (e) {
+            if (e.keyCode === 13) {
+                // 表单验证
+                let txtVal = $(".taskInput").val();
+                if (txtVal === '') {
+                    layer.msg('不能添加空内容', {time: 1000});
+                } else {
+                    let d = new Date();
+                    d.setDate(d.getDate());
+                    let createTime = d.format("yyyy-MM-dd");
+                    console.log(createTime);
+                    let d1 = new Date();
+                    d1.setDate(d1.getDate() + 7);
+                    let endTime = d1.format("yyyy-MM-dd");
+                    console.log(endTime)
+                    // 提交任务
+                    $.ajax({
+                        type: 'post',
+                        url: '/taskInput',
+                        // 获取数据发送给后端
+                        data: {taskName: $('.taskInput').val(), createTime: createTime, endTime: endTime},
+                        success: function (data) {
+                            if (data === null) {
+                                layer.msg('添加失败,请重试.', {time: 1000});
+                            } else {
+                                // 更新页面
+                                let str = '';
+                                str += '<div class="task">' +
+                                    '<i class="bi bi-circle"></i>' +
+                                    '<div class="taskMain">' +
+                                    '<input type="hidden" value=' + data.id + '>' +
+                                    '<p class="taskText">' + data.taskName + '</p>' +
+                                    '<p class="taskTime">' + data.endTime + '</p>' +
+                                    '</div>' +
+                                    '</div>';
+                                $(".tasksDay").prepend(str);
+                                // 清空输入框内容
+                                $(".taskInput").val("");
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        // 步骤列表
+        $(".tasksDay").on("click", ".taskMain", function () {
+            const typeIcon = $(this).prev().attr('class');
+            const taskText = $(this).children().first().next().text();
+            const taskId = $(this).children().first().val();
+            const task = $(this).parent();
+
+            //获取步骤列表
+            $(function () {
+                $.ajax({
+                    // 请求路径
+                    url: "/steps",
+                    type: "get",
+                    data: {id: taskId},
+                    success: function (data) {
+                        // 拿到数据后执行的方法
+                        for (let i = 0; i < data.length; i++) {
+                            let str = "";
+                            str += '<div class="step">' +
+                                '<input type="hidden" value=' + data[i].id + '>' +
+                                '<i class="bi bi-circle">' + data[i].content + '</i>' +
+                                '<i class="bi bi-trash" style="float: right"></i>' +
+                                '</div>';
+                            $("#steps").prepend(str);
+                        }
+                    }
+                });
+            });
+            let title =
+                '<i class ="' + typeIcon + '" style="font-size: 15px;padding-right: 10px"></i>' +
+                '<i>' + taskText + '</i>';
+            let content =
+                '<div class="popup">' +
+                '<div class="addStep"><i class="bi bi-plus-lg" style="padding-right: 0"></i>' +
+                '<input id="stepInput" name="content" placeholder="添加步骤" type="text">' +
+                '</div>' +
+                '<div class="steps"><i class="bi bi-circle"></i>步骤列表</div>' +
+                '<div id="steps"></div>' +
+                '<div class="delete"><i class="bi bi-trash">删除</i></div>' +
+                '</div>';
+            // 适应手机端
+            let area;
+            if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+                area = ['100%', '100%'];
+            } else {
+                area = ['500px', '100%'];
+            }
+            // 步骤展示
+            layer.open({
+                type: 1,
+                title: title,                 // 头部内容
+                content: content,             // 这里content是一个普通的String
+                area: area,      // 窗口大小
+                offset: 'rt',                 // 窗口位置
+                anim: 5,                      // 窗口动画
+                shadeClose: true,             // 阴影 关闭
+                moveOut: true,                // 是否允许拖动到窗口外
+            });
+
+            // 新增步骤列表
+            $("#stepInput").keyup(function (event) {
+                if (event.keyCode === 13) {
+                    $.ajax({
+                        url: "/stepInput",
+                        type: "post",
+                        data: {content: $("#stepInput").val(), taskId: taskId, isFinish: 0},
+                        success: function (data) {
+                            let str = "";
+                            str += '<div class="step">' +
+                                '<input type="hidden" value=' + data.id + '>' +
+                                '<i class="bi bi-circle">' + data.content + '</i>' +
+                                '<i class="bi bi-trash" style="float: right;"></i>' +
+                                '</div>';
+                            $("#steps").prepend(str);
+                            $("#stepInput").val("");
+                        }
+                    })
+                }
+            });
+
+            // 删除步骤
+            $("#steps").on("click", ".bi-trash", function () {
+                let stepId = $(this).prev().prev().val();
+                let stepRemove = $(this).parent();
+                $.ajax({
+                    url: "/stepDelete",
+                    type: "post",
+                    data: {id: stepId},
+                    success: function (data) {
+                        if (data) {
+                            stepRemove.remove();
+                        } else {
+                            layer.msg('删除错误请重试', {time: 1000});
+                        }
+                    }
+                });
+            });
+
+            // 删除任务
+            $(".delete").click(function () {
+                $.ajax({
+                    url: "/taskDelete",
+                    type: "post",
+                    data: {id: taskId},
+                    success: function (data) {
+                        if (data) {
+                            layer.closeAll();
+                            task.remove();
+                        } else {
+                            layer.msg('删除错误,请重试', {time: 2000});
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>
