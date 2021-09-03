@@ -71,8 +71,8 @@ public class IndexController {
      */
     @PostMapping("/taskInput")
     @ResponseBody
-    public Task insertDay(Task task) {
-        return taskService.insertDay(task);
+    public Task insertTask(Task task) {
+        return taskService.insertTask(task);
     }
 
     /**
@@ -83,7 +83,7 @@ public class IndexController {
      */
     @PostMapping("/stepInput")
     @ResponseBody
-    public Step stepInsert(Step step) {
+    public Step insertStep(Step step) {
         return stepService.insert(step);
     }
 

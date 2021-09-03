@@ -54,7 +54,7 @@ public interface TaskService {
      * @param task 实例对象
      * @return 实例对象
      */
-    Task insertDay(Task task);
+    Task insertTask(Task task);
 
     /**
      * 新增数据 通过日历

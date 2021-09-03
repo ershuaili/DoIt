@@ -123,12 +123,15 @@
             if (txtVal === '') {
                 layer.msg('不能添加空内容', {time: 1000});
             } else {
+                let d = new Date();
+                d.setDate(d.getDate());
+                let date = d.format("yyyy-MM-dd");
                 // 提交任务
                 $.ajax({
                     type: 'post',
                     url: '/taskInput',
                     // 获取数据发送给后端
-                    data: {taskName: $('.taskInput').val()},
+                    data: {taskName: $('.taskInput').val(), createTime: date, endTime: date},
                     success: function (data) {
                         if (data === null) {
                             layer.msg('添加失败,请重试.', {time: 1000});

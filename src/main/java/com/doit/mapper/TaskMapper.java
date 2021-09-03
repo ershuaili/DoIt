@@ -56,7 +56,7 @@ public interface TaskMapper {
      *
      * @param task 实例对象
      */
-    void insertDay(Task task);
+    void insertTask(Task task);
 
     /**
      * 新增数据 通过日历

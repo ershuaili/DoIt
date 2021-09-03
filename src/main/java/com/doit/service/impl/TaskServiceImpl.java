@@ -77,8 +77,8 @@ public class TaskServiceImpl implements TaskService {
      * @return 影响行数
      */
     @Override
-    public Task insertDay(Task task) {
-        this.taskMapper.insertDay(task);
+    public Task insertTask(Task task) {
+        this.taskMapper.insertTask(task);
         return this.queryById(task.getId());
     }
 
