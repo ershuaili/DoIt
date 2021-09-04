@@ -197,7 +197,6 @@ body {
     color: #fff;
     font-size: 30px
 }
-
 .item .photo:hover .photo-mask {
     display: block
 }
