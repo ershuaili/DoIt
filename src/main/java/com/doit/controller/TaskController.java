@@ -27,7 +27,7 @@ public class TaskController {
 
     @GetMapping
     public String tasks() {
-        return "task";
+        return "/task";
     }
 
     @GetMapping("/queryAllTask")

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SettingsController {
     @RequestMapping
     public String calendar() {
-        return "settings";
+        return "/settings";
     }
 
 }

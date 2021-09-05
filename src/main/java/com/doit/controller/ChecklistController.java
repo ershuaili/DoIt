@@ -15,6 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChecklistController {
     @RequestMapping
     public String checklist() {
-        return "checklist";
+        return "/checklist";
     }
 }
