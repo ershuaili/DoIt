@@ -27,7 +27,7 @@ public class TaskController {
 
     @GetMapping
     public String tasks() {
-        return "/task";
+        return "task";
     }
 
     @GetMapping("/queryAllTask")
@@ -35,16 +35,4 @@ public class TaskController {
     public List<Task> queryAllTask() {
         return taskService.queryAll();
     }
-
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Task selectOne(Integer id) {
-        return this.taskService.queryById(id);
-    }
-
 }

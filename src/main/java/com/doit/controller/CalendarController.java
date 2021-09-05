@@ -26,7 +26,7 @@ public class CalendarController {
 
     @RequestMapping
     public String calendar() {
-        return "/calendar";
+        return "calendar";
     }
 
     /**

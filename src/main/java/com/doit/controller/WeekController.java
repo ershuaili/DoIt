@@ -26,7 +26,7 @@ public class WeekController {
 
     @GetMapping
     public String week() {
-        return "/week";
+        return "week";
     }
 
     @GetMapping("/queryWeekTasks")

@@ -33,7 +33,7 @@ $(function () {
         let information = $(this).children().next().text();
         switch (information) {
             case "今天":
-                window.location.href = "../../../../..";
+                window.location.href = "/";
                 break;
             case "明天":
                 window.location.href = "tom";

@@ -30,7 +30,7 @@ public class TomorrowController {
      */
     @GetMapping
     public String tomorrow() {
-        return "/tomorrow";
+        return "tomorrow";
     }
 
     /**
