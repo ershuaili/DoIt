@@ -8,7 +8,9 @@
 
 ### 1、系统环境
 
-Java EE 8 Servlet 3.0 Apache Maven 3
+Java EE 8 
+Servlet 3.0 
+Apache Maven 3
 
 ### 2、主框架
 
