@@ -38,7 +38,7 @@ Thymeleaf 3.0.x
 
 ## 在线体验
 
-演示地址: http://doit.shuaiblog.com
+演示地址: http://doit.shuaiblog.xyz
 
 ## 演示图
 
