@@ -1,4 +1,5 @@
 package com.doit.entity;
+
 import lombok.Data;
 
 import java.io.Serial;
