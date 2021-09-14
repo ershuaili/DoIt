@@ -1,7 +1,8 @@
 package com.doit.config;
 
-import com.example.shiro.entity.User;
-import com.example.shiro.service.UserService;
+
+import com.doit.entity.User;
+import com.doit.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 李二帅
  * @version v1.0
  */
-
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired

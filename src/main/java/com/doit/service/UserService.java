@@ -21,6 +21,14 @@ public interface UserService {
     User queryById(Integer id);
 
     /**
+     * 通过昵称查询单条数据
+     *
+     * @param name 昵称
+     * @return 实例对象
+     */
+    User queryByName(String name);
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
@@ -52,5 +60,4 @@ public interface UserService {
      * @return 是否成功
      */
     boolean deleteById(Integer id);
-
 }

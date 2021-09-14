@@ -24,6 +24,14 @@ public interface UserMapper {
     User queryById(Integer id);
 
     /**
+     * 通过昵称查询单条数据
+     *
+     * @param name 昵称
+     * @return 实例对象
+     */
+    User queryByName(String name);
+
+    /**
      * 查询指定行数据
      *
      * @param offset 查询起始位置

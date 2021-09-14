@@ -31,6 +31,17 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 通过昵称查询单条数据
+     *
+     * @param name 昵称
+     * @return 实例对象
+     */
+    @Override
+    public User queryByName(String name) {
+        return this.userMapper.queryByName(name);
+    }
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
