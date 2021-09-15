@@ -27,12 +27,15 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         // 执行登录方法
         try {
+            System.out.println("执行了");
             subject.login(token);
             return "index";
         } catch (UnknownAccountException e) {
-            model.addAttribute("e", e);
+            System.out.println("没有账户");
+            model.addAttribute("msg", e);
             return "login";
         } catch (IncorrectCredentialsException e) {
+            System.out.println("密码错误");
             e.printStackTrace();
             return "login";
         }

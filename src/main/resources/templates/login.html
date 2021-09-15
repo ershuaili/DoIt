@@ -6,10 +6,12 @@
 </head>
 <body>
 <h1>登录</h1>
-<label>
-    <input name="userName" type="text">
-    <input name="password" type="password">
-    <input type="button" value="确认">
-</label>
+<form th:action="@{/login}">
+    <label>
+        <input name="userName" type="text">
+        <input name="password" type="password">
+        <button>登录</button>
+    </label>
+</form>
 </body>
 </html>
