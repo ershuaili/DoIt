@@ -2,6 +2,7 @@ package com.doit;
 
 import com.doit.service.StepService;
 import com.doit.service.TaskService;
+import com.doit.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,8 @@ class DoItApplicationTests {
     private TaskService taskService;
     @Autowired
     private StepService stepService;
+    @Autowired
+    private UserService userService;
 
     @Test
     void contextLoads() {
@@ -22,7 +25,7 @@ class DoItApplicationTests {
         // task.setTaskName("1234");
         // task.setEndTime();
         // System.out.println(taskService.insertDay(task));
-        System.out.println(stepService.deleteById(89));
+        System.out.println(userService.queryByName("1"));
         // System.out.println(stepService.queryStepByTaskId(1));
         // Task task1 = new Task();
         // task1.setTaskName("喝茶");
