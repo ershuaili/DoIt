@@ -31,12 +31,12 @@ public class LoginController {
             subject.login(token);
             return "index";
         } catch (UnknownAccountException e) {
-            System.out.println("没有账户");
-            model.addAttribute("msg", e);
+            e.printStackTrace();
+            model.addAttribute("msg", "没有账户");
             return "login";
         } catch (IncorrectCredentialsException e) {
-            System.out.println("密码错误");
             e.printStackTrace();
+            model.addAttribute("msg", "密码错误");
             return "login";
         }
     }
