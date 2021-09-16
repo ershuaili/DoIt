@@ -10,7 +10,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * <p>描述: [自定义shiro] </p>
+ * <p> 描述: [自定义shiro]</p>
+ * <p>
+ * shiro三大对象
+ * Subject: 用户
+ * SecurityManager: 管理所有用户
+ * Realm:   连接资源
+ * </p>
  * <p>创建时间: 2021/09/06 下午 02:55 </p>
  *
  * @author 李二帅
@@ -18,7 +24,11 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-    // ShiroFilterFactoryBean
+    /**
+     * ShiroFilterFactoryBean
+     * @param defaultWebSecurityManager  DefaultWebSecurityManager
+     * @return ben
+     */
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
@@ -35,8 +45,7 @@ public class ShiroConfig {
          */
         Map<String, String> filterMap = new LinkedHashMap<>();
 
-        // filterMap.put("/user/add", "authc");
-        // filterMap.put("/user/update", "anon");
+        // 添加过滤器
         filterMap.put("/*", "authc");
 
         bean.setFilterChainDefinitionMap(filterMap);
@@ -45,7 +54,12 @@ public class ShiroConfig {
         return bean;
     }
 
-    // DefaultWebSecurityManager
+    /**
+     * DefaultWebSecurityManager
+     *
+     * @param userRealm 用户Realm
+     * @return securityManager
+     */
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -54,7 +68,11 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    // 创建Realm对象,  需要自定义
+    /**
+     * 创建Realm对象,  需要自定义
+     *
+     * @return UserRealm()
+     */
     @Bean
     public UserRealm userRealm() {
         return new UserRealm();
