@@ -6,8 +6,11 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>描述: [] </p>
@@ -20,23 +23,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class LoginController {
     @RequestMapping("login")
-    public String login(String userName, String password, Model model) {
+    @ResponseBody
+    public String login(String userName, String password) {
+        Map<String, Object> result = new HashMap<>();
         // 获取用户数据
         Subject subject = SecurityUtils.getSubject();
         // 封装用户数据
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         // 执行登录方法
         try {
-            System.out.println("执行了");
             subject.login(token);
             return "index";
         } catch (UnknownAccountException e) {
             e.printStackTrace();
-            model.addAttribute("msg", "没有账户");
+            result.put("msg", "没有账户");
             return "login";
         } catch (IncorrectCredentialsException e) {
             e.printStackTrace();
-            model.addAttribute("msg", "密码错误");
+            result.put("msg", "密码错误");
             return "login";
         }
     }

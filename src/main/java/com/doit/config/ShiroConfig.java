@@ -26,7 +26,9 @@ import java.util.Map;
 public class ShiroConfig {
     /**
      * ShiroFilterFactoryBean
-     * @param defaultWebSecurityManager  DefaultWebSecurityManager
+     * 请求拦截
+     *
+     * @param defaultWebSecurityManager DefaultWebSecurityManager
      * @return ben
      */
     @Bean
