@@ -48,7 +48,10 @@ public class ShiroConfig {
         Map<String, String> filterMap = new LinkedHashMap<>();
 
         // 添加过滤器
-        filterMap.put("/*", "authc");
+        // 配置login页面为所有人可访问
+        filterMap.put("/login", "anon");
+        // 配置其他页面为受限资源页面
+        filterMap.put("/**", "authc");
 
         bean.setFilterChainDefinitionMap(filterMap);
 
