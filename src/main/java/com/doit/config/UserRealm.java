@@ -10,7 +10,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>描述: [] </p>
+ * <p>描述: [自定义realm] </p>
  * <p>创建时间: 2021/09/06 下午 04:02 </p>
  *
  * @author 李二帅
