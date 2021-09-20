@@ -34,11 +34,13 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-
+        // 获取用户的登录token
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        // 根据用户名查询用户
         User user = userService.queryByName(token.getUsername());
-
+        // 如果用户为空
         if (user == null) {
+            // 抛出异常 UnknownAccountException
             return null;
         }
         return new SimpleAuthenticationInfo("", user.getPassword(), "");
