@@ -6,5 +6,13 @@
 </head>
 <body>
 <h1>注册</h1>
+<form th:action="@{/register}">
+    <label>
+        用户名: <input name="nickname" type="text"><br/>
+        邮 箱: <input name="email" type="text"><br/>
+        密 码:<input name="password" type="password"><br/>
+        <input type="submit" value="提交"/>
+    </label>
+</form>
 </body>
 </html>
