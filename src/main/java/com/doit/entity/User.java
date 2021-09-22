@@ -9,12 +9,12 @@ import java.io.Serializable;
  * (User)实体类
  *
  * @author 李二帅
- * @since 2021-09-08 21:08:36
+ * @since 2021-09-22 21:15:18
  */
 @Data
 public class User implements Serializable {
     @Serial
-    private static final long serialVersionUID = -14886903365831009L;
+    private static final long serialVersionUID = 431281599743305477L;
     /**
      * 用户id
      */

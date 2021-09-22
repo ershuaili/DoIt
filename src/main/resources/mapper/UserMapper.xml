@@ -19,16 +19,6 @@
         where id = #{id}
     </select>
 
-    <!-- 通过昵称查询单条数据 -->
-    <select id="queryByName" resultMap="UserMap">
-        select id,
-               nickName,
-               email,
-               password
-        from db_doit.user
-        where nickName = #{name}
-    </select>
-
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select id,
