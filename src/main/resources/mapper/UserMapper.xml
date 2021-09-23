@@ -24,6 +24,5 @@
         insert into db_doit.user(nickName, email, password)
         values (#{nickname}, #{email}, #{password})
     </insert>
-
 </mapper>
 
