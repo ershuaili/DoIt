@@ -7,8 +7,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>描述: [自定义realm] </p>
@@ -20,7 +19,7 @@ import javax.annotation.Resource;
 
 public class UserRealm extends AuthorizingRealm {
 
-    @Resource
+    @Autowired
     private UserService userService;
 
     /**
