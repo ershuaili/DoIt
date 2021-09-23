@@ -6,8 +6,6 @@ import com.doit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * (User)表服务实现类
  *
@@ -20,17 +18,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    @Override
-    public User queryById(Integer id) {
-        return this.userMapper.queryById(id);
-    }
-
-    /**
      * 通过昵称查询单条数据
      *
      * @param name 昵称
@@ -39,18 +26,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryByName(String name) {
         return this.userMapper.queryByName(name);
-    }
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<User> queryAllByLimit(int offset, int limit) {
-        return this.userMapper.queryAllByLimit(offset, limit);
     }
 
     /**
@@ -65,26 +40,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    /**
-     * 修改数据
-     *
-     * @param user 实例对象
-     * @return 实例对象
-     */
-    @Override
-    public User update(User user) {
-        this.userMapper.update(user);
-        return this.queryById(user.getId());
-    }
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    @Override
-    public boolean deleteById(Integer id) {
-        return this.userMapper.deleteById(id) > 0;
-    }
 }
