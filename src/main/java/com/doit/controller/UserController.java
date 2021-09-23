@@ -8,8 +8,9 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * (User)表控制层
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 李二帅
  * @date 2021-09-08 21:08:35
  */
-@RestController
+@Controller
 @RequestMapping("/")
 public class UserController {
     /**
@@ -26,7 +27,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     /**
      * 用户登录
      *
@@ -34,7 +34,7 @@ public class UserController {
      * @param password 密码
      * @return result
      */
-    @RequestMapping("login")
+    @GetMapping("login")
     public String login(String userName, String password) {
         //获取主体对象
         Subject subject = SecurityUtils.getSubject();
@@ -61,7 +61,7 @@ public class UserController {
      *
      * @return 视图
      */
-    @RequestMapping("logout")
+    @GetMapping("logout")
     public String logout() {
         // 获取用户主体对象
         Subject subject = SecurityUtils.getSubject();
@@ -75,7 +75,7 @@ public class UserController {
      *
      * @return 视图
      */
-    @RequestMapping("register")
+    @GetMapping("register")
     public String register(User user) {
         try {
             userService.insert(user);
