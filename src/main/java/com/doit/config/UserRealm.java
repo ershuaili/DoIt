@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 李二帅
  * @version v1.0
  */
-
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired
@@ -41,6 +40,7 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 查询用户的权限
         User user = userService.queryByName(token.getUsername());
+        System.out.println("=============>" + user);
         // 如果查询不到用户
         if (user == null) {
             // 抛出异常 UnknownAccountException
