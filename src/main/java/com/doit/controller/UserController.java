@@ -51,7 +51,6 @@ public class UserController {
             System.out.println("密码错误!");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
         return "login";
     }
