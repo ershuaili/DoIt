@@ -10,7 +10,12 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * (User)表控制层
@@ -28,31 +33,53 @@ public class UserController {
     private UserService userService;
 
     /**
+     * 页面转跳
+     *
+     * @return 用户登录界面
+     */
+    @GetMapping("login")
+    public String login() {
+        return "login";
+    }
+
+    /**
      * 用户登录
      *
      * @param userName 用户名
      * @param password 密码
      * @return result
      */
-    @GetMapping("login")
-    public String login(String userName, String password) {
+    @PostMapping("userLogin")
+    @ResponseBody
+    public Map<String, Object> userLogin(String userName, String password) {
+        Map<String, Object> result = new LinkedHashMap<>();
         //获取主体对象
         Subject subject = SecurityUtils.getSubject();
         // 登录验证
         try {
             // 创建用户token    验证登录
             subject.login(new UsernamePasswordToken(userName, password));
-            return "redirect:/";
+            result.put("status", 200);
+            return result;
+            // return "redirect:/";
         } catch (UnknownAccountException e) {
             e.printStackTrace();
             System.out.println("用户名错误!");
+            // return "redirect:login";
+            result.put("status", 400);
+            return result;
         } catch (IncorrectCredentialsException e) {
             e.printStackTrace();
             System.out.println("密码错误!");
+            result.put("status", 400);
+            return result;
+            // return "redirect:login";
         } catch (Exception e) {
             e.printStackTrace();
+            result.put("status", 500);
+            return result;
+            // return "redirect:login";
         }
-        return "login";
     }
 
     /**
