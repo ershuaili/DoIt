@@ -10,12 +10,8 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * (User)表控制层
@@ -38,8 +34,18 @@ public class UserController {
      * @return 用户登录界面
      */
     @GetMapping("login")
-    public String login() {
+    public String toLogin() {
         return "login";
+    }
+
+    /**
+     * 页面转跳
+     *
+     * @return 用户注册界面
+     */
+    @GetMapping("register")
+    public String toRegister() {
+        return "register";
     }
 
     /**
@@ -49,36 +55,27 @@ public class UserController {
      * @param password 密码
      * @return result
      */
-    @PostMapping("userLogin")
-    @ResponseBody
-    public Map<String, Object> userLogin(String userName, String password) {
-        Map<String, Object> result = new LinkedHashMap<>();
+    @RequestMapping("userLogin")
+    public String userLogin(String userName, String password, RedirectAttributes redirectAttributes) {
         //获取主体对象
         Subject subject = SecurityUtils.getSubject();
         // 登录验证
         try {
             // 创建用户token    验证登录
             subject.login(new UsernamePasswordToken(userName, password));
-            result.put("status", 200);
-            return result;
-            // return "redirect:/";
+            return "redirect:/";
         } catch (UnknownAccountException e) {
             e.printStackTrace();
-            System.out.println("用户名错误!");
-            // return "redirect:login";
-            result.put("status", 400);
-            return result;
+            redirectAttributes.addFlashAttribute("msg", "用户名错误");
+            return "redirect:login";
         } catch (IncorrectCredentialsException e) {
             e.printStackTrace();
-            System.out.println("密码错误!");
-            result.put("status", 400);
-            return result;
-            // return "redirect:login";
+            redirectAttributes.addFlashAttribute("msg", "密码错误");
+            return "redirect:login";
         } catch (Exception e) {
             e.printStackTrace();
-            result.put("status", 500);
-            return result;
-            // return "redirect:login";
+            System.out.println("服务器内部错误");
+            return "error/500";
         }
     }
 
@@ -101,14 +98,14 @@ public class UserController {
      *
      * @return 视图
      */
-    @GetMapping("register")
+    @RequestMapping("userRegister")
     public String register(User user) {
         try {
             userService.insert(user);
             return "redirect:login";
         } catch (Exception e) {
             e.printStackTrace();
-            return "register";
+            return "error/500";
         }
     }
 }

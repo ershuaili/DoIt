@@ -6,12 +6,12 @@
 </head>
 <body>
 <h1>注册</h1>
-<form th:action="@{/register}">
+<form th:action="@{/userRegister}">
     <label>
-        用户名: <input name="nickname" type="text"><br/>
-        邮 箱: <input name="email" type="text"><br/>
-        密 码:<input name="password" type="password"><br/>
-        <input type="submit" value="提交"/>
+        用户名: <input id="nickname" name="nickname" type="text"><br/>
+        邮 箱: <input id="email" name="email" type="text"><br/>
+        密 码:<input autocomplete="off" id="password" name="password" type="password"><br/>
+        <button id="input">立即注册</button>
     </label>
 </form>
 </body>

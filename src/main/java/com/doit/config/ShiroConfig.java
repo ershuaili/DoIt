@@ -37,6 +37,7 @@ public class ShiroConfig {
         filterMap.put("/login", "anon");
         filterMap.put("/userLogin", "anon");
         filterMap.put("/register", "anon");
+        filterMap.put("/userRegister", "anon");
         filterMap.put("/*", "authc");
 
         // 设置登录界面

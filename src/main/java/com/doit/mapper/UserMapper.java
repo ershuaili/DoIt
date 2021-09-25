@@ -26,6 +26,6 @@ public interface UserMapper {
      * @param user 实例对象
      * @return 影响行数
      */
-    int insert(User user);
+    void insert(User user);
 }
 
