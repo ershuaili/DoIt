@@ -26,7 +26,6 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("++++++++++执行了授权方法++++++++++");
         return null;
     }
 
@@ -40,7 +39,6 @@ public class UserRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 查询用户的权限
         User user = userService.queryByName(token.getUsername());
-        System.out.println("=============>" + user);
         // 如果查询不到用户
         if (user == null) {
             // 抛出异常 UnknownAccountException
