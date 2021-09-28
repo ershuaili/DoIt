@@ -15,5 +15,23 @@
         <a th:href="@{/register}">注册</a>
     </label>
 </form>
+<script>
+    fetch().then((Response) => {
+        let data = Response.json();//res是一个json文件，使用 json() 读取并解析数据，返回一个被解析为JSON格式的promise对象
+        data.then((res, rej) => {
+            if (res.code == 100) {
+
+            } else if (res.code == 11115) {
+                //用户登录失效，token失效，跳转到登录页面
+                history.replace('/login')
+                window.location.reload()
+            } else {
+
+            }
+        })
+    }).catch((e) => {
+
+    })
+</script>
 </body>
 </html>
