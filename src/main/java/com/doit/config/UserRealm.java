@@ -7,7 +7,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * <p>描述: [自定义realm] </p>
@@ -18,8 +19,18 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class UserRealm extends AuthorizingRealm {
 
-    @Autowired
+    @Resource
     private UserService userService;
+
+    /**
+     * 交由 Spring 来自动地管理 Shiro-Bean 的生命周期
+     * @param token token
+     * @return token
+     */
+    // @Override
+    // public boolean supports(AuthenticationToken token){
+    //     return token instanceof JwtToken;
+    // }
 
     /**
      * 授权
