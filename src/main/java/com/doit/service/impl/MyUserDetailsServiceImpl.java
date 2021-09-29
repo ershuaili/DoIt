@@ -32,7 +32,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户不存在！");
         }
         // 用户权限集合
-        List<GrantedAuthority> author = AuthorityUtils.commaSeparatedStringToAuthorityList("admin,user");
+        List<GrantedAuthority> author = AuthorityUtils.commaSeparatedStringToAuthorityList("user");
 
         return new User(username, user.getPassword(), author);
     }

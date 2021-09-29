@@ -31,13 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // 无权限页面
         http.exceptionHandling().accessDeniedPage("/unPermission");
         // 定制请求的授权规则
         http.authorizeRequests()
+                // 注册页面
                 .antMatchers("/register").permitAll()
+                // 注册表单提交页面
                 .antMatchers("/userRegister").permitAll()
-                // 其他页面
-                .antMatchers("/**").hasRole("user");
+                // 其他页面!!!注意提供用户权限
+                .antMatchers("/**").hasAuthority("user");
         // 自定义登录界面
         http.formLogin()
                 // 登录页面
