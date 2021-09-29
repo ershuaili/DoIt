@@ -6,10 +6,9 @@
 </head>
 <body>
 <h1>登录</h1>
-<p style="background-color: #b11616 ">[[${msg}]]</p>
-<form th:action="@{/userLogin}">
+<form method="post" th:action="@{/login}">
     <label>
-        <input id="userName" name="userName" type="text">
+        <input id="userName" name="username" type="text">
         <input autocomplete="off" id="password" name="password" type="password">
         <input id="input" type="submit" value="登录"/>
         <a th:href="@{/register}">注册</a>

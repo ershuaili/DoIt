@@ -2,12 +2,10 @@ package com.doit.controller;
 
 import com.doit.entity.User;
 import com.doit.service.UserService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -47,21 +45,10 @@ public class UserController {
     }
 
     /**
-     * 用户登录
-     *
-     * @param userName 用户名
-     * @param password 密码
-     * @return result
+     * 用户登录 由springSecurity自动完成
      */
-    @RequestMapping("userLogin")
-    @ResponseBody
-    public User userLogin(String userName, String password) {
-        User user = userService.queryByName(userName);
-        if (user.getPassword().equals(password)) {
-            return user;
-        } else {
-            return null;
-        }
+    @PostMapping("login")
+    public void login() {
     }
 
     /**
@@ -71,10 +58,6 @@ public class UserController {
      */
     @GetMapping("logout")
     public String logout() {
-        // 获取用户主体对象
-        Subject subject = SecurityUtils.getSubject();
-        // 用户退出
-        subject.logout();
         return "redirect:login";
     }
 
