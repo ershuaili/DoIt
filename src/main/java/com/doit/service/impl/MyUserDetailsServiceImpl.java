@@ -1,14 +1,15 @@
 package com.doit.service.impl;
 
+import com.doit.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,11 +21,19 @@ import java.util.List;
  */
 @Service("userDetailsService")
 public class MyUserDetailsServiceImpl implements UserDetailsService {
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        // 用户权限集合
-        List<GrantedAuthority> author = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
+    @Resource
+    private UserService userService;
 
-        return new User("789", new BCryptPasswordEncoder().encode("789"), author);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 从数据库获取用户数据
+        com.doit.entity.User user = userService.queryByName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("用户不存在！");
+        }
+        // 用户权限集合
+        List<GrantedAuthority> author = AuthorityUtils.commaSeparatedStringToAuthorityList("admin,user");
+
+        return new User(username, user.getPassword(), author);
     }
 }

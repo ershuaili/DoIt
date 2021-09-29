@@ -24,5 +24,5 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    void insert(User user);
+    boolean insert(User user);
 }

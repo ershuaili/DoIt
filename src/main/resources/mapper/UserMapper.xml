@@ -14,16 +14,15 @@
         select id,
                nickName,
                email,
-               password,
-               salt
+               password
         from db_doit.user
         where nickName = #{name}
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into db_doit.user(nickName, email, password, salt)
-        values (#{nickname}, #{email}, #{password}, #{salt})
+        insert into db_doit.user(nickName, email, password)
+        values (#{nickname}, #{email}, #{password})
     </insert>
 </mapper>
 

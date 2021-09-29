@@ -3,8 +3,8 @@ package com.doit.service.impl;
 import com.doit.entity.User;
 import com.doit.mapper.UserMapper;
 import com.doit.service.UserService;
-import com.doit.utils.SaltUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,19 +33,25 @@ public class UserServiceImpl implements UserService {
      * 新增数据
      *
      * @param user 实例对象
-     * @return 实例对象
+     * @return boolean
      */
     @Override
-    public void insert(User user) {
-        //处理业务调用mapper
-        //1.生成随机盐
-        String salt = SaltUtils.getSalt(15);
-        //2.将随机盐保存到数据
-        user.setSalt(salt);
-        //3.明文密码进行md5 + salt + hash散列
-        // Md5Hash md5Hash = new Md5Hash(user.getPassword(), salt, 1024);
-        // user.setPassword(md5Hash.toHex());
-        userMapper.insert(user);
+    public boolean insert(User user) {
+        // 对密码进行加密
+        encryptPassword(user);
+        // 插入数据
+        return userMapper.insert(user) == 1;
+    }
+
+    /**
+     * 密码加密方法
+     *
+     * @param user 用户实体
+     */
+    private void encryptPassword(User user) {
+        String password = user.getPassword();
+        password = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(password);
     }
 
 }

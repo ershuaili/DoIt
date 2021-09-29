@@ -34,8 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/unPermission");
         // 定制请求的授权规则
         http.authorizeRequests()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/userRegister").permitAll()
                 // 其他页面
-                .antMatchers("/**").hasRole("admin");
+                .antMatchers("/**").hasRole("user");
         // 自定义登录界面
         http.formLogin()
                 // 登录页面

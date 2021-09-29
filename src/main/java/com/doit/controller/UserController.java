@@ -4,7 +4,6 @@ import com.doit.entity.User;
 import com.doit.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -26,6 +25,7 @@ public class UserController {
 
     /**
      * 页面转跳
+     * 用户登录 由springSecurity自动完成
      *
      * @return 用户登录界面
      */
@@ -44,12 +44,6 @@ public class UserController {
         return "register";
     }
 
-    /**
-     * 用户登录 由springSecurity自动完成
-     */
-    @PostMapping("login")
-    public void login() {
-    }
 
     /**
      * 用户退出
