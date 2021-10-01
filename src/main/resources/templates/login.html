@@ -5,14 +5,40 @@
     <title>登录</title>
 </head>
 <body>
-<h1>登录</h1>
-<form method="post" th:action="@{/login}">
-    <label>
-        <input id="userName" name="username" type="text">
-        <input autocomplete="off" id="password" name="password" type="password">
-        <input id="input" type="submit" value="登录"/>
-        <a th:href="@{/register}">注册</a>
-    </label>
-</form>
+<!--<h1>登录</h1>-->
+<!--<form method="post" th:action="@{/login}">-->
+<!--    <label>-->
+<!--        <input id="userName" name="username" type="text">-->
+<!--        <input autocomplete="off" id="password" name="password" type="password">-->
+<!--        <input id="input" type="submit" value="登录"/>-->
+<!--        <a th:href="@{/register}">注册</a>-->
+<!--    </label>-->
+<!--</form>-->
+
+<div id="box"></div>
+<div class="login">
+    <div class="login_container">
+        <div class="login_titles">用户登录</div>
+        <div class="login_message">
+            <div id="login_message">提示信息</div>
+        </div>
+        <form>
+            <div class="login_user">
+                <img alt="" src="./img/user.png">
+                <input id="user" placeholder="请输入用户名" type="text">
+            </div>
+            <div class="login_pwd login_user">
+                <img alt="" src="./img/pwd.png">
+                <input id="pwd" placeholder="请输入密码" type="text">
+            </div>
+            <div class="login_remember">
+                <input checked id="remember_pwd" type="checkbox" value="1"> 记住密码
+            </div>
+            <div class="login_submit" onclick="login()">
+                <div>登陆</div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
