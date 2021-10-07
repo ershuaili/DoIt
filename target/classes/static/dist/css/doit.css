@@ -1,0 +1,236 @@
+#calendar {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1300px) {
+    /*0~1300*/
+    #calendar {
+        width: 95%;
+    }
+}
+
+/* 底部输入框 */
+.bottom {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 80%;
+    position: absolute;
+    bottom: 10px;
+}
+
+/* 任务输入框 */
+.taskInput {
+    width: 100%;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: 20px;
+    border: 1px solid #C6C4C4;
+    outline: none;
+    opacity: 0.5;
+}
+
+/*输入框图标*/
+.bottom .bi-calendar3 {
+    font-size: 25px;
+    position: absolute;
+    top: 20%;
+    right: 0;
+}
+
+/* 任务列表 */
+.tasksDay {
+    width: 70%;
+    margin: 0 auto;
+    display: table;
+}
+
+/* 分割线 */
+.tasksDay fieldset {
+    border-width: 2px 0 0;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* 任务 */
+.task {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    display: table;
+    margin: 10px auto 0;
+}
+
+.task i {
+    float: left;
+    line-height: 40px;
+    font-size: 25px;
+    padding-right: 20px;
+    flex: none;
+}
+
+.taskMain {
+    height: 100%;
+    text-align: left;
+    overflow: hidden;
+}
+
+
+/* 步骤列表 */
+.popup {
+    width: 95%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.popup * {
+    overflow: hidden;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-top: 2px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.popup .bi {
+    font-size: 15px;
+    padding-right: 10px;
+}
+
+/*我的一天*/
+.myDay {
+    background-color: bisque;
+}
+
+/*重复任务*/
+.recur {
+    background-color: #00ad81;
+}
+
+/*添加步骤*/
+.addStep {
+    background-color: #01AAED;
+}
+
+#stepInput {
+    background-color: #01AAED;
+    width: 80%;
+    line-height: 30px;
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+/*步骤列表*/
+.steps {
+    background-color: #00FF00;
+}
+
+#steps {
+    height: auto;
+}
+
+.step {
+    background-color: #00FF00;
+}
+
+/*删除任务*/
+.delete {
+    background-color: #f45922;
+    margin-bottom: 5px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+/* 明天 */
+.tomMain {
+
+}
+
+#calendar {
+    background-color: white;
+}
+
+/* 设置页面 */
+/* 整体背景 */
+body {
+    background-image: linear-gradient(90deg, #5b4099, #fb83b7);
+}
+
+/* 元素边框 */
+.content {
+    height: 90vh;
+    max-width: 560px;
+    margin: 20px auto;
+    box-shadow: 1px 1px 4px #ccc;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative
+}
+
+/* 头像 */
+.item .photo {
+    margin-top: 20px;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 24px
+}
+
+/* 完全填充 */
+.item .photo > * {
+    display: block;
+    background: #f7b75d;
+    width: 100%;
+    line-height: 80px;
+    color: #fff;
+    font-size: 30px
+}
+.item .photo:hover .photo-mask {
+    display: block
+}
+
+/* 背景遮罩 */
+.item .photo-mask {
+    border-radius: 50%;
+    background: #000;
+    opacity: .6;
+    font-size: 13px;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: none
+}
+
+/* 打开本地文件 */
+.item .img-upload {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer
+}
+
+.content-bottom {
+    /*绝对布局*/
+    position: absolute;
+    /*距离底部的距离*/
+    bottom: 0;
+}

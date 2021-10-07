@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doit.mapper.TaskMapper">
+
+    <resultMap type="com.doit.entity.Task" id="TaskMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="taskName" column="task_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+        <result property="isFinish" column="is_finish" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <!--查询所有实例-->
+    <select id="queryAll" resultMap="TaskMap">
+        select id,
+               task_name,
+               create_time,
+               end_time,
+               is_finish
+        from db_doit.task
+    </select>
+
+    <!--查询今天的任务-->
+    <select id="queryToday" resultMap="TaskMap">
+        select id, task_name, create_time, end_time, is_finish
+        from db_doit.task
+        where create_time &lt;= DATE(NOW()) and
+              end_time >= DATE(NOW())
+           or end_time IS NULL;
+    </select>
+
+    <!--查询明天的任务-->
+    <select id="queryTomorrow" resultMap="TaskMap">
+        select id, task_name, create_time, end_time, is_finish
+        from db_doit.task
+        where task.end_time >= (DATE(NOW()) + 1);
+    </select>
+
+    <!-- 查询最近七天的任务 -->
+    <select id="queryWeek" resultMap="TaskMap">
+        select id, task_name, create_time, end_time, is_finish
+        from db_doit.task
+        where date_sub(curdate(), INTERVAL WEEKDAY(curdate()) DAY) &lt; date(create_time);
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TaskMap">
+        select id,
+               task_name,
+               create_time,
+               end_time,
+               is_finish
+        from db_doit.task
+        where id = #{id}
+    </select>
+
+    <!-- 今天新增任务 -->
+    <insert id="insertTask" keyProperty="id" useGeneratedKeys="true">
+        insert into db_doit.task(task_name, create_time, end_time)
+        values (#{taskName}, #{createTime}, #{endTime})
+    </insert>
+
+    <!--日历中插入数据-->
+    <insert id="insertCal" keyProperty="id" useGeneratedKeys="true">
+        insert into db_doit.task(task_name, create_time, end_time)
+        values (#{taskName}, #{createTime}, #{endTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_doit.task
+        <set>
+            <if test="taskName != null and taskName != ''">
+                task_name = #{taskName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="isFinish != null">
+                is_finish = #{isFinish},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from db_doit.task
+        where id = #{id}
+    </delete>
+
+</mapper>
+

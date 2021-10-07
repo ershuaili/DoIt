@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<h1>注册</h1>
+<form th:action="@{/userRegister}">
+    <label>
+        用户名: <input id="nickname" name="nickname" type="text"><br/>
+        邮 箱: <input id="email" name="email" type="text"><br/>
+        密 码:<input autocomplete="off" id="password" name="password" type="password"><br/>
+        <button id="input">立即注册</button>
+    </label>
+</form>
+</body>
+</html>
